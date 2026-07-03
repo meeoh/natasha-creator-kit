@@ -1,0 +1,19 @@
+{
+  "profile": {
+    "name": "Your Wife's Golf Brand",
+    "bio": "Short-form golf tips, course-day outfits, practice routines, and relatable on-course moments for an audience that loves style, improvement, and the joy of golf.",
+    "location": "Toronto, Canada",
+    "avatar": "assets/avatar.svg",
+    "email": "hello@example.com",
+    "instagramUrl": "https://instagram.com/natashagolfing",
+    "tiktokUrl": "https://www.tiktok.com/@natashagolfing"
+  },
+  "platforms": {
+    "instagram": {
+      "username": "natashagolfing"
+    },
+    "tiktok": {
+      "username": "natashagolfing"
+    }
+  }
+}

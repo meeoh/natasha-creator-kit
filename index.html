@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Golf creator kit and live social stats." />
+    <title>Golf Creator Kit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="nav">
+        <a class="brand" href="#top" aria-label="Creator kit home">
+          <span class="brand-mark">⛳</span>
+          <span data-profile="name">Golf Creator</span>
+        </a>
+        <nav class="nav-links" aria-label="Page navigation">
+          <a href="#stats">Stats</a>
+          <a href="#audience">Audience</a>
+          <a href="#contact">Partner</a>
+        </nav>
+      </header>
+
+      <main id="top">
+        <section class="hero section-grid">
+          <div class="hero-copy reveal">
+            <p class="eyebrow">Golf creator kit · Live social snapshot</p>
+            <h1><span data-profile="name">Golf Creator</span> creates polished, playful golf content for women getting into the game.</h1>
+            <p class="lede" data-profile="bio">
+              Short-form golf tips, course-day outfits, practice routines, and relatable on-course moments for an audience that loves style, improvement, and the joy of golf.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#contact">Work together</a>
+              <a class="button ghost" data-profile="instagramUrl" href="https://instagram.com/" target="_blank" rel="noreferrer">Instagram</a>
+              <a class="button ghost" data-profile="tiktokUrl" href="https://tiktok.com/" target="_blank" rel="noreferrer">TikTok</a>
+            </div>
+          </div>
+
+          <aside class="hero-card reveal" aria-label="Creator profile summary">
+            <div class="orb orb-one"></div>
+            <div class="orb orb-two"></div>
+            <div class="profile-card glass">
+              <div class="avatar-wrap">
+                <img data-profile="avatar" src="assets/avatar.svg" alt="Creator avatar" />
+              </div>
+              <div>
+                <p class="profile-name" data-profile="name">Golf Creator</p>
+                <p class="profile-meta"><span data-profile="location">Toronto, Canada</span> · Golf lifestyle</p>
+              </div>
+            </div>
+            <div class="score-card glass">
+              <p>Combined audience</p>
+              <strong data-stat="combinedFollowers">—</strong>
+              <span>Updated <span data-stat="updatedAt">daily</span></span>
+            </div>
+          </aside>
+        </section>
+
+        <section id="stats" class="stats-section reveal">
+          <div class="section-heading">
+            <p class="eyebrow">Current reach</p>
+            <h2>Live creator stats, refreshed once a day.</h2>
+          </div>
+          <div class="stat-grid" aria-live="polite">
+            <article class="stat-card instagram">
+              <div class="card-topline"><span>Instagram</span><span class="dot"></span></div>
+              <strong data-stat="instagramFollowers">—</strong>
+              <p>followers</p>
+              <small><span data-stat="instagramPosts">—</span> posts · @<span data-stat="instagramUsername">handle</span></small>
+            </article>
+            <article class="stat-card tiktok">
+              <div class="card-topline"><span>TikTok</span><span class="dot"></span></div>
+              <strong data-stat="tiktokFollowers">—</strong>
+              <p>followers</p>
+              <small><span data-stat="tiktokLikes">—</span> likes · <span data-stat="tiktokVideos">—</span> videos</small>
+            </article>
+            <article class="stat-card total">
+              <div class="card-topline"><span>Total community</span><span class="dot"></span></div>
+              <strong data-stat="combinedFollowers">—</strong>
+              <p>followers across platforms</p>
+              <small>Instagram + TikTok</small>
+            </article>
+          </div>
+        </section>
+
+        <section id="audience" class="split-section reveal">
+          <div>
+            <p class="eyebrow">Why brands partner</p>
+            <h2>Golf content with a modern, approachable point of view.</h2>
+          </div>
+          <div class="value-grid">
+            <div class="value-card">
+              <span>01</span>
+              <h3>Beginner-friendly storytelling</h3>
+              <p>Content makes golf feel less intimidating while still celebrating progress, etiquette, and skill-building.</p>
+            </div>
+            <div class="value-card">
+              <span>02</span>
+              <h3>Style meets performance</h3>
+              <p>Natural fit for apparel, accessories, tech, travel, wellness, and golf course experiences.</p>
+            </div>
+            <div class="value-card">
+              <span>03</span>
+              <h3>Short-form native</h3>
+              <p>Fast hooks, clean edits, relatable POVs, and platform-native concepts for Reels and TikTok.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="collab-section reveal">
+          <div class="section-heading compact">
+            <p class="eyebrow">Partnership menu</p>
+            <h2>Ways to collaborate</h2>
+          </div>
+          <div class="pill-grid">
+            <span>Sponsored Reels</span>
+            <span>TikTok integrations</span>
+            <span>UGC packages</span>
+            <span>Course visits</span>
+            <span>Product seeding</span>
+            <span>Affiliate campaigns</span>
+          </div>
+        </section>
+
+        <section id="contact" class="contact-card reveal">
+          <div>
+            <p class="eyebrow">Partner inquiries</p>
+            <h2>Ready to build something on the course?</h2>
+            <p>Update the contact email, handles, and creator details in <code>data/stats.json</code>.</p>
+          </div>
+          <a class="button primary light" data-profile="emailLink" href="mailto:hello@example.com">Email for rates</a>
+        </section>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

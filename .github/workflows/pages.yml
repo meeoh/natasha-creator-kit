@@ -1,0 +1,59 @@
+name: Update stats and deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 10 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Refresh social stats
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          APIFY_INSTAGRAM_ACTOR_ID: ${{ secrets.APIFY_INSTAGRAM_ACTOR_ID }}
+          APIFY_TIKTOK_ACTOR_ID: ${{ secrets.APIFY_TIKTOK_ACTOR_ID }}
+          APIFY_INSTAGRAM_INPUT_JSON: ${{ secrets.APIFY_INSTAGRAM_INPUT_JSON }}
+          APIFY_TIKTOK_INPUT_JSON: ${{ secrets.APIFY_TIKTOK_INPUT_JSON }}
+          INSTAGRAM_USERNAME: ${{ vars.INSTAGRAM_USERNAME }}
+          TIKTOK_USERNAME: ${{ vars.TIKTOK_USERNAME }}
+          IG_GRAPH_ACCESS_TOKEN: ${{ secrets.IG_GRAPH_ACCESS_TOKEN }}
+          IG_USER_ID: ${{ secrets.IG_USER_ID }}
+          TIKTOK_ACCESS_TOKEN: ${{ secrets.TIKTOK_ACCESS_TOKEN }}
+          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
+          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
+          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
+        run: node scripts/update-stats.mjs
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload static site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

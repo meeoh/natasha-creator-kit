@@ -8,7 +8,7 @@ const emptyStats = {
     name: "Golf Creator",
     bio: "Sharing my golf journey from beginner to better through relatable moments, lessons learned along the way, golf fits, and product discoveries.",
     location: "Toronto, Canada",
-    avatar: "assets/avatar.svg",
+    avatar: "assets/natasha-avatar.jpg",
     email: "natashagolfing@gmail.com",
     instagramUrl: "https://instagram.com/",
     tiktokUrl: "https://www.tiktok.com/"

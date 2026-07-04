@@ -195,7 +195,8 @@ h1 {
   min-height: 620px;
   padding: 28px;
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto auto;
+  align-content: start;
   gap: 18px;
 }
 .insights-head {
@@ -214,10 +215,15 @@ h1 {
 }
 .view-social { flex: 0 0 auto; }
 
-.platform-grid { display: grid; grid-template-columns: 0.82fr 1fr 1fr; gap: 16px; }
+.platform-grid {
+  display: grid;
+  grid-template-columns: 0.82fr 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
 .total-card,
 .platform-card {
-  min-height: 244px;
+  min-height: 172px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -238,9 +244,9 @@ h1 {
 .total-card p { color: var(--muted); margin-bottom: 12px; font-weight: 850; }
 .total-card strong {
   display: block;
-  font-size: clamp(56px, 5.8vw, 86px);
+  font-size: clamp(46px, 4.5vw, 72px);
   line-height: 0.85;
-  letter-spacing: -0.09em;
+  letter-spacing: -0.085em;
 }
 .spark {
   position: absolute;
@@ -280,9 +286,9 @@ h1 {
   z-index: 1;
   display: block;
   margin-top: 22px;
-  font-size: clamp(58px, 6vw, 90px);
+  font-size: clamp(46px, 4.8vw, 74px);
   line-height: 0.82;
-  letter-spacing: -0.09em;
+  letter-spacing: -0.085em;
 }
 .platform-card p { position: relative; z-index: 1; margin: 8px 0 6px; font-weight: 920; font-size: 17px; }
 .platform-card small { position: relative; z-index: 1; color: var(--muted); font-weight: 760; }
@@ -336,6 +342,6 @@ h1 {
   h1 { font-size: 46px; }
   .insights-head { flex-direction: column; }
   .platform-grid { grid-template-columns: 1fr; }
-  .total-card, .platform-card { min-height: 210px; }
-  .total-card strong { font-size: 76px; }
+  .total-card, .platform-card { min-height: 170px; }
+  .total-card strong { font-size: 64px; }
 }

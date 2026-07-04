@@ -180,16 +180,7 @@ h1 {
   font-size: 16px;
   line-height: 1.55;
 }
-.tag-row, .offer-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; }
-.tag-row span, .offer-list span {
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: rgba(25,24,23,0.055);
-  padding: 10px 14px;
-  color: #34312e;
-  font-size: 13px;
-  font-weight: 820;
-}
+.profile-cta { margin-top: 2px; }
 
 .stats-panel {
   min-height: 620px;

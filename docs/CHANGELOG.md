@@ -88,6 +88,7 @@
 - `/links` uses cropped avatar, warm card styling, compact no-scroll viewport layout, and light pink/white monochrome icon cards.
 - Changed `/links` Collabs icon to an outline envelope so it matches the other outline-style icons.
 - Restored plain default `mailto:` behavior on media kit and `/links`; removed the custom email-copy/toast JS.
+- Added small info tooltips beside media kit `Avg engagement` labels to explain the calculation.
 
 ## Current known design direction
 

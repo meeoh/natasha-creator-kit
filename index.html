@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260704-ui24" />
+    <link rel="stylesheet" href="styles.css?v=20260704-ui25" />
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>
@@ -51,7 +51,13 @@
                   <strong data-stat="instagramFollowers">—</strong>
                 </div>
                 <div class="mini-stat">
-                  <span>Avg engagement</span>
+                  <div class="metric-label">
+                    Avg engagement
+                    <button class="info-dot" type="button" aria-label="Instagram average engagement is calculated as total likes plus comments divided by followers times sampled posts.">
+                      i
+                      <span class="info-tooltip">Instagram: total likes + comments divided by followers × sampled public posts.</span>
+                    </button>
+                  </div>
                   <strong data-stat="instagramAvgEngagementRate">—</strong>
                 </div>
                 <div class="mini-stat">
@@ -79,7 +85,13 @@
                   <strong data-stat="tiktokFollowers">—</strong>
                 </div>
                 <div class="mini-stat">
-                  <span>Avg engagement</span>
+                  <div class="metric-label">
+                    Avg engagement
+                    <button class="info-dot" type="button" aria-label="TikTok average engagement is calculated as total likes plus comments plus shares plus saves divided by followers times sampled videos.">
+                      i
+                      <span class="info-tooltip">TikTok: total likes + comments + shares + saves divided by followers × sampled videos.</span>
+                    </button>
+                  </div>
                   <strong data-stat="tiktokAvgEngagementRate">—</strong>
                 </div>
                 <div class="mini-stat">
@@ -163,6 +175,6 @@
 
     </div>
 
-    <script src="script.js?v=20260704-ui24"></script>
+    <script src="script.js?v=20260704-ui25"></script>
   </body>
 </html>

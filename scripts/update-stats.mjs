@@ -9,7 +9,7 @@ const emptyStats = {
     bio: "Short-form golf tips, course-day outfits, practice routines, and relatable on-course moments for an audience that loves style, improvement, and the joy of golf.",
     location: "Toronto, Canada",
     avatar: "assets/avatar.svg",
-    email: "hello@example.com",
+    email: "natashagolfing@gmail.com",
     instagramUrl: "https://instagram.com/",
     tiktokUrl: "https://www.tiktok.com/"
   },

@@ -52,7 +52,7 @@ Set her name, email, copy, and handles:
     "bio": "Creator positioning statement...",
     "location": "Toronto, Canada",
     "avatar": "assets/avatar.svg",
-    "email": "hello@example.com",
+    "email": "natashagolfing@gmail.com",
     "instagramUrl": "https://instagram.com/handle",
     "tiktokUrl": "https://www.tiktok.com/@handle"
   },

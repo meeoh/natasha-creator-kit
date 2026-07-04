@@ -195,7 +195,7 @@ h1 {
   min-height: 620px;
   padding: 28px;
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: auto 1fr;
   gap: 18px;
 }
 .insights-head {
@@ -287,16 +287,6 @@ h1 {
 .platform-card p { position: relative; z-index: 1; margin: 8px 0 6px; font-weight: 920; font-size: 17px; }
 .platform-card small { position: relative; z-index: 1; color: var(--muted); font-weight: 760; }
 
-.quick-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
-.quick-grid div {
-  min-height: 96px;
-  border-radius: 22px;
-  padding: 16px;
-  background: rgba(25,24,23,0.045);
-  border: 1px solid var(--line);
-}
-.quick-grid span { display: block; color: var(--muted); font-size: 12px; font-weight: 900; margin-bottom: 8px; }
-.quick-grid strong { display: block; font-size: 15px; line-height: 1.25; letter-spacing: -0.04em; }
 
 .below-card {
   margin: 18px 0 34px;
@@ -345,7 +335,7 @@ h1 {
   .profile-image-card { width: min(188px, 72%); }
   h1 { font-size: 46px; }
   .insights-head { flex-direction: column; }
-  .platform-grid, .quick-grid { grid-template-columns: 1fr; }
+  .platform-grid { grid-template-columns: 1fr; }
   .total-card, .platform-card { min-height: 210px; }
   .total-card strong { font-size: 76px; }
 }

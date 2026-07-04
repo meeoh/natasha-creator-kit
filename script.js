@@ -109,4 +109,67 @@ async function loadStats() {
   return fallbackStats;
 }
 
+function postPlatformLabel(platform = "") {
+  return platform.toLowerCase() === "tiktok" ? "TikTok" : "Instagram";
+}
+
+function renderFeaturedPosts(posts = []) {
+  const grid = document.querySelector("[data-featured-posts]");
+  if (!grid) return;
+
+  if (!posts.length) {
+    grid.innerHTML = '<p class="featured-empty">Featured posts will appear here once links are added.</p>';
+    return;
+  }
+
+  grid.innerHTML = posts.map((post) => {
+    const category = (post.category || "").toLowerCase();
+    const title = post.title || post.url || "Featured post";
+    return `
+      <a class="featured-post-card" data-category="${category}" href="${post.url}" target="_blank" rel="noreferrer">
+        <span class="post-platform">${postPlatformLabel(post.platform)}</span>
+        <p class="post-title">${title}</p>
+        <span class="post-category">${category}</span>
+      </a>
+    `;
+  }).join("");
+}
+
+function setupFeaturedFilters() {
+  const buttons = document.querySelectorAll("[data-filter]");
+  const cards = document.querySelectorAll(".featured-post-card");
+  if (!buttons.length || !cards.length) return;
+
+  buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.dataset.filter;
+      buttons.forEach((node) => node.classList.toggle("active", node === button));
+
+      cards.forEach((card) => {
+        const visible = filter === "all" || card.dataset.category === filter;
+
+        if (visible) {
+          card.hidden = false;
+          requestAnimationFrame(() => card.classList.remove("is-hidden"));
+        } else {
+          card.classList.add("is-hidden");
+          window.setTimeout(() => { card.hidden = true; }, 220);
+        }
+      });
+    });
+  });
+}
+
+async function loadFeaturedPosts() {
+  const response = await fetch("data/featured-posts.json", { cache: "no-store" });
+  if (!response.ok) return [];
+  return response.json();
+}
+
 loadStats().then(render).catch(() => render(fallbackStats));
+loadFeaturedPosts()
+  .then((posts) => {
+    renderFeaturedPosts(posts);
+    setupFeaturedFilters();
+  })
+  .catch(() => renderFeaturedPosts([]));

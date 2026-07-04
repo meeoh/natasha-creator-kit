@@ -12,13 +12,13 @@ Normal pushes do **not** refresh stats.
 
 ## Refreshing stats
 
-Stats refresh is manual only:
+Stats refresh automatically runs every two weeks by default, plus it can still be run manually:
 
 ```txt
 GitHub → Actions → Update stats and deploy GitHub Pages → Run workflow
 ```
 
-This refreshes Apify stats, commits `data/stats.json`, and deploys.
+The first scheduled refresh is 2026-07-18 at 14:00 UTC. After that, the workflow refreshes every 14 days. GitHub Actions does not support a true biweekly cron expression, so the workflow is scheduled weekly on Saturdays and gates paid Apify refreshes by date. On refresh runs, it updates Apify stats, commits `data/stats.json`, and deploys.
 
 ## Required GitHub secrets
 
@@ -64,7 +64,51 @@ Open:
 
 ```txt
 http://localhost:8080
+http://localhost:8080/links/
 ```
+
+## Custom domain
+
+The repo has a root `CNAME` file:
+
+```txt
+natashagolfing.com
+```
+
+GitHub Pages should serve:
+
+```txt
+https://natashagolfing.com/
+https://natashagolfing.com/links
+```
+
+DNS setup should include GitHub Pages apex A records and a `www` CNAME to `meeoh.github.io`. Enable `Enforce HTTPS` in GitHub Pages after DNS verification.
+
+## `/links` page
+
+Files:
+
+```txt
+links/index.html
+links/styles.css
+```
+
+Current links, in order:
+
+```txt
+Instagram
+TikTok
+Media kit
+Collabs
+```
+
+Design rules:
+
+- Match the media kit design.
+- Keep it compact and fitting in the viewport without scroll where possible.
+- Use `assets/natasha-avatar.jpg`.
+- Use subtle pink/white icon cards with black glyphs, not bright gradients.
+- Bump the query string in `links/index.html` when changing `links/styles.css`.
 
 ## Adding featured posts
 
@@ -80,7 +124,7 @@ http://localhost:8080
 }
 ```
 
-2. Download thumbnail locally. For Instagram posts, this often works:
+2. Download thumbnail locally. For Instagram posts/reels, this often works with `/p/SHORTCODE/` even when the public URL is `/reels/SHORTCODE/`:
 
 ```bash
 curl -L "https://www.instagram.com/p/SHORTCODE/media/?size=l" -o assets/featured/SHORTCODE.jpg
@@ -92,7 +136,9 @@ curl -L "https://www.instagram.com/p/SHORTCODE/media/?size=l" -o assets/featured
 sips -Z 900 --setProperty format jpeg --setProperty formatOptions 82 assets/featured/SHORTCODE.jpg --out assets/featured/SHORTCODE.jpg
 ```
 
-4. Commit JSON + image.
+4. For TikTok thumbnails, use TikTok oEmbed to find `thumbnail_url`, download it locally, then optimize with `sips`.
+
+5. Commit JSON + image.
 
 ## Cost estimate
 
@@ -108,7 +154,11 @@ If daily:
 ~$9–10/month
 ```
 
-But currently refresh is manual-only.
+With the current biweekly schedule:
+
+```txt
+~$0.60–$0.62/month, plus any manual refreshes
+```
 
 ## Avoid committing secrets
 

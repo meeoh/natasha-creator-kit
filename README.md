@@ -1,18 +1,23 @@
 # Golf Creator Kit
 
-A sleek static creator/media kit for a golf creator, designed for GitHub Pages.
+A sleek static creator/media kit for Natasha Golfing, designed for GitHub Pages and served at:
 
-The source repo does **not** hardcode follower counts. The workflow generates `data/stats.json` during deploy, then GitHub Pages serves that generated file.
+```txt
+https://natashagolfing.com/
+https://natashagolfing.com/links
+```
+
+`data/stats.json` is intentionally committed so the current public stats are visible in GitHub. The workflow updates it during scheduled/manual refreshes, then GitHub Pages serves the committed file.
 
 ## Recommended no-platform-app setup
 
 If you do not want to create Meta/TikTok developer apps, use a username-based third-party fetcher. The best fit for this project is **Apify**:
 
 ```txt
-GitHub Action once daily
+GitHub Action every two weeks by default, plus manual runs on demand
 → Apify Instagram profile actor by username
 → Apify TikTok profile actor by username
-→ generate data/stats.json
+→ update data/stats.json
 → deploy GitHub Pages
 ```
 
@@ -21,19 +26,22 @@ Why this path:
 - no Meta app setup
 - no TikTok app setup
 - username-based
-- can run on a daily schedule
+- can run on a schedule, currently every two weeks by default
 - API key stays private in GitHub Actions
-- likely enough on Apify's free credits for one creator once daily, depending on actor pricing
+- likely enough on Apify's free credits for one creator on a biweekly cadence, depending on actor pricing
 
 Tradeoff: Apify actors are generally scraper-based, so they are less official than platform APIs and can occasionally break. But for ASAP and username-only setup, this is the most practical path.
 
 ## Files
 
-- `data/profile.json` — safe-to-commit profile info and handles, but no stats
-- `data/stats.json` — generated at build/deploy time and ignored by git
+- `index.html`, `styles.css`, `script.js` — media kit frontend
+- `links/index.html`, `links/styles.css` — Linktree-style links page
+- `CNAME` — custom domain for `natashagolfing.com`
+- `data/profile.json` — safe-to-commit profile info and handles
+- `data/stats.json` — committed/generated stats used by the site
+- `data/featured-posts.json` — featured post metadata
 - `scripts/update-stats.mjs` — pulls stats and writes `data/stats.json`
-- `.github/workflows/pages.yml` — daily refresh and GitHub Pages deploy
-- `index.html`, `styles.css`, `script.js` — static frontend
+- `.github/workflows/pages.yml` — biweekly/manual refresh and GitHub Pages deploy
 
 ## Customize profile and handles
 
@@ -50,8 +58,8 @@ Set her name, email, copy, and handles:
   "profile": {
     "name": "Creator Name",
     "bio": "Creator positioning statement...",
-    "location": "Toronto, Canada",
-    "avatar": "assets/avatar.svg",
+    "location": "Canada",
+    "avatar": "assets/natasha-avatar.jpg",
     "email": "natashagolfing@gmail.com",
     "instagramUrl": "https://instagram.com/handle",
     "tiktokUrl": "https://www.tiktok.com/@handle"
@@ -63,7 +71,7 @@ Set her name, email, copy, and handles:
 }
 ```
 
-You can also replace `assets/avatar.svg` with a real image, for example `assets/avatar.jpg`, then update `profile.avatar`.
+Circular avatar displays currently use the cropped square image `assets/natasha-avatar.jpg`. The original optimized image is kept as `assets/natasha-cover.jpg`.
 
 ## Apify setup
 
@@ -140,7 +148,23 @@ Then preview:
 python3 -m http.server 8080
 ```
 
-Open <http://localhost:8080>.
+Open:
+
+```txt
+http://localhost:8080
+http://localhost:8080/links/
+```
+
+## Links page
+
+The `/links` page is a compact Linktree-style page matching the media kit design. It includes:
+
+```txt
+Instagram → https://www.instagram.com/natashagolfing/
+TikTok → https://www.tiktok.com/@natashagolfing
+Media kit → https://natashagolfing.com/
+Collabs → mailto:natashagolfing@gmail.com
+```
 
 ## GitHub Pages deploy
 
@@ -157,13 +181,19 @@ Open <http://localhost:8080>.
    Build and deployment → Source → GitHub Actions
    ```
 
-4. Run:
+4. Custom domain is configured through root `CNAME`:
+
+   ```txt
+   natashagolfing.com
+   ```
+
+5. Run:
 
    ```txt
    Actions → Update stats and deploy GitHub Pages → Run workflow
    ```
 
-The workflow also runs once daily.
+The workflow also runs every two weeks by default, starting 2026-07-18 at 14:00 UTC. Technically it is scheduled weekly on Saturdays and gates the stats refresh by date because GitHub Actions does not support a true biweekly cron expression.
 
 ## Official API fallback
 

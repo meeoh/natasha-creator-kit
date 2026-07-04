@@ -4,7 +4,14 @@
 
 A static, GitHub Pages-hosted media kit for Natasha Golfing.
 
-Live site:
+Live sites:
+
+```txt
+https://natashagolfing.com/
+https://natashagolfing.com/links
+```
+
+GitHub Pages fallback:
 
 ```txt
 https://meeoh.github.io/natasha-creator-kit/
@@ -16,11 +23,13 @@ Repo:
 https://github.com/meeoh/natasha-creator-kit
 ```
 
-The site is designed as a sleek one-page creator/media kit with:
+The project contains:
 
-- profile card on the left
-- social stats and featured post gallery on the right
-- manual GitHub Actions refresh for stats
+- a sleek one-page creator/media kit at `/`
+- a Linktree-style links page at `/links`
+- social stats and featured post gallery on the media kit
+- manually entered audience charts on the media kit
+- biweekly scheduled + manual GitHub Actions refresh for stats
 - Apify-powered Instagram/TikTok scraping
 - no secrets committed to git
 
@@ -51,12 +60,12 @@ The top header/nav was removed completely. Do not re-add it unless asked.
 
 The left card contains:
 
-- local optimized profile/cover image: `assets/natasha-cover.jpg`
-- Creator media kit label
+- local cropped avatar image: `assets/natasha-avatar.jpg`
+- `Media kit` label
 - `Natasha Golfing`
 - location: `Canada · Golf content creator`
-- bio
-- mailto CTA: `Contact to collaborate`
+- bio: `Sharing my golf journey from beginner to better through relatable moments, lessons learned along the way, golf fits, and product discoveries.`
+- mailto CTA: `Contact for collabs`
 
 The left card should be sticky on desktop so it stays visible while scrolling the right side/page.
 
@@ -67,6 +76,7 @@ Currently contains:
 - `Insights & data`
 - Instagram stat section
 - TikTok stat section
+- manual audience section with gender + age charts
 - Featured posts gallery with filters
 
 Previous iterations had combined metric cards and a contact section in the right panel; those were removed/reworked.
@@ -112,15 +122,19 @@ This is stored in:
 ## Main files
 
 ```txt
-index.html                  Page markup
-styles.css                  Main styling
+index.html                  Media kit page markup
+styles.css                  Media kit styling
 script.js                   Client-side rendering + featured post filtering
+links/index.html            Linktree-style links page
+links/styles.css            Links page styling
+CNAME                       Custom domain for GitHub Pages: natashagolfing.com
 data/profile.json           Source-of-truth profile info/handles/email
 data/stats.json             Tracked/generated social stats
 data/featured-posts.json    Featured post data
 scripts/update-stats.mjs    Apify + optional official API updater
-.github/workflows/pages.yml GitHub Pages deploy + manual stats refresh
-assets/natasha-cover.jpg    Optimized profile/cover photo
+.github/workflows/pages.yml GitHub Pages deploy + biweekly/manual stats refresh
+assets/natasha-cover.jpg    Original optimized cover/profile photo
+assets/natasha-avatar.jpg   Cropped square avatar used by media kit and /links
 assets/featured/*.jpg       Optimized featured post thumbnails
 ```
 
@@ -138,12 +152,13 @@ Important behavior:
 
 - On normal push to `main`: deploy only, do not refresh stats.
 - On manual `workflow_dispatch`: refresh stats, commit `data/stats.json`, deploy.
+- On scheduled runs: refresh stats every two weeks, commit `data/stats.json`, deploy. The first scheduled refresh is 2026-07-18 at 14:00 UTC. GitHub Actions does not support a true biweekly cron, so the workflow cron runs weekly on Saturdays and gates actual refreshes by date.
 
 Stats should **not** refresh on every commit.
 
 ## Stats refresh behavior
 
-Stats are refreshed only when manually running:
+Stats are refreshed automatically every two weeks or when manually running:
 
 ```txt
 Actions → Update stats and deploy GitHub Pages → Run workflow
@@ -282,32 +297,34 @@ If daily:
 ~$9–10/month
 ```
 
-But workflow is manual-only, so cost occurs only when user explicitly refreshes stats.
-
-## Audience demographics decision
-
-User asked about an audience section like CreatorsJet showing:
-
-- gender
-- age
-- top countries
-
-Findings:
-
-- CreatorsJet can create username-only kits.
-- Sarahnautics had demographics; Natasha’s CreatorsJet free-tier page did not show audience demographics.
-- CreatorsJet likely uses third-party influencer analytics / estimated demographics, not OAuth-only data.
-- Public Apify scraping does not reliably provide demographics.
-- Official Instagram APIs can potentially provide audience demographics for a Professional account, but setup is heavier.
-- TikTok official Display API generally does not provide full audience demographics.
-
-Decision:
+With the biweekly scheduled refresh, starting 2026-07-18:
 
 ```txt
-Leave audience section out for now.
+~$0.60–$0.62/month, plus any manual refreshes
 ```
 
-Do not add audience demographics unless asked again.
+## Audience demographics
+
+Audience data is manually provided, not scraped. The current media kit has two individual charts:
+
+Gender:
+
+```txt
+Men: 52%
+Women: 48%
+```
+
+Age, combined from user-provided Instagram/TikTok screenshots:
+
+```txt
+18–24: 15.6%
+25–34: 40.4%
+35–44: 22.5%
+45–54: 12.3%
+55+: 9.2%
+```
+
+Do not try to automate demographics with Apify unless the user explicitly asks. Public scraping does not reliably provide real audience demographics.
 
 ## Featured posts data
 
@@ -332,6 +349,8 @@ Products:
 ```txt
 https://www.instagram.com/p/DZ_Z4OWtHVO/?hl=en
 https://www.instagram.com/p/DZPxSoUxpm6/?hl=en
+https://www.tiktok.com/@natashagolfing/video/7632421241474862343?_r=1&_t=ZS-97juxsKcEJb
+https://www.instagram.com/reels/DaOOTzGhwm1/
 ```
 
 Play:
@@ -339,6 +358,9 @@ Play:
 ```txt
 https://www.instagram.com/p/DYdI7NzHb13/?hl=en
 https://www.instagram.com/p/DZBflphMDuF/?hl=en
+https://www.instagram.com/reels/DZn_d5lhGHX/
+https://www.tiktok.com/@natashagolfing/photo/7589137311741267207?_r=1&_t=ZS-97jv1xUFB4S&image_index=2
+https://www.tiktok.com/@natashagolfing/video/7635450570861579527?_r=1&_t=ZS-97jv0ZZlEfA
 ```
 
 Entertainment:
@@ -355,7 +377,56 @@ Thumbnails were downloaded from Instagram `media/?size=l`, optimized with `sips`
 assets/featured/
 ```
 
-If adding new featured posts, also add optimized local images. Avoid relying on Instagram CDN URLs directly because they expire.
+If adding new featured posts, also add optimized local images. Avoid relying on Instagram/TikTok CDN URLs directly because they expire.
+
+## `/links` page
+
+The links page lives at:
+
+```txt
+links/index.html
+links/styles.css
+```
+
+Public URL:
+
+```txt
+https://natashagolfing.com/links
+```
+
+Current links, in order:
+
+```txt
+Instagram → https://www.instagram.com/natashagolfing/
+TikTok → https://www.tiktok.com/@natashagolfing
+Media kit → https://natashagolfing.com/
+Collabs → mailto:natashagolfing@gmail.com
+```
+
+Design notes:
+
+- Match the media kit: warm card, blush glow, rounded edges.
+- Use the cropped avatar `assets/natasha-avatar.jpg`.
+- Keep the page fitting in the viewport without scroll where possible.
+- Icons should be black glyphs in light pink/white card icons, not bright multicolor gradients.
+- Main title is just `Natasha Golfing`, not `Golf creator links`.
+- One-liner: `Golf girlie learning, styling, and sharing the journey ⛳️✨`.
+
+## Custom domain
+
+Primary domain:
+
+```txt
+natashagolfing.com
+```
+
+`CNAME` at repo root contains:
+
+```txt
+natashagolfing.com
+```
+
+DNS should point apex A records at GitHub Pages and `www` CNAME at `meeoh.github.io`. Enforce HTTPS in GitHub Pages once DNS is verified.
 
 ## Local preview
 
@@ -378,8 +449,8 @@ Opening `index.html` directly may fail to load JSON due to browser `file://` fet
 We have often bumped query params in `index.html` to force CSS/JS refresh on GitHub Pages, e.g.:
 
 ```html
-styles.css?v=20260704-ui11
-script.js?v=20260704-ui11
+styles.css?v=20260704-ui22
+script.js?v=20260704-ui22
 ```
 
 If UI seems stale after deploy, bump these query params and/or hard refresh.
@@ -391,6 +462,8 @@ If UI seems stale after deploy, bump these query params and/or hard refresh.
 - Use real post previews where possible.
 - Keep featured post filter behavior smooth and without flashing.
 - Keep the left profile card sticky on desktop.
-- Keep stats refresh manual-only unless user explicitly asks otherwise.
+- Keep stats refresh biweekly by default plus manual on demand unless user explicitly asks otherwise.
+- Keep `/links` simple, compact, and no-scroll where possible.
+- Use `assets/natasha-avatar.jpg` for circular avatar displays.
 - Do not commit secrets. GitHub Actions secrets are used for Apify.
 - `data/stats.json` is committed intentionally.

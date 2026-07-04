@@ -8,6 +8,7 @@
 - Added GitHub Actions deployment workflow.
 - Added Apify + optional official API updater in `scripts/update-stats.mjs`.
 - Added placeholder avatar, later replaced by real optimized cover/profile image.
+- Added cropped high-quality square avatar at `assets/natasha-avatar.jpg` for media kit and `/links`.
 
 ## Data integration
 
@@ -23,6 +24,7 @@
 - Added manual-only GitHub Action refresh.
 - Changed workflow so normal pushes deploy without refreshing stats.
 - Changed workflow so manual run refreshes stats and commits `data/stats.json`.
+- Added a biweekly scheduled stats refresh starting 2026-07-18, using a weekly Saturday cron gated by date.
 
 ## Stats
 
@@ -49,13 +51,16 @@
 - Reduced `Natasha Golfing` heading size.
 - Removed top updated-date pill.
 - Changed location from `Toronto, Canada` to `Canada`.
-- Replaced profile category tags with `Contact to collaborate` button.
+- Replaced profile category tags with collab CTA button.
 - Removed post/video counts from stat cards.
 - Added platform-specific Instagram/TikTok sections.
 - Added featured posts gallery with filter pills.
 - Added real thumbnail previews for featured posts.
+- Added manual audience charts for gender and age.
 - Removed text overlays like `Product feature` from thumbnails.
 - Removed filter flash animation.
+- Simplified labels/copy: `Media kit`, `Contact for collabs`, shorter profile bio.
+- Rebalanced profile card spacing and audited mobile styles.
 
 ## Featured posts
 
@@ -67,11 +72,25 @@
   - Entertainment
 - Removed Community filter per user request.
 - Added local thumbnails in `assets/featured/`.
+- Added additional product posts:
+  - TikTok `7632421241474862343`
+  - Instagram Reel `DaOOTzGhwm1`
+- Added additional play posts:
+  - Instagram Reel `DZn_d5lhGHX`
+  - TikTok photo `7589137311741267207`
+  - TikTok video `7635450570861579527`
+
+## Custom domain and links page
+
+- Added `CNAME` for `natashagolfing.com`.
+- Added `/links` Linktree-style page matching the media kit design.
+- `/links` includes Instagram, TikTok, Media kit, and Collabs links.
+- `/links` uses cropped avatar, warm card styling, compact no-scroll viewport layout, and light pink/white monochrome icon cards.
 
 ## Current known design direction
 
 - Left sticky creator profile card.
-- Right side contains stats + featured posts.
+- Right side contains stats + audience + featured posts.
 - Featured posts should be visual and polished.
 - Avoid dead space and generic filler.
 - Use CreatorsJet as visual reference but improve/customize.

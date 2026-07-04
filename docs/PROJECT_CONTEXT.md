@@ -453,8 +453,8 @@ Opening `index.html` directly may fail to load JSON due to browser `file://` fet
 We have often bumped query params in `index.html` to force CSS/JS refresh on GitHub Pages, e.g.:
 
 ```html
-styles.css?v=20260704-ui27
-script.js?v=20260704-ui27
+styles.css?v=20260704-ui28
+script.js?v=20260704-ui28
 ```
 
 If UI seems stale after deploy, bump these query params and/or hard refresh.

@@ -147,19 +147,9 @@ function setupFeaturedFilters() {
       const filter = button.dataset.filter;
       buttons.forEach((node) => node.classList.toggle("active", node === button));
 
-      cards.forEach((card, index) => {
+      cards.forEach((card) => {
         const visible = filter === "all" || card.dataset.category === filter;
         card.hidden = !visible;
-
-        if (visible) {
-          card.animate(
-            [
-              { opacity: 0, transform: "translateY(10px) scale(0.98)" },
-              { opacity: 1, transform: "translateY(0) scale(1)" }
-            ],
-            { duration: 260, delay: Math.min(index * 28, 140), easing: "cubic-bezier(.2,.8,.2,1)" }
-          );
-        }
       });
     });
   });

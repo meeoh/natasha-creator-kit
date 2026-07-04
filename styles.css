@@ -353,7 +353,8 @@ h1 {
   gap: 16px;
 }
 .social-detail-card,
-.featured-panel {
+.featured-panel,
+.audience-panel {
   position: relative;
   overflow: hidden;
   border: 1px solid var(--line-strong);
@@ -412,7 +413,8 @@ h1 {
   letter-spacing: -.075em;
 }
 .hero-stat strong { font-size: clamp(38px, 3.6vw, 64px); }
-.featured-panel {
+.featured-panel,
+.audience-panel {
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -420,6 +422,118 @@ h1 {
     radial-gradient(circle at 95% 5%, rgba(209,59,124,.12), transparent 13rem),
     #fff;
 }
+.audience-grid {
+  display: grid;
+  grid-template-columns: .86fr 1.14fr;
+  gap: 14px;
+}
+.audience-card {
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(25,24,23,.028);
+  padding: 18px;
+}
+.audience-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.audience-card h4 {
+  margin: 0;
+  font-size: 22px;
+  line-height: 1;
+  letter-spacing: -.055em;
+  font-weight: 930;
+}
+.audience-card-head span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+}
+.gender-arc-wrap {
+  display: grid;
+  place-items: center;
+  margin: 4px 0 10px;
+}
+.gender-arc {
+  width: min(240px, 100%);
+  height: auto;
+  overflow: visible;
+}
+.gender-arc path {
+  fill: none;
+  stroke-width: 34;
+  stroke-linecap: butt;
+}
+.gender-arc-base { stroke: #efb4cb; }
+.gender-arc-men {
+  stroke: var(--blush);
+  stroke-dasharray: 52 100;
+}
+.audience-legend {
+  border-top: 1px solid var(--line);
+}
+.audience-legend-row {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-bottom: 1px solid var(--line);
+  font-size: 15px;
+  font-weight: 900;
+}
+.audience-legend-row span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.audience-legend-row strong {
+  font-size: 22px;
+  letter-spacing: -.04em;
+}
+.dot {
+  width: 11px;
+  height: 11px;
+  display: inline-block;
+  border-radius: 999px;
+}
+.men-dot { background: var(--blush); }
+.women-dot { background: #efb4cb; }
+.age-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.age-row { display: grid; gap: 7px; }
+.age-meta {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+}
+.age-meta span,
+.age-meta strong {
+  font-size: 17px;
+  letter-spacing: -.04em;
+  font-weight: 900;
+}
+.age-track {
+  height: 12px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(25,24,23,.12);
+}
+.age-track i {
+  display: block;
+  width: var(--value);
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--blush), #ef7aab);
+}
+
 .featured-head {
   display: flex;
   align-items: flex-start;
@@ -592,6 +706,7 @@ h1 {
   .platform-grid, .insight-detail-grid, .metric-row { grid-template-columns: 1fr; }
   .social-sections { grid-template-rows: auto; }
   .featured-head { flex-direction: column; }
+  .audience-grid { grid-template-columns: 1fr; }
   .featured-grid { grid-template-columns: 1fr; }
   .total-card, .platform-card { min-height: 170px; }
   .total-card strong { font-size: 64px; }

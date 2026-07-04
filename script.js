@@ -4,7 +4,7 @@ const fullNumberFormatter = new Intl.NumberFormat("en");
 const fallbackStats = {
   profile: {
     name: "Golf Creator",
-    bio: "Short-form golf tips, course-day outfits, practice routines, and relatable on-course moments for an audience that loves style, improvement, and the joy of golf.",
+    bio: "I’m a golf creator sharing my journey from beginner to better, one honest round at a time. I document relatable on-course moments, lessons I pick up as I go, golf style, and product discoveries to make golf feel more welcoming, fun, and real for everyday golfers.",
     location: "Toronto, Canada",
     avatar: "assets/avatar.svg",
     email: "natashagolfing@gmail.com",

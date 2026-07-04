@@ -13,21 +13,47 @@
       "username": "natashagolfing",
       "followers": 3202,
       "posts": 40,
-      "following": 288
+      "following": 288,
+      "performance": {
+        "sampleSize": 35,
+        "engagementSampleSize": 35,
+        "viewSampleSize": 34,
+        "likeSampleSize": 35,
+        "totalLikes": 12773,
+        "totalViews": 224681,
+        "totalEngagement": 15596,
+        "engagementDenominator": 112070,
+        "avgLikes": 365,
+        "avgViews": 6608,
+        "avgEngagementRate": 13.92
+      }
     },
     "tiktok": {
       "username": "natashagolfing",
       "followers": 1922,
-      "likes": 48800,
+      "likes": 48900,
       "videos": 146,
-      "following": 284
+      "following": 284,
+      "performance": {
+        "sampleSize": 140,
+        "engagementSampleSize": 140,
+        "viewSampleSize": 140,
+        "likeSampleSize": 140,
+        "totalLikes": 46686,
+        "totalViews": 1243179,
+        "totalEngagement": 67287,
+        "engagementDenominator": 269080,
+        "avgLikes": 333,
+        "avgViews": 8880,
+        "avgEngagementRate": 25.01
+      }
     }
   },
   "performance": {
-    "avgEngagementRate": null,
-    "avgViews": null,
-    "avgLikes": null,
-    "sampleSize": 0
+    "avgEngagementRate": 21.75,
+    "avgViews": 8436,
+    "avgLikes": 340,
+    "sampleSize": 175
   },
-  "updatedAt": "2026-07-04T00:01:23.041Z"
+  "updatedAt": "2026-07-04T00:42:43.804Z"
 }

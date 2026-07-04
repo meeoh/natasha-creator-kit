@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260704-ui8" />
+    <link rel="stylesheet" href="styles.css?v=20260704-ui9" />
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>
@@ -46,62 +46,68 @@
             <p class="eyebrow">Insights & data</p>
           </div>
 
-          <div class="platform-grid">
-            <article class="total-card">
-              <div>
-                <p>Total followers</p>
-                <strong data-stat="combinedFollowers">—</strong>
-              </div>
-              <span class="spark">✦</span>
-            </article>
-
-            <article class="platform-card instagram">
-              <div class="platform-heading">
+          <div class="social-sections">
+            <article class="social-detail-card instagram-detail">
+              <div class="social-detail-head">
                 <span class="platform-icon">◎</span>
                 <div>
-                  <h2>Instagram</h2>
+                  <p class="mini-label">Instagram</p>
                   <a data-profile="instagramUrl" href="https://instagram.com/natashagolfing" target="_blank" rel="noreferrer">@<span data-stat="instagramUsername">natashagolfing</span></a>
                 </div>
               </div>
-              <strong data-stat="instagramFollowers">—</strong>
-              <p>followers</p>
+              <div class="metric-row">
+                <div class="mini-stat hero-stat">
+                  <span>Followers</span>
+                  <strong data-stat="instagramFollowers">—</strong>
+                </div>
+                <div class="mini-stat">
+                  <span>Avg engagement</span>
+                  <strong data-stat="instagramAvgEngagementRate">—</strong>
+                </div>
+                <div class="mini-stat">
+                  <span>Avg views</span>
+                  <strong data-stat="instagramAvgViews">—</strong>
+                </div>
+                <div class="mini-stat">
+                  <span>Avg likes</span>
+                  <strong data-stat="instagramAvgLikes">—</strong>
+                </div>
+              </div>
             </article>
 
-            <article class="platform-card tiktok">
-              <div class="platform-heading">
+            <article class="social-detail-card tiktok-detail">
+              <div class="social-detail-head">
                 <span class="platform-icon">♪</span>
                 <div>
-                  <h2>TikTok</h2>
+                  <p class="mini-label">TikTok</p>
                   <a data-profile="tiktokUrl" href="https://www.tiktok.com/@natashagolfing" target="_blank" rel="noreferrer">@natashagolfing</a>
                 </div>
               </div>
-              <strong data-stat="tiktokFollowers">—</strong>
-              <p>followers</p>
-            </article>
-          </div>
-
-          <div class="insight-detail-grid">
-            <article class="detail-card feature-card metric-card">
-              <p class="mini-label">Avg engagement</p>
-              <h3 class="metric-value" data-stat="avgEngagementRate">—</h3>
-              <p>All-time public content engagement rate across Instagram and TikTok.</p>
-            </article>
-
-            <article class="detail-card metric-card">
-              <p class="mini-label">Avg views</p>
-              <h3 class="metric-value" data-stat="avgViews">—</h3>
-              <p>Average views across public videos/posts where view data is available.</p>
-            </article>
-
-            <article class="detail-card metric-card">
-              <p class="mini-label">Avg likes</p>
-              <h3 class="metric-value" data-stat="avgLikes">—</h3>
-              <p>Average likes across <span data-stat="performanceSampleSize">—</span> public posts/videos.</p>
+              <div class="metric-row">
+                <div class="mini-stat hero-stat">
+                  <span>Followers</span>
+                  <strong data-stat="tiktokFollowers">—</strong>
+                </div>
+                <div class="mini-stat">
+                  <span>Avg engagement</span>
+                  <strong data-stat="tiktokAvgEngagementRate">—</strong>
+                </div>
+                <div class="mini-stat">
+                  <span>Avg views</span>
+                  <strong data-stat="tiktokAvgViews">—</strong>
+                </div>
+                <div class="mini-stat">
+                  <span>Avg likes</span>
+                  <strong data-stat="tiktokAvgLikes">—</strong>
+                </div>
+              </div>
             </article>
 
-            <article class="detail-card cta-card">
-              <p class="mini-label">Available for</p>
-              <h3>Sponsored Reels, TikTok integrations, UGC packages, and course visits.</h3>
+            <article class="collab-panel">
+              <div>
+                <p class="mini-label">Available for</p>
+                <h3>Sponsored Reels, TikTok integrations, UGC packages, and course visits.</h3>
+              </div>
               <a class="primary-button" data-profile="emailLink" href="mailto:hello@example.com">Contact to collaborate</a>
             </article>
           </div>
@@ -111,6 +117,6 @@
 
     </div>
 
-    <script src="script.js?v=20260704-ui8"></script>
+    <script src="script.js?v=20260704-ui9"></script>
   </body>
 </html>

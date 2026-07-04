@@ -186,8 +186,8 @@ h1 {
   min-height: 620px;
   padding: 28px;
   display: grid;
-  grid-template-rows: auto auto 1fr;
-  align-content: start;
+  grid-template-rows: auto 1fr;
+  align-content: stretch;
   gap: 18px;
 }
 .insights-head {
@@ -343,11 +343,96 @@ h1 {
 }
 .cta-card .mini-label { color: #f0b6cd; }
 .cta-card h3 { font-size: clamp(20px, 1.65vw, 28px); }
+.social-sections {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: 1fr 1fr auto;
+  gap: 16px;
+}
+.social-detail-card,
+.collab-panel {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 24px;
+  background: #fff;
+  padding: 22px;
+  box-shadow: 0 16px 42px rgba(54,43,35,.07);
+}
+.social-detail-card::after {
+  content: "";
+  position: absolute;
+  right: -58px;
+  bottom: -82px;
+  width: 170px;
+  height: 170px;
+  border-radius: 999px;
+  opacity: .22;
+}
+.instagram-detail::after { background: linear-gradient(135deg, #ffcf6b, #ff4fb8, #8b5cff); }
+.tiktok-detail::after { background: linear-gradient(135deg, #25f4ee, #fe2c55); }
+.social-detail-head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+.social-detail-head .mini-label { margin-bottom: 4px; }
+.social-detail-head a { color: var(--muted); text-decoration: none; font-weight: 850; }
+.metric-row {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.15fr repeat(3, 1fr);
+  gap: 12px;
+}
+.mini-stat {
+  min-height: 104px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(25,24,23,.035);
+  padding: 14px;
+}
+.mini-stat span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+.mini-stat strong {
+  font-size: clamp(28px, 2.8vw, 48px);
+  line-height: .86;
+  letter-spacing: -.075em;
+}
+.hero-stat strong { font-size: clamp(38px, 3.6vw, 64px); }
+.collab-panel {
+  min-height: 154px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  background: var(--ink);
+  color: #fff;
+}
+.collab-panel .mini-label { color: #f0b6cd; }
+.collab-panel h3 {
+  max-width: 620px;
+  margin: 0;
+  font-size: clamp(22px, 2vw, 34px);
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+  font-weight: 930;
+}
 .primary-button {
   min-height: 46px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  flex: 0 0 auto;
   border-radius: 999px;
   padding: 0 18px;
   background: var(--blush);
@@ -362,6 +447,7 @@ h1 {
   .profile-panel, .stats-panel { min-height: auto; }
   .platform-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .insight-detail-grid { grid-template-columns: 1fr 1fr; }
+  .metric-row { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
 @media (max-width: 720px) {
@@ -373,7 +459,9 @@ h1 {
   .profile-image-card { width: min(188px, 72%); }
   h1 { font-size: 46px; }
   .insights-head { flex-direction: column; }
-  .platform-grid, .insight-detail-grid { grid-template-columns: 1fr; }
+  .platform-grid, .insight-detail-grid, .metric-row { grid-template-columns: 1fr; }
+  .social-sections { grid-template-rows: auto; }
+  .collab-panel { align-items: flex-start; flex-direction: column; }
   .total-card, .platform-card { min-height: 170px; }
   .total-card strong { font-size: 64px; }
 }

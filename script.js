@@ -80,9 +80,15 @@ function render(stats) {
   setText('[data-stat="instagramFollowers"]', formatCompact(instagram.followers));
   setText('[data-stat="instagramPosts"]', formatFull(instagram.posts));
   setText('[data-stat="instagramUsername"]', instagram.username || "handle");
+  setText('[data-stat="instagramAvgEngagementRate"]', formatPercent(instagram.performance?.avgEngagementRate));
+  setText('[data-stat="instagramAvgViews"]', formatCompact(instagram.performance?.avgViews));
+  setText('[data-stat="instagramAvgLikes"]', formatCompact(instagram.performance?.avgLikes));
   setText('[data-stat="tiktokFollowers"]', formatCompact(tiktok.followers));
   setText('[data-stat="tiktokLikes"]', formatCompact(tiktok.likes));
   setText('[data-stat="tiktokVideos"]', formatFull(tiktok.videos));
+  setText('[data-stat="tiktokAvgEngagementRate"]', formatPercent(tiktok.performance?.avgEngagementRate));
+  setText('[data-stat="tiktokAvgViews"]', formatCompact(tiktok.performance?.avgViews));
+  setText('[data-stat="tiktokAvgLikes"]', formatCompact(tiktok.performance?.avgLikes));
   setText('[data-stat="combinedFollowers"]', formatCompact(combinedFollowers));
   setText('[data-stat="avgEngagementRate"]', formatPercent(data.performance.avgEngagementRate));
   setText('[data-stat="avgViews"]', formatCompact(data.performance.avgViews));

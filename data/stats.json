@@ -23,5 +23,11 @@
       "following": 284
     }
   },
+  "performance": {
+    "avgEngagementRate": null,
+    "avgViews": null,
+    "avgLikes": null,
+    "sampleSize": 0
+  },
   "updatedAt": "2026-07-04T00:01:23.041Z"
 }

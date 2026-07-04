@@ -15,6 +15,12 @@ const fallbackStats = {
     instagram: { username: "handle", followers: 0, posts: 0 },
     tiktok: { username: "handle", followers: 0, likes: 0, videos: 0 }
   },
+  performance: {
+    avgEngagementRate: null,
+    avgViews: null,
+    avgLikes: null,
+    sampleSize: 0
+  },
   updatedAt: null
 };
 
@@ -26,6 +32,11 @@ function formatCompact(value) {
 function formatFull(value) {
   const number = Number(value || 0);
   return number > 0 ? fullNumberFormatter.format(number) : "—";
+}
+
+function formatPercent(value) {
+  const number = Number(value);
+  return Number.isFinite(number) ? `${number.toFixed(number >= 10 ? 1 : 2)}%` : "—";
 }
 
 function setText(selector, value) {
@@ -45,7 +56,8 @@ function normalizeStats(stats) {
     platforms: {
       instagram: { ...fallbackStats.platforms.instagram, ...(stats.platforms?.instagram || {}) },
       tiktok: { ...fallbackStats.platforms.tiktok, ...(stats.platforms?.tiktok || {}) }
-    }
+    },
+    performance: { ...fallbackStats.performance, ...(stats.performance || {}) }
   };
 }
 
@@ -72,6 +84,10 @@ function render(stats) {
   setText('[data-stat="tiktokLikes"]', formatCompact(tiktok.likes));
   setText('[data-stat="tiktokVideos"]', formatFull(tiktok.videos));
   setText('[data-stat="combinedFollowers"]', formatCompact(combinedFollowers));
+  setText('[data-stat="avgEngagementRate"]', formatPercent(data.performance.avgEngagementRate));
+  setText('[data-stat="avgViews"]', formatCompact(data.performance.avgViews));
+  setText('[data-stat="avgLikes"]', formatCompact(data.performance.avgLikes));
+  setText('[data-stat="performanceSampleSize"]', formatFull(data.performance.sampleSize));
   setText('[data-stat="updatedAt"]', updated ? updated.toLocaleDateString(undefined, { month: "short", day: "numeric" }) : "daily");
 
   document.title = `${profile.name} · Golf Creator Kit`;

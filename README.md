@@ -112,6 +112,15 @@ You can also replace `assets/avatar.svg` with a real image, for example `assets/
 
 The updater tries to normalize common actor output fields like `followersCount`, `followerCount`, `likesCount`, `videoCount`, etc.
 
+By default, performance metrics use all available public content up to `MAX_CONTENT_ITEMS` per platform. Defaults:
+
+```txt
+CONTENT_SAMPLE_SIZE=all
+MAX_CONTENT_ITEMS=250
+```
+
+This is used to calculate average engagement rate, average views, and average likes. You can set `CONTENT_SAMPLE_SIZE` to a number like `12` if you want recent-content metrics instead.
+
 ## Local test with Apify
 
 From this folder:

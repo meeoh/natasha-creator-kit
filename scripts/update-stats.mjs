@@ -17,6 +17,12 @@ const emptyStats = {
     instagram: { username: "", followers: null, posts: null },
     tiktok: { username: "", followers: null, likes: null, videos: null }
   },
+  performance: {
+    avgEngagementRate: null,
+    avgViews: null,
+    avgLikes: null,
+    sampleSize: 0
+  },
   updatedAt: null
 };
 
@@ -80,6 +86,81 @@ function firstValue(object, paths) {
   return undefined;
 }
 
+function maxContentItems() {
+  return asNumber(env("MAX_CONTENT_ITEMS"), 250);
+}
+
+function contentSampleLimit(totalAvailable = null) {
+  const requested = (env("CONTENT_SAMPLE_SIZE") || "all").toLowerCase();
+  const max = maxContentItems();
+
+  if (requested === "all") {
+    return Math.max(1, Math.min(asNumber(totalAvailable, max), max));
+  }
+
+  return Math.max(1, Math.min(asNumber(requested, 12), max));
+}
+
+function normalizeContentItem(item, platform) {
+  const likes = asNumber(firstValue(item, platform === "instagram"
+    ? ["likesCount", "likeCount", "likes", "edge_liked_by.count", "statistics.likes"]
+    : ["diggCount", "likeCount", "likes", "stats.diggCount"]));
+  const comments = asNumber(firstValue(item, platform === "instagram"
+    ? ["commentsCount", "commentCount", "comments", "edge_media_to_comment.count", "statistics.comments"]
+    : ["commentCount", "comments", "stats.commentCount"]));
+  const shares = asNumber(firstValue(item, ["shareCount", "shares", "stats.shareCount"]));
+  const saves = asNumber(firstValue(item, ["collectCount", "saveCount", "saves", "stats.collectCount"]));
+  const views = asNumber(firstValue(item, platform === "instagram"
+    ? ["videoViewCount", "videoPlayCount", "videoViews", "viewsCount", "views", "playCount"]
+    : ["playCount", "viewCount", "views", "stats.playCount"]));
+
+  return { likes, comments, shares, saves, views };
+}
+
+function summarizeContent(items, followers, platform) {
+  const normalized = items.map((item) => normalizeContentItem(item, platform));
+  const likeSamples = normalized.filter((item) => item.likes !== null);
+  const viewSamples = normalized.filter((item) => item.views !== null && item.views > 0);
+  const engagementSamples = normalized.filter((item) => [item.likes, item.comments, item.shares, item.saves].some((value) => value !== null));
+
+  const totalLikes = likeSamples.reduce((sum, item) => sum + item.likes, 0);
+  const totalViews = viewSamples.reduce((sum, item) => sum + item.views, 0);
+  const totalEngagement = engagementSamples.reduce((sum, item) => sum + (item.likes || 0) + (item.comments || 0) + (item.shares || 0) + (item.saves || 0), 0);
+  const engagementDenominator = Number(followers || 0) * engagementSamples.length;
+
+  return {
+    sampleSize: normalized.length,
+    engagementSampleSize: engagementSamples.length,
+    viewSampleSize: viewSamples.length,
+    likeSampleSize: likeSamples.length,
+    totalLikes,
+    totalViews,
+    totalEngagement,
+    engagementDenominator,
+    avgLikes: likeSamples.length ? Math.round(totalLikes / likeSamples.length) : null,
+    avgViews: viewSamples.length ? Math.round(totalViews / viewSamples.length) : null,
+    avgEngagementRate: engagementDenominator ? Number(((totalEngagement / engagementDenominator) * 100).toFixed(2)) : null
+  };
+}
+
+function summarizeCombined(...summaries) {
+  const valid = summaries.filter(Boolean);
+  const totalLikes = valid.reduce((sum, item) => sum + item.totalLikes, 0);
+  const totalViews = valid.reduce((sum, item) => sum + item.totalViews, 0);
+  const totalEngagement = valid.reduce((sum, item) => sum + item.totalEngagement, 0);
+  const engagementDenominator = valid.reduce((sum, item) => sum + item.engagementDenominator, 0);
+  const likeSampleSize = valid.reduce((sum, item) => sum + item.likeSampleSize, 0);
+  const viewSampleSize = valid.reduce((sum, item) => sum + item.viewSampleSize, 0);
+  const sampleSize = valid.reduce((sum, item) => sum + item.sampleSize, 0);
+
+  return {
+    avgEngagementRate: engagementDenominator ? Number(((totalEngagement / engagementDenominator) * 100).toFixed(2)) : null,
+    avgViews: viewSampleSize ? Math.round(totalViews / viewSampleSize) : null,
+    avgLikes: likeSampleSize ? Math.round(totalLikes / likeSampleSize) : null,
+    sampleSize
+  };
+}
+
 async function fetchJson(url, options = {}) {
   const response = await fetch(url, options);
   const text = await response.text();
@@ -105,7 +186,7 @@ function apifyActorUrl(actorId) {
   return url;
 }
 
-async function runApifyActor(actorId, input) {
+async function runApifyActorItems(actorId, input) {
   const items = await fetchJson(apifyActorUrl(actorId), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -120,6 +201,11 @@ async function runApifyActor(actorId, input) {
     throw new Error(`Apify actor ${actorId} returned no items.`);
   }
 
+  return items;
+}
+
+async function runApifyActor(actorId, input) {
+  const items = await runApifyActorItems(actorId, input);
   return items[0];
 }
 
@@ -154,6 +240,21 @@ async function updateInstagramFromApify(stats) {
   if (avatar && (!stats.profile.avatar || stats.profile.avatar === "assets/avatar.svg")) stats.profile.avatar = avatar;
 
   stats.profile.instagramUrl = `https://instagram.com/${stats.platforms.instagram.username}`;
+
+  try {
+    const recentInput = parseInputJson("APIFY_INSTAGRAM_RECENT_INPUT_JSON", {
+      resultsType: "posts",
+      directUrls: [`https://www.instagram.com/${username}/`],
+      resultsLimit: contentSampleLimit(stats.platforms.instagram.posts),
+      skipPinnedPosts: true
+    });
+    const recentItems = await runApifyActorItems(env("APIFY_INSTAGRAM_ACTOR_ID"), recentInput);
+    stats.platforms.instagram.performance = summarizeContent(recentItems, stats.platforms.instagram.followers, "instagram");
+    console.log(`Updated Instagram content metrics from ${recentItems.length} items.`);
+  } catch (error) {
+    console.warn(`Instagram content metrics skipped: ${error.message}`);
+  }
+
   console.log(`Updated Instagram from Apify @${stats.platforms.instagram.username}.`);
   return true;
 }
@@ -166,7 +267,7 @@ async function updateTikTokFromApify(stats) {
 
   const input = parseInputJson("APIFY_TIKTOK_INPUT_JSON", {
     profiles: [username],
-    resultsPerPage: 1,
+    resultsPerPage: contentSampleLimit(stats.platforms.tiktok.videos),
     profileScrapeSections: ["videos"],
     profileSorting: "latest",
     excludePinnedPosts: false,
@@ -180,7 +281,8 @@ async function updateTikTokFromApify(stats) {
     shouldDownloadVideos: false,
     maxProfilesPerQuery: 1
   });
-  const item = await runApifyActor(env("APIFY_TIKTOK_ACTOR_ID"), input);
+  const items = await runApifyActorItems(env("APIFY_TIKTOK_ACTOR_ID"), input);
+  const item = items[0];
 
   stats.platforms.tiktok = {
     ...stats.platforms.tiktok,
@@ -195,6 +297,8 @@ async function updateTikTokFromApify(stats) {
   if (avatar && (!stats.profile.avatar || stats.profile.avatar === "assets/avatar.svg")) stats.profile.avatar = avatar;
 
   stats.profile.tiktokUrl = `https://www.tiktok.com/@${stats.platforms.tiktok.username}`;
+  stats.platforms.tiktok.performance = summarizeContent(items, stats.platforms.tiktok.followers, "tiktok");
+  console.log(`Updated TikTok content metrics from ${items.length} items.`);
   console.log(`Updated TikTok from Apify @${stats.platforms.tiktok.username}.`);
   return true;
 }
@@ -289,6 +393,8 @@ async function main() {
 
   if (!updatedInstagram) console.log("Instagram not updated. Configure Apify or official Instagram API secrets.");
   if (!updatedTikTok) console.log("TikTok not updated. Configure Apify or official TikTok API secrets.");
+
+  stats.performance = summarizeCombined(stats.platforms.instagram.performance, stats.platforms.tiktok.performance);
 
   if (updatedInstagram || updatedTikTok) {
     stats.updatedAt = new Date().toISOString();

@@ -125,11 +125,16 @@ function renderFeaturedPosts(posts = []) {
   grid.innerHTML = posts.map((post) => {
     const category = (post.category || "").toLowerCase();
     const title = post.title || post.url || "Featured post";
+    const image = post.image ? `<img src="${post.image}" alt="${title}" loading="lazy" />` : "";
     return `
-      <a class="featured-post-card" data-category="${category}" href="${post.url}" target="_blank" rel="noreferrer">
+      <a class="featured-post-card ${image ? "has-image" : ""}" data-category="${category}" href="${post.url}" target="_blank" rel="noreferrer">
+        ${image}
         <span class="post-platform">${postPlatformLabel(post.platform)}</span>
-        <p class="post-title">${title}</p>
         <span class="post-category">${category}</span>
+        <div class="post-overlay">
+          <p class="post-title">${title}</p>
+          <span>View post ↗</span>
+        </div>
       </a>
     `;
   }).join("");

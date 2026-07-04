@@ -3,42 +3,49 @@
     "title": "Product feature",
     "platform": "instagram",
     "category": "products",
-    "url": "https://www.instagram.com/p/DZ_Z4OWtHVO/?hl=en"
+    "url": "https://www.instagram.com/p/DZ_Z4OWtHVO/?hl=en",
+    "image": "assets/featured/DZ_Z4OWtHVO.jpg"
   },
   {
     "title": "Product feature",
     "platform": "instagram",
     "category": "products",
-    "url": "https://www.instagram.com/p/DZPxSoUxpm6/?hl=en"
+    "url": "https://www.instagram.com/p/DZPxSoUxpm6/?hl=en",
+    "image": "assets/featured/DZPxSoUxpm6.jpg"
   },
   {
     "title": "Golf play moment",
     "platform": "instagram",
     "category": "play",
-    "url": "https://www.instagram.com/p/DYdI7NzHb13/?hl=en"
+    "url": "https://www.instagram.com/p/DYdI7NzHb13/?hl=en",
+    "image": "assets/featured/DYdI7NzHb13.jpg"
   },
   {
     "title": "Golf play moment",
     "platform": "instagram",
     "category": "play",
-    "url": "https://www.instagram.com/p/DZBflphMDuF/?hl=en"
+    "url": "https://www.instagram.com/p/DZBflphMDuF/?hl=en",
+    "image": "assets/featured/DZBflphMDuF.jpg"
   },
   {
     "title": "Entertainment post",
     "platform": "instagram",
     "category": "entertainment",
-    "url": "https://www.instagram.com/p/DZXToHtx6LJ/?hl=en"
+    "url": "https://www.instagram.com/p/DZXToHtx6LJ/?hl=en",
+    "image": "assets/featured/DZXToHtx6LJ.jpg"
   },
   {
     "title": "Entertainment post",
     "platform": "instagram",
     "category": "entertainment",
-    "url": "https://www.instagram.com/p/DZyUp7RPHfw/?hl=en"
+    "url": "https://www.instagram.com/p/DZyUp7RPHfw/?hl=en",
+    "image": "assets/featured/DZyUp7RPHfw.jpg"
   },
   {
     "title": "Entertainment post",
     "platform": "instagram",
     "category": "entertainment",
-    "url": "https://www.instagram.com/p/DXdIXD6Dc14/?hl=en"
+    "url": "https://www.instagram.com/p/DXdIXD6Dc14/?hl=en",
+    "image": "assets/featured/DXdIXD6Dc14.jpg"
   }
 ]

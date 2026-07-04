@@ -162,7 +162,7 @@ h1, h2, p { margin-top: 0; }
 h1 {
   margin: 0 0 16px;
   font-family: Inter, system-ui, sans-serif;
-  font-size: clamp(42px, 4.6vw, 72px);
+  font-size: clamp(36px, 3.8vw, 58px);
   line-height: 0.95;
   letter-spacing: -0.07em;
   font-weight: 950;

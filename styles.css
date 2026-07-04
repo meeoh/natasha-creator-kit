@@ -683,6 +683,29 @@ h1 {
   text-decoration: none;
   box-shadow: 0 18px 40px rgba(209,59,124,.18);
 }
+.email-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 20;
+  transform: translate(-50%, 12px);
+  opacity: 0;
+  pointer-events: none;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: rgba(255,255,255,.92);
+  color: var(--ink);
+  padding: 11px 15px;
+  font-size: 13px;
+  font-weight: 900;
+  box-shadow: 0 18px 44px rgba(54,43,35,.16);
+  backdrop-filter: blur(18px);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+.email-toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
 
 @media (max-width: 1020px) {
   .kit-card { min-height: auto; grid-template-columns: 1fr; overflow: visible; }

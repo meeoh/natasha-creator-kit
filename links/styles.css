@@ -12,10 +12,12 @@
 }
 
 * { box-sizing: border-box; }
-html { min-height: 100%; }
+html { height: 100%; }
 body {
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
   margin: 0;
+  overflow: hidden;
   color: var(--ink);
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background:
@@ -41,15 +43,17 @@ body {
   position: relative;
   z-index: 1;
   width: min(100% - 28px, 540px);
-  min-height: 100vh;
+  height: 100vh;
+  height: 100dvh;
   margin: 0 auto;
-  padding: 24px 0;
+  padding: 14px 0;
   display: grid;
   place-items: center;
 }
 
 .links-card {
   width: 100%;
+  max-height: calc(100dvh - 28px);
   position: relative;
   overflow: hidden;
   border: 1px solid var(--line);
@@ -60,7 +64,7 @@ body {
     var(--card);
   box-shadow: var(--shadow);
   backdrop-filter: blur(26px);
-  padding: 34px;
+  padding: clamp(20px, 3.2dvh, 30px) 34px;
   text-align: center;
 }
 
@@ -74,9 +78,9 @@ body {
 }
 
 .avatar-wrap {
-  width: 150px;
+  width: clamp(106px, 17dvh, 140px);
   aspect-ratio: 1;
-  margin: 0 auto 22px;
+  margin: 0 auto clamp(14px, 2.2dvh, 20px);
   position: relative;
   border-radius: 999px;
   border: 7px solid #fff;
@@ -112,20 +116,20 @@ h1 {
 
 .intro {
   max-width: 390px;
-  margin: 18px auto 26px;
+  margin: clamp(12px, 1.8dvh, 16px) auto clamp(16px, 2.5dvh, 22px);
   color: #3b3734;
-  font-size: 16px;
-  line-height: 1.5;
+  font-size: clamp(14px, 2.1dvh, 16px);
+  line-height: 1.42;
   font-weight: 600;
 }
 
 .link-stack {
   display: grid;
-  gap: 12px;
+  gap: clamp(8px, 1.4dvh, 12px);
 }
 
 .link-button {
-  min-height: 74px;
+  min-height: clamp(58px, 9dvh, 70px);
   position: relative;
   display: grid;
   grid-template-columns: auto 1fr;
@@ -136,7 +140,7 @@ h1 {
   background: rgba(255,255,255,.8);
   color: var(--ink);
   text-decoration: none;
-  padding: 12px 16px 12px 12px;
+  padding: clamp(8px, 1.4dvh, 12px) 16px clamp(8px, 1.4dvh, 12px) 12px;
   box-shadow: 0 16px 42px rgba(54,43,35,.08);
   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, background 180ms ease;
 }
@@ -149,13 +153,15 @@ h1 {
 }
 
 .link-icon {
-  width: 50px;
-  height: 50px;
+  width: clamp(42px, 6.4dvh, 50px);
+  height: clamp(42px, 6.4dvh, 50px);
   display: grid;
   place-items: center;
-  border: 1px solid var(--line-strong);
+  border: 1px solid rgba(197,67,125,.22);
   border-radius: 17px;
-  background: #fff;
+  background:
+    radial-gradient(circle at 82% 8%, rgba(209,59,124,.16), transparent 62%),
+    linear-gradient(135deg, #fff, #fff2f7);
   color: var(--ink);
   font-size: 22px;
   font-weight: 950;
@@ -164,9 +170,11 @@ h1 {
 }
 
 .link-button:hover .link-icon {
-  background: var(--ink);
-  border-color: var(--ink);
-  color: #fff;
+  background:
+    radial-gradient(circle at 82% 8%, rgba(209,59,124,.22), transparent 62%),
+    linear-gradient(135deg, #fff, #ffe8f1);
+  border-color: rgba(197,67,125,.34);
+  color: var(--ink);
 }
 
 .link-button span:not(.link-icon) {
@@ -194,13 +202,13 @@ h1 {
 @media (max-width: 520px) {
   .links-shell {
     width: min(100% - 18px, 540px);
-    padding: 10px 0;
-    align-items: start;
+    padding: 8px 0;
   }
 
   .links-card {
+    max-height: calc(100dvh - 16px);
     border-radius: 28px;
-    padding: 24px 18px;
+    padding: clamp(16px, 2.6dvh, 22px) 18px;
   }
 
   .links-card::before {
@@ -209,13 +217,34 @@ h1 {
   }
 
   .avatar-wrap {
-    width: 132px;
-    margin-bottom: 18px;
+    width: clamp(96px, 16dvh, 124px);
     border-width: 6px;
   }
 
-  h1 { font-size: clamp(32px, 10vw, 42px); }
-  .intro { font-size: 15px; }
-  .link-button { min-height: 70px; border-radius: 20px; }
-  .link-icon { width: 46px; height: 46px; border-radius: 16px; }
+  h1 { font-size: clamp(31px, 9.5vw, 40px); }
+  .intro { font-size: clamp(13px, 2dvh, 15px); }
+  .link-button { border-radius: 20px; }
+  .link-icon { border-radius: 16px; }
+}
+
+@media (max-height: 680px) {
+  .links-card { padding-top: 16px; padding-bottom: 16px; }
+  .links-card::before { inset: 9px; }
+  .avatar-wrap { width: 92px; border-width: 6px; }
+  h1 { font-size: 34px; }
+  .intro { margin-top: 10px; margin-bottom: 12px; font-size: 13px; line-height: 1.32; }
+  .link-stack { gap: 8px; }
+  .link-button { min-height: 56px; border-radius: 18px; }
+  .link-icon { width: 40px; height: 40px; border-radius: 14px; font-size: 19px; }
+  .link-button strong { font-size: 15px; }
+  .link-button small { font-size: 12px; }
+}
+
+@media (max-height: 560px) {
+  .links-card { padding-top: 12px; padding-bottom: 12px; }
+  .avatar-wrap { width: 74px; margin-bottom: 8px; }
+  h1 { font-size: 30px; }
+  .intro { margin: 8px auto 10px; }
+  .link-button { min-height: 50px; }
+  .link-icon { width: 36px; height: 36px; }
 }

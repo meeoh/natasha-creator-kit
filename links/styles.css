@@ -128,7 +128,7 @@ h1 {
   min-height: 74px;
   position: relative;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr;
   align-items: center;
   gap: 14px;
   border: 1px solid var(--line-strong);
@@ -162,6 +162,7 @@ h1 {
 
 .instagram .link-icon { background: linear-gradient(135deg, #ffcf6b, #ff4fb8, #8b5cff); }
 .tiktok .link-icon { background: linear-gradient(135deg, #25f4ee, #191817 48%, #fe2c55); }
+.media-kit .link-icon { background: linear-gradient(135deg, #191817, #8f7d70); }
 .email .link-icon { background: linear-gradient(135deg, var(--blush), #df7aa8); }
 
 .link-button span:not(.link-icon) {
@@ -173,8 +174,8 @@ h1 {
 
 .link-button strong {
   font-size: 17px;
-  letter-spacing: -.035em;
-  font-weight: 900;
+  letter-spacing: -.025em;
+  font-weight: 760;
 }
 
 .link-button small {
@@ -184,13 +185,6 @@ h1 {
   font-weight: 750;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.link-button em {
-  color: var(--blush);
-  font-style: normal;
-  font-size: 21px;
-  font-weight: 900;
 }
 
 @media (max-width: 520px) {

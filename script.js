@@ -131,10 +131,7 @@ function renderFeaturedPosts(posts = []) {
         ${image}
         <span class="post-platform">${postPlatformLabel(post.platform)}</span>
         <span class="post-category">${category}</span>
-        <div class="post-overlay">
-          <p class="post-title">${title}</p>
-          <span>View post ↗</span>
-        </div>
+        <span class="post-open">View post ↗</span>
       </a>
     `;
   }).join("");
@@ -150,15 +147,18 @@ function setupFeaturedFilters() {
       const filter = button.dataset.filter;
       buttons.forEach((node) => node.classList.toggle("active", node === button));
 
-      cards.forEach((card) => {
+      cards.forEach((card, index) => {
         const visible = filter === "all" || card.dataset.category === filter;
+        card.hidden = !visible;
 
         if (visible) {
-          card.hidden = false;
-          requestAnimationFrame(() => card.classList.remove("is-hidden"));
-        } else {
-          card.classList.add("is-hidden");
-          window.setTimeout(() => { card.hidden = true; }, 220);
+          card.animate(
+            [
+              { opacity: 0, transform: "translateY(10px) scale(0.98)" },
+              { opacity: 1, transform: "translateY(0) scale(1)" }
+            ],
+            { duration: 260, delay: Math.min(index * 28, 140), easing: "cubic-bezier(.2,.8,.2,1)" }
+          );
         }
       });
     });

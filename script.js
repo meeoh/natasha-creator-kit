@@ -6,7 +6,7 @@ const fallbackStats = {
     name: "Golf Creator",
     bio: "Sharing my golf journey from beginner to better through relatable moments, lessons learned along the way, golf fits, and product discoveries.",
     location: "Toronto, Canada",
-    avatar: "assets/avatar.svg",
+    avatar: "assets/natasha-cover.jpg",
     email: "natashagolfing@gmail.com",
     instagramUrl: "https://instagram.com/",
     tiktokUrl: "https://tiktok.com/"

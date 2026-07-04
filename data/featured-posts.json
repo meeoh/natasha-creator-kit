@@ -14,6 +14,20 @@
     "image": "assets/featured/DZPxSoUxpm6.jpg"
   },
   {
+    "title": "Product feature",
+    "platform": "tiktok",
+    "category": "products",
+    "url": "https://www.tiktok.com/@natashagolfing/video/7632421241474862343?_r=1&_t=ZS-97juxsKcEJb",
+    "image": "assets/featured/7632421241474862343.jpg"
+  },
+  {
+    "title": "Product feature",
+    "platform": "instagram",
+    "category": "products",
+    "url": "https://www.instagram.com/reels/DaOOTzGhwm1/",
+    "image": "assets/featured/DaOOTzGhwm1.jpg"
+  },
+  {
     "title": "Golf play moment",
     "platform": "instagram",
     "category": "play",

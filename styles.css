@@ -166,8 +166,8 @@ h1 {
   font-family: Inter, system-ui, sans-serif;
   font-size: clamp(36px, 3.8vw, 58px);
   line-height: 0.95;
-  letter-spacing: -0.07em;
-  font-weight: 950;
+  letter-spacing: -0.055em;
+  font-weight: 820;
 }
 .location {
   margin: 0 0 18px;

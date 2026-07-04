@@ -102,12 +102,14 @@ Media kit
 Collabs
 ```
 
+The Collabs link is a plain `mailto:` link. It uses default browser/device behavior. If clicking it appears to do nothing, the visitor probably does not have a default mail app/handler configured.
+
 Design rules:
 
 - Match the media kit design.
 - Keep it compact and fitting in the viewport without scroll where possible.
 - Use `assets/natasha-avatar.jpg`.
-- Use subtle pink/white icon cards with black glyphs, not bright gradients.
+- Use subtle pink/white icon cards with black/outline glyphs, not bright gradients.
 - Bump the query string in `links/index.html` when changing `links/styles.css`.
 
 ## Adding featured posts

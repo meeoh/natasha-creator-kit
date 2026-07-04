@@ -127,6 +127,7 @@ styles.css                  Media kit styling
 script.js                   Client-side rendering + featured post filtering
 links/index.html            Linktree-style links page
 links/styles.css            Links page styling
+(no links/script.js)        /links intentionally has no JS; mailto uses browser default behavior
 CNAME                       Custom domain for GitHub Pages: natashagolfing.com
 data/profile.json           Source-of-truth profile info/handles/email
 data/stats.json             Tracked/generated social stats
@@ -403,12 +404,14 @@ Media kit → https://natashagolfing.com/
 Collabs → mailto:natashagolfing@gmail.com
 ```
 
+The Collabs link is a plain `mailto:` link. It intentionally uses default browser/device behavior and does not copy to clipboard or show a custom toast. If clicking does nothing, the visitor likely does not have a default mail app/handler configured.
+
 Design notes:
 
 - Match the media kit: warm card, blush glow, rounded edges.
 - Use the cropped avatar `assets/natasha-avatar.jpg`.
 - Keep the page fitting in the viewport without scroll where possible.
-- Icons should be black glyphs in light pink/white card icons, not bright multicolor gradients.
+- Icons should be black/outline glyphs in light pink/white card icons, not bright multicolor gradients.
 - Main title is just `Natasha Golfing`, not `Golf creator links`.
 - One-liner: `Golf girlie learning, styling, and sharing the journey ⛳️✨`.
 
@@ -449,8 +452,8 @@ Opening `index.html` directly may fail to load JSON due to browser `file://` fet
 We have often bumped query params in `index.html` to force CSS/JS refresh on GitHub Pages, e.g.:
 
 ```html
-styles.css?v=20260704-ui22
-script.js?v=20260704-ui22
+styles.css?v=20260704-ui24
+script.js?v=20260704-ui24
 ```
 
 If UI seems stale after deploy, bump these query params and/or hard refresh.

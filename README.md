@@ -166,6 +166,8 @@ Media kit → https://natashagolfing.com/
 Collabs → mailto:natashagolfing@gmail.com
 ```
 
+The Collabs link uses plain default `mailto:` behavior. If clicking it does nothing, the browser/device likely does not have a default email app or mail handler configured.
+
 ## GitHub Pages deploy
 
 1. Push this project to GitHub.

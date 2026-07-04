@@ -86,6 +86,8 @@
 - Added `/links` Linktree-style page matching the media kit design.
 - `/links` includes Instagram, TikTok, Media kit, and Collabs links.
 - `/links` uses cropped avatar, warm card styling, compact no-scroll viewport layout, and light pink/white monochrome icon cards.
+- Changed `/links` Collabs icon to an outline envelope so it matches the other outline-style icons.
+- Restored plain default `mailto:` behavior on media kit and `/links`; removed the custom email-copy/toast JS.
 
 ## Current known design direction
 

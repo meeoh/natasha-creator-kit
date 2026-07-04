@@ -113,7 +113,7 @@ body {
   position: sticky;
   top: 22px;
   height: auto;
-  padding: 12px 44px 54px;
+  padding: 28px 44px 44px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -708,7 +708,7 @@ h1 {
     padding: 18px;
   }
   .profile-panel {
-    padding: 14px 24px 30px;
+    padding: 22px 24px 30px;
   }
   .stats-panel { gap: 14px; }
   .profile-image-card { width: min(188px, 64%); }
@@ -744,7 +744,7 @@ h1 {
   .social-detail-card,
   .featured-panel,
   .audience-panel { border-radius: 22px; }
-  .profile-panel { padding: 12px 18px 26px; }
+  .profile-panel { padding: 20px 18px 28px; }
   .profile-image-card { width: min(174px, 62%); border-width: 7px; }
   h1 { font-size: clamp(31px, 10vw, 38px); }
   .metric-row { gap: 10px; }

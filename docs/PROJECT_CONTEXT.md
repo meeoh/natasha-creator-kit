@@ -245,6 +245,12 @@ avg views = total views / view sample size
 avg engagement rate = total(likes + comments) / (followers × #sampled posts) × 100
 ```
 
+Tooltip shown in the UI:
+
+```txt
+Avg engagement = (likes + comments) ÷ (followers × posts sampled)
+```
+
 Instagram public scraping generally does not provide saves/shares reliably.
 
 ### TikTok
@@ -253,6 +259,12 @@ Instagram public scraping generally does not provide saves/shares reliably.
 avg likes = total likes / video sample size
 avg views = total views / video sample size
 avg engagement rate = total(likes + comments + shares + saves/collects) / (followers × #sampled videos) × 100
+```
+
+Tooltip shown in the UI:
+
+```txt
+Avg engagement = (likes + comments + shares + saves) ÷ (followers × videos sampled)
 ```
 
 ### Combined

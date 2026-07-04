@@ -6,7 +6,7 @@ const profilePath = new URL("../data/profile.json", import.meta.url);
 const emptyStats = {
   profile: {
     name: "Golf Creator",
-    bio: "I’m a golf creator sharing my journey from beginner to better, one honest round at a time. I document relatable on-course moments, lessons I pick up as I go, golf style, and product discoveries to make golf feel more welcoming, fun, and real for everyday golfers.",
+    bio: "Sharing my golf journey from beginner to better through relatable moments, lessons learned along the way, golf fits, and product discoveries.",
     location: "Toronto, Canada",
     avatar: "assets/avatar.svg",
     email: "natashagolfing@gmail.com",

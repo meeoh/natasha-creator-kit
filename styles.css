@@ -93,13 +93,12 @@ body {
 .contact-link { background: var(--ink); color: #fff; border-color: var(--ink); }
 
 .kit-card {
-  height: calc(100vh - 54px);
-  min-height: 620px;
+  min-height: calc(100vh - 54px);
   display: grid;
   grid-template-columns: minmax(360px, 0.47fr) minmax(560px, 0.83fr);
   gap: 18px;
   align-items: start;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .profile-panel, .stats-panel, .below-card {
@@ -111,7 +110,8 @@ body {
 }
 
 .profile-panel {
-  position: relative;
+  position: sticky;
+  top: 22px;
   height: auto;
   padding: 28px;
   display: flex;
@@ -185,19 +185,14 @@ h1 {
 .profile-cta { margin-top: 2px; }
 
 .stats-panel {
-  height: 100%;
   min-height: 0;
   padding: 28px;
   display: grid;
   grid-template-rows: auto 1fr;
   align-content: stretch;
   gap: 18px;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-  scrollbar-width: thin;
+  overflow: visible;
 }
-.stats-panel::-webkit-scrollbar { width: 10px; }
-.stats-panel::-webkit-scrollbar-thumb { background: rgba(25,24,23,.18); border-radius: 999px; }
 .insights-head {
   display: flex;
   align-items: start;
@@ -574,8 +569,9 @@ h1 {
 }
 
 @media (max-width: 1020px) {
-  .kit-card { height: auto; min-height: auto; grid-template-columns: 1fr; overflow: visible; }
+  .kit-card { min-height: auto; grid-template-columns: 1fr; overflow: visible; }
   .profile-panel, .stats-panel { min-height: auto; }
+  .profile-panel { position: relative; top: auto; }
   .stats-panel { height: auto; overflow: visible; }
   .platform-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .insight-detail-grid { grid-template-columns: 1fr 1fr; }

@@ -76,7 +76,7 @@ Currently contains:
 - `Insights & data`
 - Instagram stat section
 - TikTok stat section
-- small info tooltip beside each `Avg engagement` label explaining the platform-specific formula
+- small info tooltip beside each `Avg engagement` label showing the platform-specific math formula as a fraction
 - manual audience section with gender + age charts
 - Featured posts gallery with filters
 
@@ -453,8 +453,8 @@ Opening `index.html` directly may fail to load JSON due to browser `file://` fet
 We have often bumped query params in `index.html` to force CSS/JS refresh on GitHub Pages, e.g.:
 
 ```html
-styles.css?v=20260704-ui25
-script.js?v=20260704-ui25
+styles.css?v=20260704-ui26
+script.js?v=20260704-ui26
 ```
 
 If UI seems stale after deploy, bump these query params and/or hard refresh.

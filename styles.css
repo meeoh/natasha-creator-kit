@@ -459,6 +459,40 @@ h1 {
   opacity: 1;
   transform: translateY(0);
 }
+.info-tooltip span {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+.formula-platform {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--blush) !important;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: 10px !important;
+  font-weight: 950 !important;
+}
+.formula {
+  display: inline-grid;
+  justify-items: center;
+  gap: 6px;
+  min-width: 100%;
+  color: var(--ink) !important;
+  font-weight: 850 !important;
+}
+.formula-top,
+.formula-bottom {
+  display: block;
+  width: 100%;
+  text-align: center;
+  white-space: nowrap;
+}
+.formula-top {
+  border-bottom: 1.5px solid rgba(25,24,23,.4);
+  padding-bottom: 6px;
+}
+.formula-bottom { color: #4d4844 !important; }
 .mini-stat strong {
   font-size: clamp(28px, 2.8vw, 48px);
   line-height: .86;

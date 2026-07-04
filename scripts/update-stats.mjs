@@ -35,16 +35,27 @@ async function readJsonIfExists(url) {
 
 async function readBaseStats() {
   const generated = await readJsonIfExists(statsPath);
-  const profile = await readJsonIfExists(profilePath);
-  const base = generated || profile || emptyStats;
+  const profileConfig = await readJsonIfExists(profilePath);
 
   return {
     ...emptyStats,
-    ...base,
-    profile: { ...emptyStats.profile, ...(base.profile || {}) },
+    ...(generated || {}),
+    profile: {
+      ...emptyStats.profile,
+      ...(generated?.profile || {}),
+      ...(profileConfig?.profile || {})
+    },
     platforms: {
-      instagram: { ...emptyStats.platforms.instagram, ...(base.platforms?.instagram || {}) },
-      tiktok: { ...emptyStats.platforms.tiktok, ...(base.platforms?.tiktok || {}) }
+      instagram: {
+        ...emptyStats.platforms.instagram,
+        ...(profileConfig?.platforms?.instagram || {}),
+        ...(generated?.platforms?.instagram || {})
+      },
+      tiktok: {
+        ...emptyStats.platforms.tiktok,
+        ...(profileConfig?.platforms?.tiktok || {}),
+        ...(generated?.platforms?.tiktok || {})
+      }
     }
   };
 }
@@ -279,7 +290,10 @@ async function main() {
   if (!updatedInstagram) console.log("Instagram not updated. Configure Apify or official Instagram API secrets.");
   if (!updatedTikTok) console.log("TikTok not updated. Configure Apify or official TikTok API secrets.");
 
-  stats.updatedAt = new Date().toISOString();
+  if (updatedInstagram || updatedTikTok) {
+    stats.updatedAt = new Date().toISOString();
+  }
+
   await writeFile(statsPath, `${JSON.stringify(stats, null, 2)}\n`);
   console.log("Wrote generated data/stats.json.");
 }

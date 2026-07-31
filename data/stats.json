@@ -11,49 +11,49 @@
   "platforms": {
     "instagram": {
       "username": "natashagolfing",
-      "followers": 4137,
-      "posts": 64,
-      "following": 310,
+      "followers": 4543,
+      "posts": 86,
+      "following": 319,
       "performance": {
-        "sampleSize": 49,
-        "engagementSampleSize": 49,
-        "viewSampleSize": 48,
-        "likeSampleSize": 49,
-        "totalLikes": 18525,
-        "totalViews": 313589,
-        "totalEngagement": 22696,
-        "engagementDenominator": 202713,
-        "avgLikes": 378,
-        "avgViews": 6533,
-        "avgEngagementRate": 11.2
+        "sampleSize": 10,
+        "engagementSampleSize": 10,
+        "viewSampleSize": 10,
+        "likeSampleSize": 10,
+        "totalLikes": 6534,
+        "totalViews": 451213,
+        "totalEngagement": 7789,
+        "engagementDenominator": 45430,
+        "avgLikes": 653,
+        "avgViews": 45121,
+        "avgEngagementRate": 17.15
       }
     },
     "tiktok": {
       "username": "natashagolfing",
-      "followers": 2035,
-      "likes": 56800,
-      "videos": 161,
-      "following": 293,
+      "followers": 2150,
+      "likes": 64500,
+      "videos": 169,
+      "following": 300,
       "performance": {
-        "sampleSize": 156,
-        "engagementSampleSize": 156,
-        "viewSampleSize": 156,
-        "likeSampleSize": 156,
-        "totalLikes": 54680,
-        "totalViews": 1409683,
-        "totalEngagement": 77053,
-        "engagementDenominator": 317460,
-        "avgLikes": 351,
-        "avgViews": 9036,
-        "avgEngagementRate": 24.27
+        "sampleSize": 161,
+        "engagementSampleSize": 161,
+        "viewSampleSize": 161,
+        "likeSampleSize": 161,
+        "totalLikes": 62245,
+        "totalViews": 2021238,
+        "totalEngagement": 85809,
+        "engagementDenominator": 346150,
+        "avgLikes": 387,
+        "avgViews": 12554,
+        "avgEngagementRate": 24.79
       }
     }
   },
   "performance": {
-    "avgEngagementRate": 19.18,
-    "avgViews": 8447,
-    "avgLikes": 357,
-    "sampleSize": 205
+    "avgEngagementRate": 23.9,
+    "avgViews": 14459,
+    "avgLikes": 402,
+    "sampleSize": 171
   },
-  "updatedAt": "2026-07-18T15:01:04.127Z"
+  "updatedAt": "2026-07-31T16:41:38.342Z"
 }

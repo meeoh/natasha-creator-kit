@@ -109,9 +109,17 @@ body {
   backdrop-filter: blur(26px);
 }
 
-.profile-panel {
+.left-rail {
   position: sticky;
   top: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.profile-panel {
+  position: relative;
+  top: auto;
   height: auto;
   padding: 28px 44px 44px;
   display: flex;
@@ -349,12 +357,13 @@ h1 {
 .social-sections {
   min-height: 0;
   display: grid;
-  grid-template-rows: auto auto 1fr;
+  grid-template-rows: auto auto auto 1fr;
   gap: 16px;
 }
 .social-detail-card,
 .featured-panel,
-.audience-panel {
+.audience-panel,
+.brand-panel {
   position: relative;
   overflow: hidden;
   border: 1px solid var(--line-strong);
@@ -487,13 +496,98 @@ h1 {
 }
 .hero-stat strong { font-size: clamp(38px, 3.6vw, 64px); }
 .featured-panel,
-.audience-panel {
+.audience-panel,
+.brand-panel {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 4px;
   background:
     radial-gradient(circle at 95% 5%, rgba(209,59,124,.12), transparent 13rem),
     #fff;
+}
+.brand-panel-head {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+}
+.brand-panel h2 {
+  margin: 4px 0 0;
+  font-size: clamp(24px, 2vw, 34px);
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+}
+.brand-carousel {
+  --brand-carousel-width: 720px;
+  --brand-slide-distance: 980px;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+.brand-logo-track {
+  display: flex;
+  width: max-content;
+  animation: brand-carousel-slide 32s linear infinite;
+  will-change: transform;
+}
+.brand-carousel:hover .brand-logo-track {
+  animation-play-state: paused;
+}
+.brand-logo-set {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 22px;
+  padding-right: 0;
+}
+.brand-logo-tile {
+  width: calc((var(--brand-carousel-width) - 44px) / 3);
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  opacity: .9;
+  transition: transform 180ms ease, opacity 180ms ease, filter 180ms ease;
+}
+.brand-logo-tile:hover {
+  transform: translateY(-2px);
+  opacity: 1;
+  filter: saturate(1.08);
+}
+.brand-logo-tile img {
+  display: block;
+  max-width: 100%;
+  max-height: 58px;
+  object-fit: contain;
+  transform: translateY(var(--logo-y, 0));
+}
+.brand-logo-tile-golfnorth { --logo-y: 2px; }
+.brand-logo-tile-grooveit { --logo-y: 1px; }
+.brand-logo-tile-whygolf {
+  --logo-y: -10px;
+  width: 205px;
+}
+.brand-logo-tile-trust {
+  --logo-y: -8px;
+  width: 145px;
+  padding-inline: 0;
+}
+.brand-logo-tile-trust img {
+  max-height: 64px;
+}
+.brand-logo-tile-mark {
+  --logo-y: -2px;
+  width: 112px;
+  padding-inline: 0;
+}
+.brand-logo-tile-dark img {
+  max-height: 72px;
+  filter: invert(1) drop-shadow(0 10px 24px rgba(25,24,23,.12));
+}
+@keyframes brand-carousel-slide {
+  to { transform: translateX(calc(-1 * var(--brand-slide-distance))); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .brand-logo-track { animation: none; }
 }
 .audience-grid {
   display: grid;
@@ -625,6 +719,7 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin-bottom: 12px;
 }
 .filter-pill {
   min-height: 38px;
@@ -758,7 +853,8 @@ h1 {
 }
 @media (max-width: 1020px) {
   .kit-card { min-height: auto; grid-template-columns: 1fr; overflow: visible; }
-  .profile-panel, .stats-panel { min-height: auto; }
+  .left-rail { position: relative; top: auto; }
+  .profile-panel, .stats-panel, .brand-panel { min-height: auto; }
   .profile-panel { position: relative; top: auto; }
   .stats-panel { height: auto; overflow: visible; }
   .platform-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -775,13 +871,15 @@ h1 {
   .updated-pill { display: none; }
   .kit-card { gap: 12px; }
   .profile-panel,
-  .stats-panel {
+  .stats-panel,
+  .brand-panel {
     border-radius: 26px;
     padding: 18px;
   }
   .profile-panel {
     padding: 22px 24px 30px;
   }
+  .brand-panel { padding: 18px; }
   .stats-panel { gap: 14px; }
   .profile-image-card { width: min(188px, 64%); }
   .profile-copy { margin-top: 22px; }
@@ -800,7 +898,8 @@ h1 {
   .social-sections { grid-template-rows: auto; }
   .social-detail-card,
   .featured-panel,
-  .audience-panel { padding: 18px; }
+  .audience-panel,
+  .brand-panel { padding: 18px; }
   .featured-head { flex-direction: column; }
   .audience-grid { grid-template-columns: 1fr; }
   .audience-card-head { flex-direction: column; }
@@ -813,6 +912,7 @@ h1 {
   .page-shell { width: min(100% - 12px, 1180px); }
   .profile-panel,
   .stats-panel,
+  .brand-panel,
   .social-detail-card,
   .featured-panel,
   .audience-panel { border-radius: 22px; }

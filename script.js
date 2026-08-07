@@ -3,17 +3,17 @@ const fullNumberFormatter = new Intl.NumberFormat("en");
 
 const fallbackStats = {
   profile: {
-    name: "Golf Creator",
+    name: "Natasha Golfing",
     bio: "Sharing my golf journey from beginner to better through relatable moments, lessons learned along the way, golf fits, and product discoveries.",
-    location: "Toronto, Canada",
+    location: "Canada",
     avatar: "assets/natasha-avatar.jpg",
     email: "natashagolfing@gmail.com",
-    instagramUrl: "https://instagram.com/",
-    tiktokUrl: "https://tiktok.com/"
+    instagramUrl: "https://instagram.com/natashagolfing",
+    tiktokUrl: "https://www.tiktok.com/@natashagolfing"
   },
   platforms: {
-    instagram: { username: "handle", followers: 0, posts: 0 },
-    tiktok: { username: "handle", followers: 0, likes: 0, videos: 0 }
+    instagram: { username: "natashagolfing", followers: 0, posts: 0 },
+    tiktok: { username: "natashagolfing", followers: 0, likes: 0, videos: 0 }
   },
   performance: {
     avgEngagementRate: null,
@@ -281,6 +281,22 @@ function setupFeaturedFilters() {
   });
 }
 
+function setupBrandCarousel() {
+  const carousel = document.querySelector("[data-brand-carousel]");
+  if (!carousel) return;
+
+  const firstSet = carousel.querySelector(".brand-logo-set");
+  if (!firstSet) return;
+
+  const updateMetrics = () => {
+    carousel.style.setProperty("--brand-carousel-width", `${carousel.clientWidth}px`);
+    carousel.style.setProperty("--brand-slide-distance", `${firstSet.offsetWidth}px`);
+  };
+
+  updateMetrics();
+  window.addEventListener("resize", updateMetrics);
+}
+
 async function loadFeaturedPosts() {
   try {
     const response = await fetch("data/featured-posts.json", { cache: "no-store" });
@@ -292,6 +308,7 @@ async function loadFeaturedPosts() {
   return fallbackFeaturedPosts;
 }
 
+setupBrandCarousel();
 loadStats().then(render).catch(() => render(fallbackStats));
 loadFeaturedPosts()
   .then((posts) => {

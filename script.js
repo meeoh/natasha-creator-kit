@@ -24,6 +24,93 @@ const fallbackStats = {
   updatedAt: null
 };
 
+const fallbackFeaturedPosts = [
+  {
+    title: "Product feature",
+    platform: "instagram",
+    category: "products",
+    url: "https://www.instagram.com/p/DZ_Z4OWtHVO/?hl=en",
+    image: "assets/featured/DZ_Z4OWtHVO.jpg"
+  },
+  {
+    title: "Product feature",
+    platform: "instagram",
+    category: "products",
+    url: "https://www.instagram.com/p/DZPxSoUxpm6/?hl=en",
+    image: "assets/featured/DZPxSoUxpm6.jpg"
+  },
+  {
+    title: "Product feature",
+    platform: "tiktok",
+    category: "products",
+    url: "https://www.tiktok.com/@natashagolfing/video/7632421241474862343?_r=1&_t=ZS-97juxsKcEJb",
+    image: "assets/featured/7632421241474862343.jpg"
+  },
+  {
+    title: "Product feature",
+    platform: "instagram",
+    category: "products",
+    url: "https://www.instagram.com/reels/DaOOTzGhwm1/",
+    image: "assets/featured/DaOOTzGhwm1.jpg"
+  },
+  {
+    title: "Golf play moment",
+    platform: "instagram",
+    category: "play",
+    url: "https://www.instagram.com/p/DYdI7NzHb13/?hl=en",
+    image: "assets/featured/DYdI7NzHb13.jpg"
+  },
+  {
+    title: "Golf play moment",
+    platform: "instagram",
+    category: "play",
+    url: "https://www.instagram.com/p/DZBflphMDuF/?hl=en",
+    image: "assets/featured/DZBflphMDuF.jpg"
+  },
+  {
+    title: "Golf play moment",
+    platform: "instagram",
+    category: "play",
+    url: "https://www.instagram.com/reels/DZn_d5lhGHX/",
+    image: "assets/featured/DZn_d5lhGHX.jpg"
+  },
+  {
+    title: "Golf play moment",
+    platform: "tiktok",
+    category: "play",
+    url: "https://www.tiktok.com/@natashagolfing/photo/7589137311741267207?_r=1&_t=ZS-97jv1xUFB4S&image_index=2",
+    image: "assets/featured/7589137311741267207.jpg"
+  },
+  {
+    title: "Golf play moment",
+    platform: "tiktok",
+    category: "play",
+    url: "https://www.tiktok.com/@natashagolfing/video/7635450570861579527?_r=1&_t=ZS-97jv0ZZlEfA",
+    image: "assets/featured/7635450570861579527.jpg"
+  },
+  {
+    title: "Personality post",
+    platform: "instagram",
+    category: "entertainment",
+    url: "https://www.instagram.com/p/DZXToHtx6LJ/?hl=en",
+    image: "assets/featured/DZXToHtx6LJ.jpg"
+  },
+  {
+    title: "Personality post",
+    platform: "instagram",
+    category: "entertainment",
+    url: "https://www.instagram.com/p/DZyUp7RPHfw/?hl=en",
+    image: "assets/featured/DZyUp7RPHfw.jpg"
+  },
+  {
+    title: "Personality post",
+    platform: "instagram",
+    category: "entertainment",
+    url: "https://www.instagram.com/p/DXdIXD6Dc14/?hl=en",
+    image: "assets/featured/DXdIXD6Dc14.jpg"
+  }
+];
+
 function formatCompact(value) {
   const number = Number(value || 0);
   return number > 0 ? numberFormatter.format(number) : "—";
@@ -167,9 +254,14 @@ function setupFeaturedFilters() {
 }
 
 async function loadFeaturedPosts() {
-  const response = await fetch("data/featured-posts.json", { cache: "no-store" });
-  if (!response.ok) return [];
-  return response.json();
+  try {
+    const response = await fetch("data/featured-posts.json", { cache: "no-store" });
+    if (response.ok) return response.json();
+  } catch (_) {
+    // Opening index.html directly from disk blocks fetch(), so use the bundled posts.
+  }
+
+  return fallbackFeaturedPosts;
 }
 
 loadStats().then(render).catch(() => render(fallbackStats));
@@ -178,4 +270,4 @@ loadFeaturedPosts()
     renderFeaturedPosts(posts);
     setupFeaturedFilters();
   })
-  .catch(() => renderFeaturedPosts([]));
+  .catch(() => renderFeaturedPosts(fallbackFeaturedPosts));

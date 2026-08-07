@@ -113,6 +113,17 @@ function postPlatformLabel(platform = "") {
   return platform.toLowerCase() === "tiktok" ? "TikTok" : "Instagram";
 }
 
+function postCategoryLabel(category = "") {
+  const labels = {
+    entertainment: "Personality",
+    places: "Places",
+    play: "Play",
+    products: "Products"
+  };
+
+  return labels[category.toLowerCase()] || category;
+}
+
 function renderFeaturedPosts(posts = []) {
   const grid = document.querySelector("[data-featured-posts]");
   if (!grid) return;
@@ -130,7 +141,7 @@ function renderFeaturedPosts(posts = []) {
       <a class="featured-post-card ${image ? "has-image" : ""}" data-category="${category}" href="${post.url}" target="_blank" rel="noreferrer">
         ${image}
         <span class="post-platform">${postPlatformLabel(post.platform)}</span>
-        <span class="post-category">${category}</span>
+        <span class="post-category">${postCategoryLabel(category)}</span>
         <span class="post-open">View post ↗</span>
       </a>
     `;

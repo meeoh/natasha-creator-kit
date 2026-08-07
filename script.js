@@ -54,6 +54,12 @@ const fallbackFeaturedPosts = [
     image: "assets/featured/DaOOTzGhwm1.jpg"
   },
   {
+    title: "Product feature",
+    platform: "instagram",
+    category: "products",
+    url: "https://www.instagram.com/p/Dbihh_YxNe-/"
+  },
+  {
     title: "Golf play moment",
     platform: "instagram",
     category: "play",

@@ -82,5 +82,23 @@
     "category": "entertainment",
     "url": "https://www.instagram.com/p/DXdIXD6Dc14/?hl=en",
     "image": "assets/featured/DXdIXD6Dc14.jpg"
+  },
+  {
+    "title": "Places post",
+    "platform": "instagram",
+    "category": "places",
+    "url": "https://www.instagram.com/p/Dbf6AlBxIib/"
+  },
+  {
+    "title": "Places post",
+    "platform": "instagram",
+    "category": "places",
+    "url": "https://www.instagram.com/p/DaaYbVPxy8-/"
+  },
+  {
+    "title": "Places post",
+    "platform": "instagram",
+    "category": "places",
+    "url": "https://www.instagram.com/p/DZ43mtZxYMU/"
   }
 ]

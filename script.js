@@ -57,7 +57,8 @@ const fallbackFeaturedPosts = [
     title: "Product feature",
     platform: "instagram",
     category: "products",
-    url: "https://www.instagram.com/p/Dbihh_YxNe-/"
+    url: "https://www.instagram.com/p/Dbihh_YxNe-/",
+    image: "assets/featured/Dbihh_YxNe-.jpg"
   },
   {
     title: "Golf play moment",
@@ -119,19 +120,22 @@ const fallbackFeaturedPosts = [
     title: "Places post",
     platform: "instagram",
     category: "places",
-    url: "https://www.instagram.com/p/Dbf6AlBxIib/"
+    url: "https://www.instagram.com/p/Dbf6AlBxIib/",
+    image: "assets/featured/Dbf6AlBxIib.jpg"
   },
   {
     title: "Places post",
     platform: "instagram",
     category: "places",
-    url: "https://www.instagram.com/p/DaaYbVPxy8-/"
+    url: "https://www.instagram.com/p/DaaYbVPxy8-/",
+    image: "assets/featured/DaaYbVPxy8-.jpg"
   },
   {
     title: "Places post",
     platform: "instagram",
     category: "places",
-    url: "https://www.instagram.com/p/DZ43mtZxYMU/"
+    url: "https://www.instagram.com/p/DZ43mtZxYMU/",
+    image: "assets/featured/DZ43mtZxYMU.jpg"
   }
 ];
 

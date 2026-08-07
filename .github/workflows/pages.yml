@@ -3,11 +3,6 @@ name: Update stats and deploy GitHub Pages
 on:
   push:
     branches: [main]
-  # First scheduled stats refresh: 2026-07-18 at 14:00 UTC.
-  # Then refresh every 14 days. GitHub Actions has no native biweekly cron,
-  # so this runs weekly on Saturdays and gates refreshes by date below.
-  schedule:
-    - cron: "0 14 * * 6"
   workflow_dispatch:
 
 permissions:
@@ -40,16 +35,6 @@ jobs:
 
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             should_refresh=true
-          elif [[ "${{ github.event_name }}" == "schedule" ]]; then
-            start_date="2026-07-18"
-            today="$(date -u +%Y-%m-%d)"
-            start_epoch="$(date -u -d "$start_date" +%s)"
-            today_epoch="$(date -u -d "$today" +%s)"
-            days_since=$(( (today_epoch - start_epoch) / 86400 ))
-
-            if (( days_since >= 0 && days_since % 14 == 0 )); then
-              should_refresh=true
-            fi
           fi
 
           echo "should_refresh=$should_refresh" >> "$GITHUB_OUTPUT"
@@ -90,11 +75,9 @@ jobs:
           fi
 
       - name: Configure Pages
-        if: github.event_name != 'schedule' || steps.refresh.outputs.should_refresh == 'true'
         uses: actions/configure-pages@v5
 
       - name: Upload static site
-        if: github.event_name != 'schedule' || steps.refresh.outputs.should_refresh == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: .

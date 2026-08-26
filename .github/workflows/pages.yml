@@ -1,4 +1,4 @@
-name: Update stats and deploy GitHub Pages
+name: Deploy GitHub Pages
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
   pages: write
   id-token: write
 
@@ -15,63 +15,13 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  update-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Determine stats refresh mode
-        id: refresh
-        shell: bash
-        run: |
-          should_refresh=false
-
-          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
-            should_refresh=true
-          fi
-
-          echo "should_refresh=$should_refresh" >> "$GITHUB_OUTPUT"
-          echo "should_refresh=$should_refresh"
-
-      - name: Refresh social stats
-        if: steps.refresh.outputs.should_refresh == 'true'
-        env:
-          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
-          APIFY_INSTAGRAM_ACTOR_ID: ${{ secrets.APIFY_INSTAGRAM_ACTOR_ID }}
-          APIFY_TIKTOK_ACTOR_ID: ${{ secrets.APIFY_TIKTOK_ACTOR_ID }}
-          APIFY_INSTAGRAM_INPUT_JSON: ${{ secrets.APIFY_INSTAGRAM_INPUT_JSON }}
-          APIFY_TIKTOK_INPUT_JSON: ${{ secrets.APIFY_TIKTOK_INPUT_JSON }}
-          CONTENT_SAMPLE_SIZE: ${{ vars.CONTENT_SAMPLE_SIZE }}
-          MAX_CONTENT_ITEMS: ${{ vars.MAX_CONTENT_ITEMS }}
-          INSTAGRAM_USERNAME: ${{ vars.INSTAGRAM_USERNAME }}
-          TIKTOK_USERNAME: ${{ vars.TIKTOK_USERNAME }}
-          IG_GRAPH_ACCESS_TOKEN: ${{ secrets.IG_GRAPH_ACCESS_TOKEN }}
-          IG_USER_ID: ${{ secrets.IG_USER_ID }}
-          TIKTOK_ACCESS_TOKEN: ${{ secrets.TIKTOK_ACCESS_TOKEN }}
-          TIKTOK_REFRESH_TOKEN: ${{ secrets.TIKTOK_REFRESH_TOKEN }}
-          TIKTOK_CLIENT_KEY: ${{ secrets.TIKTOK_CLIENT_KEY }}
-          TIKTOK_CLIENT_SECRET: ${{ secrets.TIKTOK_CLIENT_SECRET }}
-        run: node scripts/update-stats.mjs
-
-      - name: Commit refreshed stats
-        if: steps.refresh.outputs.should_refresh == 'true'
-        run: |
-          if [[ -n "$(git status --porcelain data/stats.json)" ]]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/stats.json
-            git commit -m "Update social stats [skip ci]"
-            git push
-          else
-            echo "No stats changes to commit."
-          fi
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -82,6 +32,5 @@ jobs:
           path: .
 
       - name: Deploy to GitHub Pages
-        if: github.event_name != 'schedule' || steps.refresh.outputs.should_refresh == 'true'
         id: deployment
         uses: actions/deploy-pages@v4

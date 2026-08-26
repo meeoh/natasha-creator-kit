@@ -18,7 +18,13 @@ const fallbackStats = {
       posts: 0,
       performance: { avgEngagementRate: 4.9, avgViews: 22200, reachRate: 73, source: "manual" }
     },
-    tiktok: { username: "natashagolfing", followers: 0, likes: 0, videos: 0 }
+    tiktok: {
+      username: "natashagolfing",
+      followers: 2287,
+      likes: 70200,
+      videos: 191,
+      performance: { totalViews: 2200000, engagementRate: 3.5, profileViews: 39900, source: "manual" }
+    }
   },
   performance: {
     avgEngagementRate: null,
@@ -206,9 +212,9 @@ function render(stats) {
   setText('[data-stat="tiktokFollowers"]', formatCompact(tiktok.followers));
   setText('[data-stat="tiktokLikes"]', formatCompact(tiktok.likes));
   setText('[data-stat="tiktokVideos"]', formatFull(tiktok.videos));
-  setText('[data-stat="tiktokAvgEngagementRate"]', formatPercent(tiktok.performance?.avgEngagementRate));
-  setText('[data-stat="tiktokAvgViews"]', formatCompact(tiktok.performance?.avgViews));
-  setText('[data-stat="tiktokAvgLikes"]', formatCompact(tiktok.performance?.avgLikes));
+  setText('[data-stat="tiktokTotalViews"]', formatCompact(tiktok.performance?.totalViews));
+  setText('[data-stat="tiktokEngagementRate"]', formatPercent(tiktok.performance?.engagementRate));
+  setText('[data-stat="tiktokProfileViews"]', formatCompact(tiktok.performance?.profileViews));
   setText('[data-stat="combinedFollowers"]', formatCompact(combinedFollowers));
   setText('[data-stat="avgEngagementRate"]', formatPercent(data.performance.avgEngagementRate));
   setText('[data-stat="avgViews"]', formatCompact(data.performance.avgViews));

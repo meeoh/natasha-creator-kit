@@ -7,30 +7,19 @@ https://natashagolfing.com/
 https://natashagolfing.com/links
 ```
 
-`data/stats.json` is intentionally committed so the current public stats are visible in GitHub. The workflow updates it during manual refreshes, then GitHub Pages serves the committed file.
+`data/stats.json` is intentionally committed so the current public stats are visible in GitHub. Social stats are maintained manually in that file; the GitHub Pages workflow only deploys the committed site and does not refresh Instagram or TikTok automatically.
 
-## Recommended no-platform-app setup
+## Stats setup
 
-If you do not want to create Meta/TikTok developer apps, use a username-based third-party fetcher. The best fit for this project is **Apify**:
+Instagram and TikTok stats are manual only.
 
-```txt
-Manual GitHub Action refresh on demand
-→ Apify Instagram profile actor by username
-→ Apify TikTok profile actor by username
-→ update data/stats.json
-→ deploy GitHub Pages
-```
+To update social stats:
 
-Why this path:
+1. Edit `data/stats.json`.
+2. Commit the change.
+3. Push to `main`, or run the GitHub Pages deploy workflow manually.
 
-- no Meta app setup
-- no TikTok app setup
-- username-based
-- runs from GitHub Actions on demand
-- API key stays private in GitHub Actions
-- likely enough on Apify's free credits for one creator at this scale, depending on actor pricing and refresh frequency
-
-Tradeoff: Apify actors are generally scraper-based, so they are less official than platform APIs and can occasionally break. But for ASAP and username-only setup, this is the most practical path.
+The deploy workflow does not call Apify, official Instagram/TikTok APIs, or `scripts/update-stats.mjs`.
 
 ## Files
 
@@ -41,8 +30,8 @@ Tradeoff: Apify actors are generally scraper-based, so they are less official th
 - `data/stats.json` — committed/generated stats used by the site
 - `data/featured-posts.json` — featured post metadata
 - `assets/brands/` — local partner carousel logos, including PUR3 Golf
-- `scripts/update-stats.mjs` — pulls stats and writes `data/stats.json`
-- `.github/workflows/pages.yml` — manual stats refresh and GitHub Pages deploy
+- `scripts/update-stats.mjs` — legacy/manual utility for pulling stats and writing `data/stats.json`; not run by deploy workflow
+- `.github/workflows/pages.yml` — GitHub Pages deploy
 
 ## Customize profile and handles
 
@@ -74,54 +63,9 @@ Set her name, email, copy, and handles:
 
 Circular avatar displays currently use the cropped square image `assets/natasha-avatar.jpg`. The original optimized image is kept as `assets/natasha-cover.jpg`.
 
-## Apify setup
+## Manual stats values
 
-1. Create an Apify account:
-   ```txt
-   https://apify.com
-   ```
-
-2. Find an Instagram profile scraper actor and a TikTok profile scraper actor.
-
-3. Create an Apify API token.
-
-4. In GitHub, add repository secrets:
-
-   ```txt
-   Settings → Secrets and variables → Actions → New repository secret
-   ```
-
-   Required:
-
-   | Secret | Example | Notes |
-   | --- | --- | --- |
-   | `APIFY_TOKEN` | `apify_api_...` | Your Apify API token |
-   | `APIFY_INSTAGRAM_ACTOR_ID` | `apify/instagram-profile-scraper` | Exact actor ID from Apify |
-   | `APIFY_TIKTOK_ACTOR_ID` | `clockworks/tiktok-scraper` | Exact actor ID from Apify |
-
-5. Optional but useful: add GitHub repository variables:
-
-   ```txt
-   Settings → Secrets and variables → Actions → Variables
-   ```
-
-   | Variable | Example |
-   | --- | --- |
-   | `INSTAGRAM_USERNAME` | `herhandle` |
-   | `TIKTOK_USERNAME` | `herhandle` |
-
-   If you do not add these variables, the script uses the usernames from `data/profile.json`.
-
-6. If your chosen Apify actor expects a different input shape, add these optional secrets:
-
-   | Secret | Example |
-   | --- | --- |
-   | `APIFY_INSTAGRAM_INPUT_JSON` | `{ "resultsType": "details", "directUrls": ["https://www.instagram.com/herhandle/"], "resultsLimit": 1, "addProfileStatistics": true }` |
-   | `APIFY_TIKTOK_INPUT_JSON` | `{ "profiles": ["herhandle"], "resultsPerPage": 1, "profileScrapeSections": ["videos"], "profileSorting": "latest" }` |
-
-The updater tries to normalize common actor output fields like `followersCount`, `followerCount`, `likesCount`, `videoCount`, etc. Instagram profile stats, including follower count, can still refresh automatically.
-
-Instagram performance metrics shown in the media kit are maintained manually in `data/stats.json`:
+Instagram performance values in `data/stats.json`:
 
 ```json
 "performance": {
@@ -132,29 +76,20 @@ Instagram performance metrics shown in the media kit are maintained manually in 
 }
 ```
 
-TikTok performance metrics still use all available public content up to `MAX_CONTENT_ITEMS`. Defaults:
+TikTok performance values in `data/stats.json`:
 
-```txt
-CONTENT_SAMPLE_SIZE=all
-MAX_CONTENT_ITEMS=250
+```json
+"performance": {
+  "totalViews": 2200000,
+  "engagementRate": 3.5,
+  "profileViews": 39900,
+  "source": "manual"
+}
 ```
 
-For TikTok, this is used to calculate average engagement rate, average views, and average likes. You can set `CONTENT_SAMPLE_SIZE` to a number like `12` if you want recent-content metrics instead.
-
-## Local test with Apify
+## Local preview
 
 From this folder:
-
-```bash
-APIFY_TOKEN="..." \
-APIFY_INSTAGRAM_ACTOR_ID="actor/id" \
-APIFY_TIKTOK_ACTOR_ID="actor/id" \
-INSTAGRAM_USERNAME="natashagolfing" \
-TIKTOK_USERNAME="natashagolfing" \
-node scripts/update-stats.mjs
-```
-
-Then preview:
 
 ```bash
 python3 -m http.server 8080
@@ -201,31 +136,10 @@ The Collabs link uses plain default `mailto:` behavior. If clicking it does noth
    natashagolfing.com
    ```
 
-5. Run:
+5. Push to `main` or run the deploy workflow manually.
 
-   ```txt
-   Actions → Update stats and deploy GitHub Pages → Run workflow
-   ```
+Normal pushes deploy the site without refreshing stats. Manual workflow runs also deploy only. To change stats, edit `data/stats.json`, commit it, and deploy.
 
-Normal pushes deploy the site without refreshing stats. Manual workflow runs refresh stats, commit `data/stats.json` if changed, and deploy.
+## Legacy updater
 
-## Official API fallback
-
-The updater still supports official APIs if you later want more reliability:
-
-Instagram secrets:
-
-```txt
-IG_GRAPH_ACCESS_TOKEN
-IG_USER_ID
-```
-
-TikTok secrets:
-
-```txt
-TIKTOK_REFRESH_TOKEN
-TIKTOK_CLIENT_KEY
-TIKTOK_CLIENT_SECRET
-```
-
-But for the current goal — no platform apps, automatic follower refreshes, and manually maintained Instagram performance stats — Apify is the best next step.
+`scripts/update-stats.mjs` still exists as a legacy/manual utility for Apify or official API pulls, but the current deploy workflow does not use it. Do not add social API secrets or automatic refresh behavior unless explicitly requested.

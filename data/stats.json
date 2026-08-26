@@ -28,25 +28,15 @@
       "videos": 191,
       "following": 325,
       "performance": {
-        "sampleSize": 185,
-        "engagementSampleSize": 185,
-        "viewSampleSize": 185,
-        "likeSampleSize": 185,
-        "totalLikes": 68074,
-        "totalViews": 2243572,
-        "totalEngagement": 93112,
-        "engagementDenominator": 423095,
-        "avgLikes": 368,
-        "avgViews": 12127,
-        "avgEngagementRate": 22.01
+        "totalViews": 2200000,
+        "engagementRate": 3.5,
+        "profileViews": 39900,
+        "source": "manual"
       }
     }
   },
   "performance": {
-    "avgEngagementRate": 22.01,
-    "avgViews": 12127,
-    "avgLikes": 368,
-    "sampleSize": 185
+    "source": "manual"
   },
   "updatedAt": "2026-08-26T01:54:26.898Z"
 }

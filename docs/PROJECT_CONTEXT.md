@@ -29,8 +29,8 @@ The project contains:
 - a Linktree-style links page at `/links`
 - social stats and featured post gallery on the media kit
 - manually entered audience charts on the media kit
-- manual GitHub Actions refresh for stats
-- Apify-powered Instagram/TikTok scraping for profile stats/TikTok performance
+- manually maintained social stats in `data/stats.json`
+- deploy-only GitHub Actions workflow; no automatic Instagram/TikTok refreshes
 - no secrets committed to git
 
 ## Current product direction
@@ -145,10 +145,10 @@ links/styles.css            Links page styling
 (no links/script.js)        /links intentionally has no JS; mailto uses browser default behavior
 CNAME                       Custom domain for GitHub Pages: natashagolfing.com
 data/profile.json           Source-of-truth profile info/handles/email
-data/stats.json             Tracked/generated social stats
+data/stats.json             Manually maintained social stats
 data/featured-posts.json    Featured post data
-scripts/update-stats.mjs    Apify + optional official API updater
-.github/workflows/pages.yml GitHub Pages deploy + manual stats refresh
+scripts/update-stats.mjs    Legacy/manual Apify + optional official API updater; not used by deploy workflow
+.github/workflows/pages.yml GitHub Pages deploy only
 assets/natasha-cover.jpg    Original optimized cover/profile photo
 assets/natasha-avatar.jpg   Cropped square avatar used by media kit and /links
 assets/brands/*             Local partner carousel logos
@@ -168,47 +168,21 @@ Workflow:
 Important behavior:
 
 - On normal push to `main`: deploy only, do not refresh stats.
-- On manual `workflow_dispatch`: refresh stats, commit `data/stats.json`, deploy.
+- On manual `workflow_dispatch`: deploy only, do not refresh stats.
 
-Stats should **not** refresh on every commit. Instagram performance fields should remain manually maintained.
+Instagram and TikTok stats should only change when `data/stats.json` is edited and committed manually.
 
-## Stats refresh behavior
+## Stats update behavior
 
-Stats are refreshed when manually running:
+Stats are manual only. To change Instagram or TikTok stats, edit `data/stats.json`, commit, and deploy.
 
-```txt
-Actions → Update stats and deploy GitHub Pages → Run workflow
-```
-
-The workflow then:
-
-1. runs `node scripts/update-stats.mjs`
-2. updates `data/stats.json`
-3. commits `data/stats.json` if changed using `github-actions[bot]`
-4. deploys to GitHub Pages
+The GitHub Actions workflow deploys the committed static site only. It does not run `scripts/update-stats.mjs`, Apify, or official Instagram/TikTok APIs.
 
 ## Apify setup
 
-Required GitHub secrets:
+Apify is no longer used by the GitHub Actions deploy workflow. No Apify secrets or vars are required for deployment.
 
-```txt
-APIFY_TOKEN
-APIFY_INSTAGRAM_ACTOR_ID=apify/instagram-scraper
-APIFY_TIKTOK_ACTOR_ID=clockworks/tiktok-scraper
-```
-
-Optional vars/secrets:
-
-```txt
-INSTAGRAM_USERNAME
-TIKTOK_USERNAME
-CONTENT_SAMPLE_SIZE
-MAX_CONTENT_ITEMS
-APIFY_INSTAGRAM_INPUT_JSON
-APIFY_TIKTOK_INPUT_JSON
-```
-
-If username vars are absent, code uses handles from `data/profile.json`.
+`scripts/update-stats.mjs` remains in the repo as a legacy/manual utility if the user explicitly asks to run a scraper-based update later, but the current requirement is that Instagram and TikTok stats are updated by manually editing `data/stats.json`.
 
 Current handle for both:
 
@@ -221,17 +195,16 @@ natashagolfing
 Current stats file tracks:
 
 - profile info
-- Instagram followers/posts/following
-- TikTok followers/likes/videos/following
+- manually maintained Instagram followers/posts/following
+- manually maintained TikTok followers/likes/videos/following
 - manually maintained Instagram performance (avg engagement, avg views, reach rate)
-- TikTok performance
-- combined auto-calculated performance for platforms with sampled totals
+- manually maintained TikTok performance (total views, engagement rate, profile views)
 
 `data/stats.json` is intentionally committed now because the user wanted to see the stats file in GitHub.
 
 ## Performance stats calculations
 
-Instagram follower count can still update automatically, but Instagram performance is manually maintained in `data/stats.json` and shown in the Instagram section:
+Instagram stats are manually maintained in `data/stats.json` and shown in the Instagram section:
 
 ```json
 "performance": {
@@ -256,55 +229,33 @@ The Instagram avg engagement tooltip definition is:
 (Likes + Comments + Shares + Saves) ÷ Views, averaged across posts
 ```
 
-TikTok performance still uses public content scraping.
+TikTok stats are also manually maintained in `data/stats.json` and shown in the TikTok section:
 
-Current defaults:
-
-```txt
-CONTENT_SAMPLE_SIZE=all
-MAX_CONTENT_ITEMS=250
+```json
+"performance": {
+  "totalViews": 2200000,
+  "engagementRate": 3.5,
+  "profileViews": 39900,
+  "source": "manual"
+}
 ```
 
-### TikTok
-
-```txt
-avg likes = total likes / video sample size
-avg views = total views / video sample size
-avg engagement rate = total(likes + comments + shares + saves/collects) / (followers × #sampled videos) × 100
-```
-
-Tooltip shown in the UI:
-
-```txt
-Avg engagement = (likes + comments + shares + saves) ÷ (followers × videos sampled)
-```
-
-### Combined
-
-Combined performance is computed by aggregating platform totals and denominators for platforms that have sampled totals. Manually maintained Instagram performance is not included in this automatic combined calculation.
-
-Current generated example:
+Current displayed example:
 
 ```txt
 Instagram avg engagement: 4.9%
 Instagram avg views: 22.2K
 Instagram reach rate: 73%
 
-TikTok avg engagement: 24.2%
-TikTok avg views: 12.8K
-TikTok avg likes: 385
+TikTok followers: 2.3K
+TikTok total views: 2.2M
+TikTok engagement rate: 3.5%
+TikTok profile views: 39.9K
 ```
 
 ## Estimated Apify costs
 
-Approximate actor pricing seen during research:
-
-```txt
-Instagram Scraper: ~$1.50 / 1,000 results
-TikTok Scraper: ~$1.70 / 1,000 results
-```
-
-Instagram content performance is no longer scraped automatically. Manual refreshes update Instagram profile stats and TikTok stats/performance, so current Apify cost depends mostly on the selected TikTok sample size plus one Instagram profile-details result.
+The deploy workflow no longer runs Apify or official social APIs, so normal deploys have no social-scraping cost. If the legacy updater is run manually later, costs depend on the selected actors and sample size.
 
 ## Audience demographics
 
@@ -467,8 +418,8 @@ If UI seems stale after deploy, bump these query params and/or hard refresh.
 - Use real post previews where possible.
 - Keep featured post filter behavior smooth and without flashing.
 - Keep the left profile card sticky on desktop.
-- Keep stats refresh manual unless user explicitly asks otherwise; Instagram performance figures are maintained manually.
+- Keep all social stats manual unless user explicitly asks otherwise; the deploy workflow must not refresh Instagram or TikTok automatically.
 - Keep `/links` simple, compact, and no-scroll where possible.
 - Use `assets/natasha-avatar.jpg` for circular avatar displays.
-- Do not commit secrets. GitHub Actions secrets are used for Apify.
+- Do not commit secrets. The current deploy workflow does not need social API/Apify secrets.
 - `data/stats.json` is committed intentionally.

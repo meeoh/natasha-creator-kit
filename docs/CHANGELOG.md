@@ -1,5 +1,12 @@
 # Changelog / Work Completed
 
+## Latest manual-stats update
+
+- Changed GitHub Actions to deploy only; it no longer refreshes or commits Instagram/TikTok stats.
+- Updated TikTok stat cards to show Followers, Total views, Engagement rate, and Profile views.
+- Set TikTok manual performance values to total views `2.2M`, engagement rate `3.5%`, and profile views `39.9K`.
+- Updated docs to clarify that social stats are changed only by manually editing `data/stats.json`.
+
 ## Initial build
 
 - Created static GitHub Pages media kit.

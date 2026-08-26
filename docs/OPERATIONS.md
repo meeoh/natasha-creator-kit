@@ -10,56 +10,40 @@ git push origin main
 
 Normal pushes do **not** refresh stats.
 
-## Refreshing stats
+## Updating stats
 
-Stats refresh can be run manually:
+Instagram and TikTok stats are manual only.
 
-```txt
-GitHub → Actions → Update stats and deploy GitHub Pages → Run workflow
-```
+To update them:
 
-On refresh runs, the workflow updates automatic profile stats, commits `data/stats.json`, and deploys. Instagram follower count can refresh automatically, but Instagram performance stats are manually maintained in `data/stats.json`.
+1. Edit `data/stats.json`.
+2. Commit the change.
+3. Push to `main`, or run the GitHub Pages deploy workflow manually.
 
-## Required GitHub secrets
+The GitHub Actions workflow deploys only. It does not call Apify, official APIs, or `scripts/update-stats.mjs`.
 
-```txt
-APIFY_TOKEN
-APIFY_INSTAGRAM_ACTOR_ID
-APIFY_TIKTOK_ACTOR_ID
-```
+## GitHub secrets
 
-Expected actor IDs:
+No GitHub Actions secrets are required for deployment. Social stats are not refreshed automatically.
 
-```txt
-APIFY_INSTAGRAM_ACTOR_ID=apify/instagram-scraper
-APIFY_TIKTOK_ACTOR_ID=clockworks/tiktok-scraper
-```
-
-## Optional GitHub vars/secrets
-
-```txt
-INSTAGRAM_USERNAME
-TIKTOK_USERNAME
-CONTENT_SAMPLE_SIZE
-MAX_CONTENT_ITEMS
-APIFY_INSTAGRAM_INPUT_JSON
-APIFY_TIKTOK_INPUT_JSON
-```
-
-Defaults for TikTok performance scrape:
-
-```txt
-CONTENT_SAMPLE_SIZE=all
-MAX_CONTENT_ITEMS=250
-```
-
-Instagram performance fields are manual:
+Current Instagram performance fields are manual:
 
 ```json
 "performance": {
   "avgEngagementRate": 4.9,
   "avgViews": 22200,
   "reachRate": 73,
+  "source": "manual"
+}
+```
+
+Current TikTok performance fields are manual:
+
+```json
+"performance": {
+  "totalViews": 2200000,
+  "engagementRate": 3.5,
+  "profileViews": 39900,
   "source": "manual"
 }
 ```
@@ -176,7 +160,7 @@ sips -Z 900 --setProperty format jpeg --setProperty formatOptions 82 assets/feat
 
 ## Cost estimate
 
-Current refreshes no longer scrape Instagram content-performance items. A manual refresh updates Instagram profile stats and TikTok stats/performance, so Apify cost should be lower than the previous all-content Instagram + TikTok estimate and depends on the configured actor pricing and TikTok sample size.
+The deploy workflow no longer runs Apify or official social APIs, so normal deploys have no social-scraping cost.
 
 ## Avoid committing secrets
 

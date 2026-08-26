@@ -122,6 +122,28 @@ Design rules:
 - Use subtle pink/white icon cards with black/outline glyphs, not bright gradients.
 - Bump the query string in `links/index.html` when changing `links/styles.css`.
 
+## Updating partner logos
+
+Partner logos live in `assets/brands/` and are referenced twice in `index.html` because the carousel repeats one logo set for seamless scrolling.
+
+Current partner list:
+
+```txt
+GolfNorth
+GrooveIt
+PUR3 Golf
+Trust Golf Ball
+Transcend Golf Simulators
+SeeMore Putter Company
+```
+
+When replacing a partner logo:
+
+1. Add the optimized local asset under `assets/brands/`.
+2. Update both repeated carousel logo sets in `index.html`.
+3. Add or adjust a logo-specific CSS class in `styles.css` for alignment/sizing.
+4. Preview locally and verify the logo is visually aligned in the carousel before pushing.
+
 ## Adding featured posts
 
 1. Add item to `data/featured-posts.json`:

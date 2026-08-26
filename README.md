@@ -40,6 +40,7 @@ Tradeoff: Apify actors are generally scraper-based, so they are less official th
 - `data/profile.json` — safe-to-commit profile info and handles
 - `data/stats.json` — committed/generated stats used by the site
 - `data/featured-posts.json` — featured post metadata
+- `assets/brands/` — local partner carousel logos, including PUR3 Golf
 - `scripts/update-stats.mjs` — pulls stats and writes `data/stats.json`
 - `.github/workflows/pages.yml` — manual stats refresh and GitHub Pages deploy
 

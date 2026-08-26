@@ -78,9 +78,23 @@ Currently contains:
 - TikTok stat section
 - small info tooltip beside `Avg engagement` labels; Instagram shows the manual-insights definition, TikTok shows the formula
 - manual audience section with gender + age charts
+- Partners carousel
 - Featured posts gallery with filters
 
 Previous iterations had combined metric cards and a contact section in the right panel; those were removed/reworked.
+
+### Partners carousel
+
+Current partner logos, in order:
+
+- GolfNorth (`assets/brands/golfnorth.png`)
+- GrooveIt (`assets/brands/grooveit.png`)
+- PUR3 Golf (`assets/brands/pur3-golf.png`, linked to `https://pur3golf.com/`)
+- Trust Golf Ball (`assets/brands/trust-golf.svg`)
+- Transcend Golf Simulators (`assets/brands/transcend-golf.png`)
+- SeeMore Putter Company (`assets/brands/seemore.png`)
+
+WhyGolf was removed from the carousel and replaced with PUR3 Golf. The PUR3 logo is a local dark transparent PNG derived from the PUR3 site logo and sized with `.brand-logo-tile-pur3`.
 
 ### Featured posts
 
@@ -137,6 +151,7 @@ scripts/update-stats.mjs    Apify + optional official API updater
 .github/workflows/pages.yml GitHub Pages deploy + manual stats refresh
 assets/natasha-cover.jpg    Original optimized cover/profile photo
 assets/natasha-avatar.jpg   Cropped square avatar used by media kit and /links
+assets/brands/*             Local partner carousel logos
 assets/featured/*.jpg       Optimized featured post thumbnails
 ```
 

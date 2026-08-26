@@ -92,6 +92,7 @@
 - Restored plain default `mailto:` behavior on media kit and `/links`; removed the custom email-copy/toast JS.
 - Added small info tooltips beside media kit `Avg engagement` labels to explain the calculation, then refined the tooltip copy into compact `Avg engagement = ...` math formulas without unexplained acronyms.
 - Updated the Instagram stat row to show Followers, Avg engagement, Avg views, and Reach rate.
+- Updated the Instagram avg engagement tooltip definition to `(Likes + Comments + Shares + Saves) ÷ Views, averaged across posts`.
 
 ## Current known design direction
 

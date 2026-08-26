@@ -76,7 +76,7 @@ Currently contains:
 - `Insights & data`
 - Instagram stat section
 - TikTok stat section
-- small info tooltip beside `Avg engagement` labels; Instagram notes manual insights, TikTok shows the formula
+- small info tooltip beside `Avg engagement` labels; Instagram shows the manual-insights definition, TikTok shows the formula
 - manual audience section with gender + age charts
 - Featured posts gallery with filters
 
@@ -233,6 +233,12 @@ The Instagram UI shows:
 Avg engagement: 4.9%
 Avg views: 22.2K
 Reach rate: 73%
+```
+
+The Instagram avg engagement tooltip definition is:
+
+```txt
+(Likes + Comments + Shares + Saves) ÷ Views, averaged across posts
 ```
 
 TikTok performance still uses public content scraping.

@@ -562,9 +562,12 @@ h1 {
 }
 .brand-logo-tile-golfnorth { --logo-y: 2px; }
 .brand-logo-tile-grooveit { --logo-y: 1px; }
-.brand-logo-tile-whygolf {
-  --logo-y: -10px;
-  width: 205px;
+.brand-logo-tile-pur3 {
+  --logo-y: -1px;
+  width: 190px;
+}
+.brand-logo-tile-pur3 img {
+  max-height: 68px;
 }
 .brand-logo-tile-trust {
   --logo-y: -8px;

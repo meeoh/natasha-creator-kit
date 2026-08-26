@@ -93,6 +93,7 @@
 - Added small info tooltips beside media kit `Avg engagement` labels to explain the calculation, then refined the tooltip copy into compact `Avg engagement = ...` math formulas without unexplained acronyms.
 - Updated the Instagram stat row to show Followers, Avg engagement, Avg views, and Reach rate.
 - Updated the Instagram avg engagement tooltip definition to `(Likes + Comments + Shares + Saves) ÷ Views, averaged across posts`.
+- Replaced the WhyGolf partner logo with PUR3 Golf in the partners carousel and aligned the logo sizing.
 
 ## Current known design direction
 

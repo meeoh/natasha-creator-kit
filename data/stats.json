@@ -15,17 +15,10 @@
       "posts": 103,
       "following": 318,
       "performance": {
-        "sampleSize": 74,
-        "engagementSampleSize": 74,
-        "viewSampleSize": 72,
-        "likeSampleSize": 74,
-        "totalLikes": 50022,
-        "totalViews": 919070,
-        "totalEngagement": 57463,
-        "engagementDenominator": 437562,
-        "avgLikes": 676,
-        "avgViews": 12765,
-        "avgEngagementRate": 13.13
+        "avgEngagementRate": 4.9,
+        "avgViews": 22200,
+        "reachRate": 73,
+        "source": "manual"
       }
     },
     "tiktok": {
@@ -50,10 +43,10 @@
     }
   },
   "performance": {
-    "avgEngagementRate": 17.5,
-    "avgViews": 12306,
-    "avgLikes": 456,
-    "sampleSize": 259
+    "avgEngagementRate": 22.01,
+    "avgViews": 12127,
+    "avgLikes": 368,
+    "sampleSize": 185
   },
   "updatedAt": "2026-08-26T01:54:26.898Z"
 }

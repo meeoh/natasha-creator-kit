@@ -12,7 +12,12 @@ const fallbackStats = {
     tiktokUrl: "https://www.tiktok.com/@natashagolfing"
   },
   platforms: {
-    instagram: { username: "natashagolfing", followers: 0, posts: 0 },
+    instagram: {
+      username: "natashagolfing",
+      followers: 0,
+      posts: 0,
+      performance: { avgEngagementRate: 4.9, avgViews: 22200, reachRate: 73, source: "manual" }
+    },
     tiktok: { username: "natashagolfing", followers: 0, likes: 0, videos: 0 }
   },
   performance: {
@@ -151,7 +156,7 @@ function formatFull(value) {
 
 function formatPercent(value) {
   const number = Number(value);
-  return Number.isFinite(number) ? `${number.toFixed(number >= 10 ? 1 : 2)}%` : "—";
+  return Number.isFinite(number) ? `${new Intl.NumberFormat("en", { maximumFractionDigits: 1 }).format(number)}%` : "—";
 }
 
 function setText(selector, value) {
@@ -197,7 +202,7 @@ function render(stats) {
   setText('[data-stat="instagramUsername"]', instagram.username || "handle");
   setText('[data-stat="instagramAvgEngagementRate"]', formatPercent(instagram.performance?.avgEngagementRate));
   setText('[data-stat="instagramAvgViews"]', formatCompact(instagram.performance?.avgViews));
-  setText('[data-stat="instagramAvgLikes"]', formatCompact(instagram.performance?.avgLikes));
+  setText('[data-stat="instagramReachRate"]', formatPercent(instagram.performance?.reachRate));
   setText('[data-stat="tiktokFollowers"]', formatCompact(tiktok.followers));
   setText('[data-stat="tiktokLikes"]', formatCompact(tiktok.likes));
   setText('[data-stat="tiktokVideos"]', formatFull(tiktok.videos));

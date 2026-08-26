@@ -29,8 +29,8 @@ The project contains:
 - a Linktree-style links page at `/links`
 - social stats and featured post gallery on the media kit
 - manually entered audience charts on the media kit
-- biweekly scheduled + manual GitHub Actions refresh for stats
-- Apify-powered Instagram/TikTok scraping
+- manual GitHub Actions refresh for stats
+- Apify-powered Instagram/TikTok scraping for profile stats/TikTok performance
 - no secrets committed to git
 
 ## Current product direction
@@ -76,7 +76,7 @@ Currently contains:
 - `Insights & data`
 - Instagram stat section
 - TikTok stat section
-- small info tooltip beside each `Avg engagement` label showing a compact platform-specific math formula
+- small info tooltip beside `Avg engagement` labels; Instagram notes manual insights, TikTok shows the formula
 - manual audience section with gender + age charts
 - Featured posts gallery with filters
 
@@ -134,7 +134,7 @@ data/profile.json           Source-of-truth profile info/handles/email
 data/stats.json             Tracked/generated social stats
 data/featured-posts.json    Featured post data
 scripts/update-stats.mjs    Apify + optional official API updater
-.github/workflows/pages.yml GitHub Pages deploy + biweekly/manual stats refresh
+.github/workflows/pages.yml GitHub Pages deploy + manual stats refresh
 assets/natasha-cover.jpg    Original optimized cover/profile photo
 assets/natasha-avatar.jpg   Cropped square avatar used by media kit and /links
 assets/featured/*.jpg       Optimized featured post thumbnails
@@ -154,13 +154,12 @@ Important behavior:
 
 - On normal push to `main`: deploy only, do not refresh stats.
 - On manual `workflow_dispatch`: refresh stats, commit `data/stats.json`, deploy.
-- On scheduled runs: refresh stats every two weeks, commit `data/stats.json`, deploy. The first scheduled refresh is 2026-07-18 at 14:00 UTC. GitHub Actions does not support a true biweekly cron, so the workflow cron runs weekly on Saturdays and gates actual refreshes by date.
 
-Stats should **not** refresh on every commit.
+Stats should **not** refresh on every commit. Instagram performance fields should remain manually maintained.
 
 ## Stats refresh behavior
 
-Stats are refreshed automatically every two weeks or when manually running:
+Stats are refreshed when manually running:
 
 ```txt
 Actions → Update stats and deploy GitHub Pages → Run workflow
@@ -191,7 +190,6 @@ TIKTOK_USERNAME
 CONTENT_SAMPLE_SIZE
 MAX_CONTENT_ITEMS
 APIFY_INSTAGRAM_INPUT_JSON
-APIFY_INSTAGRAM_RECENT_INPUT_JSON
 APIFY_TIKTOK_INPUT_JSON
 ```
 
@@ -210,15 +208,34 @@ Current stats file tracks:
 - profile info
 - Instagram followers/posts/following
 - TikTok followers/likes/videos/following
-- Instagram performance
+- manually maintained Instagram performance (avg engagement, avg views, reach rate)
 - TikTok performance
-- combined performance
+- combined auto-calculated performance for platforms with sampled totals
 
 `data/stats.json` is intentionally committed now because the user wanted to see the stats file in GitHub.
 
 ## Performance stats calculations
 
-We originally discussed latest 12 posts/videos, then changed to all-time public content.
+Instagram follower count can still update automatically, but Instagram performance is manually maintained in `data/stats.json` and shown in the Instagram section:
+
+```json
+"performance": {
+  "avgEngagementRate": 4.9,
+  "avgViews": 22200,
+  "reachRate": 73,
+  "source": "manual"
+}
+```
+
+The Instagram UI shows:
+
+```txt
+Avg engagement: 4.9%
+Avg views: 22.2K
+Reach rate: 73%
+```
+
+TikTok performance still uses public content scraping.
 
 Current defaults:
 
@@ -226,32 +243,6 @@ Current defaults:
 CONTENT_SAMPLE_SIZE=all
 MAX_CONTENT_ITEMS=250
 ```
-
-For Natasha’s current size, refresh scraped approximately:
-
-```txt
-Instagram: 35 content items
-TikTok: 140 content items
-Total sample: 175 content items
-```
-
-Metrics calculated:
-
-### Instagram
-
-```txt
-avg likes = total likes / like sample size
-avg views = total views / view sample size
-avg engagement rate = total(likes + comments) / (followers × #sampled posts) × 100
-```
-
-Tooltip shown in the UI:
-
-```txt
-Avg engagement = (likes + comments) ÷ (followers × posts sampled)
-```
-
-Instagram public scraping generally does not provide saves/shares reliably.
 
 ### TikTok
 
@@ -269,23 +260,18 @@ Avg engagement = (likes + comments + shares + saves) ÷ (followers × videos sam
 
 ### Combined
 
-Combined performance is computed by aggregating platform totals and denominators.
+Combined performance is computed by aggregating platform totals and denominators for platforms that have sampled totals. Manually maintained Instagram performance is not included in this automatic combined calculation.
 
-Current live/generated example after all-time scrape:
+Current generated example:
 
 ```txt
-Combined avg engagement: 21.75%
-Combined avg views: 8.4K
-Combined avg likes: 340
-Sample size: 175
+Instagram avg engagement: 4.9%
+Instagram avg views: 22.2K
+Instagram reach rate: 73%
 
-Instagram avg engagement: 13.92%
-Instagram avg views: 6.6K
-Instagram avg likes: 365
-
-TikTok avg engagement: 25.01%
-TikTok avg views: 8.9K
-TikTok avg likes: 333
+TikTok avg engagement: 24.2%
+TikTok avg views: 12.8K
+TikTok avg likes: 385
 ```
 
 ## Estimated Apify costs
@@ -297,25 +283,7 @@ Instagram Scraper: ~$1.50 / 1,000 results
 TikTok Scraper: ~$1.70 / 1,000 results
 ```
 
-With all-time capped scrape at current account size:
-
-```txt
-Instagram: ~35–40 results ≈ $0.05–$0.06
-TikTok: ~140–146 results ≈ $0.24–$0.25
-Total ≈ $0.30–$0.31 per manual refresh
-```
-
-If daily:
-
-```txt
-~$9–10/month
-```
-
-With the biweekly scheduled refresh, starting 2026-07-18:
-
-```txt
-~$0.60–$0.62/month, plus any manual refreshes
-```
+Instagram content performance is no longer scraped automatically. Manual refreshes update Instagram profile stats and TikTok stats/performance, so current Apify cost depends mostly on the selected TikTok sample size plus one Instagram profile-details result.
 
 ## Audience demographics
 
@@ -478,7 +446,7 @@ If UI seems stale after deploy, bump these query params and/or hard refresh.
 - Use real post previews where possible.
 - Keep featured post filter behavior smooth and without flashing.
 - Keep the left profile card sticky on desktop.
-- Keep stats refresh biweekly by default plus manual on demand unless user explicitly asks otherwise.
+- Keep stats refresh manual unless user explicitly asks otherwise; Instagram performance figures are maintained manually.
 - Keep `/links` simple, compact, and no-scroll where possible.
 - Use `assets/natasha-avatar.jpg` for circular avatar displays.
 - Do not commit secrets. GitHub Actions secrets are used for Apify.

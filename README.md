@@ -7,14 +7,14 @@ https://natashagolfing.com/
 https://natashagolfing.com/links
 ```
 
-`data/stats.json` is intentionally committed so the current public stats are visible in GitHub. The workflow updates it during scheduled/manual refreshes, then GitHub Pages serves the committed file.
+`data/stats.json` is intentionally committed so the current public stats are visible in GitHub. The workflow updates it during manual refreshes, then GitHub Pages serves the committed file.
 
 ## Recommended no-platform-app setup
 
 If you do not want to create Meta/TikTok developer apps, use a username-based third-party fetcher. The best fit for this project is **Apify**:
 
 ```txt
-GitHub Action every two weeks by default, plus manual runs on demand
+Manual GitHub Action refresh on demand
 → Apify Instagram profile actor by username
 → Apify TikTok profile actor by username
 → update data/stats.json
@@ -26,9 +26,9 @@ Why this path:
 - no Meta app setup
 - no TikTok app setup
 - username-based
-- can run on a schedule, currently every two weeks by default
+- runs from GitHub Actions on demand
 - API key stays private in GitHub Actions
-- likely enough on Apify's free credits for one creator on a biweekly cadence, depending on actor pricing
+- likely enough on Apify's free credits for one creator at this scale, depending on actor pricing and refresh frequency
 
 Tradeoff: Apify actors are generally scraper-based, so they are less official than platform APIs and can occasionally break. But for ASAP and username-only setup, this is the most practical path.
 
@@ -41,7 +41,7 @@ Tradeoff: Apify actors are generally scraper-based, so they are less official th
 - `data/stats.json` — committed/generated stats used by the site
 - `data/featured-posts.json` — featured post metadata
 - `scripts/update-stats.mjs` — pulls stats and writes `data/stats.json`
-- `.github/workflows/pages.yml` — biweekly/manual refresh and GitHub Pages deploy
+- `.github/workflows/pages.yml` — manual stats refresh and GitHub Pages deploy
 
 ## Customize profile and handles
 
@@ -118,16 +118,27 @@ Circular avatar displays currently use the cropped square image `assets/natasha-
    | `APIFY_INSTAGRAM_INPUT_JSON` | `{ "resultsType": "details", "directUrls": ["https://www.instagram.com/herhandle/"], "resultsLimit": 1, "addProfileStatistics": true }` |
    | `APIFY_TIKTOK_INPUT_JSON` | `{ "profiles": ["herhandle"], "resultsPerPage": 1, "profileScrapeSections": ["videos"], "profileSorting": "latest" }` |
 
-The updater tries to normalize common actor output fields like `followersCount`, `followerCount`, `likesCount`, `videoCount`, etc.
+The updater tries to normalize common actor output fields like `followersCount`, `followerCount`, `likesCount`, `videoCount`, etc. Instagram profile stats, including follower count, can still refresh automatically.
 
-By default, performance metrics use all available public content up to `MAX_CONTENT_ITEMS` per platform. Defaults:
+Instagram performance metrics shown in the media kit are maintained manually in `data/stats.json`:
+
+```json
+"performance": {
+  "avgEngagementRate": 4.9,
+  "avgViews": 22200,
+  "reachRate": 73,
+  "source": "manual"
+}
+```
+
+TikTok performance metrics still use all available public content up to `MAX_CONTENT_ITEMS`. Defaults:
 
 ```txt
 CONTENT_SAMPLE_SIZE=all
 MAX_CONTENT_ITEMS=250
 ```
 
-This is used to calculate average engagement rate, average views, and average likes. You can set `CONTENT_SAMPLE_SIZE` to a number like `12` if you want recent-content metrics instead.
+For TikTok, this is used to calculate average engagement rate, average views, and average likes. You can set `CONTENT_SAMPLE_SIZE` to a number like `12` if you want recent-content metrics instead.
 
 ## Local test with Apify
 
@@ -195,7 +206,7 @@ The Collabs link uses plain default `mailto:` behavior. If clicking it does noth
    Actions → Update stats and deploy GitHub Pages → Run workflow
    ```
 
-The workflow also runs every two weeks by default, starting 2026-07-18 at 14:00 UTC. Technically it is scheduled weekly on Saturdays and gates the stats refresh by date because GitHub Actions does not support a true biweekly cron expression.
+Normal pushes deploy the site without refreshing stats. Manual workflow runs refresh stats, commit `data/stats.json` if changed, and deploy.
 
 ## Official API fallback
 
@@ -216,4 +227,4 @@ TIKTOK_CLIENT_KEY
 TIKTOK_CLIENT_SECRET
 ```
 
-But for the current goal — no platform apps and no hardcoded stats — Apify is the best next step.
+But for the current goal — no platform apps, automatic follower refreshes, and manually maintained Instagram performance stats — Apify is the best next step.

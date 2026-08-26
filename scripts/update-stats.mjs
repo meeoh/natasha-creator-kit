@@ -101,24 +101,18 @@ function contentSampleLimit(totalAvailable = null) {
   return Math.max(1, Math.min(asNumber(requested, 12), max));
 }
 
-function normalizeContentItem(item, platform) {
-  const likes = asNumber(firstValue(item, platform === "instagram"
-    ? ["likesCount", "likeCount", "likes", "edge_liked_by.count", "statistics.likes"]
-    : ["diggCount", "likeCount", "likes", "stats.diggCount"]));
-  const comments = asNumber(firstValue(item, platform === "instagram"
-    ? ["commentsCount", "commentCount", "comments", "edge_media_to_comment.count", "statistics.comments"]
-    : ["commentCount", "comments", "stats.commentCount"]));
+function normalizeTikTokContentItem(item) {
+  const likes = asNumber(firstValue(item, ["diggCount", "likeCount", "likes", "stats.diggCount"]));
+  const comments = asNumber(firstValue(item, ["commentCount", "comments", "stats.commentCount"]));
   const shares = asNumber(firstValue(item, ["shareCount", "shares", "stats.shareCount"]));
   const saves = asNumber(firstValue(item, ["collectCount", "saveCount", "saves", "stats.collectCount"]));
-  const views = asNumber(firstValue(item, platform === "instagram"
-    ? ["videoViewCount", "videoPlayCount", "videoViews", "viewsCount", "views", "playCount"]
-    : ["playCount", "viewCount", "views", "stats.playCount"]));
+  const views = asNumber(firstValue(item, ["playCount", "viewCount", "views", "stats.playCount"]));
 
   return { likes, comments, shares, saves, views };
 }
 
-function summarizeContent(items, followers, platform) {
-  const normalized = items.map((item) => normalizeContentItem(item, platform));
+function summarizeTikTokContent(items, followers) {
+  const normalized = items.map((item) => normalizeTikTokContentItem(item));
   const likeSamples = normalized.filter((item) => item.likes !== null);
   const viewSamples = normalized.filter((item) => item.views !== null && item.views > 0);
   const engagementSamples = normalized.filter((item) => [item.likes, item.comments, item.shares, item.saves].some((value) => value !== null));
@@ -144,14 +138,14 @@ function summarizeContent(items, followers, platform) {
 }
 
 function summarizeCombined(...summaries) {
-  const valid = summaries.filter(Boolean);
-  const totalLikes = valid.reduce((sum, item) => sum + item.totalLikes, 0);
-  const totalViews = valid.reduce((sum, item) => sum + item.totalViews, 0);
-  const totalEngagement = valid.reduce((sum, item) => sum + item.totalEngagement, 0);
-  const engagementDenominator = valid.reduce((sum, item) => sum + item.engagementDenominator, 0);
-  const likeSampleSize = valid.reduce((sum, item) => sum + item.likeSampleSize, 0);
-  const viewSampleSize = valid.reduce((sum, item) => sum + item.viewSampleSize, 0);
-  const sampleSize = valid.reduce((sum, item) => sum + item.sampleSize, 0);
+  const valid = summaries.filter((item) => item && Number(item.sampleSize) > 0);
+  const totalLikes = valid.reduce((sum, item) => sum + Number(item.totalLikes || 0), 0);
+  const totalViews = valid.reduce((sum, item) => sum + Number(item.totalViews || 0), 0);
+  const totalEngagement = valid.reduce((sum, item) => sum + Number(item.totalEngagement || 0), 0);
+  const engagementDenominator = valid.reduce((sum, item) => sum + Number(item.engagementDenominator || 0), 0);
+  const likeSampleSize = valid.reduce((sum, item) => sum + Number(item.likeSampleSize || 0), 0);
+  const viewSampleSize = valid.reduce((sum, item) => sum + Number(item.viewSampleSize || 0), 0);
+  const sampleSize = valid.reduce((sum, item) => sum + Number(item.sampleSize || 0), 0);
 
   return {
     avgEngagementRate: engagementDenominator ? Number(((totalEngagement / engagementDenominator) * 100).toFixed(2)) : null,
@@ -241,21 +235,7 @@ async function updateInstagramFromApify(stats) {
 
   stats.profile.instagramUrl = `https://instagram.com/${stats.platforms.instagram.username}`;
 
-  try {
-    const recentInput = parseInputJson("APIFY_INSTAGRAM_RECENT_INPUT_JSON", {
-      resultsType: "posts",
-      directUrls: [`https://www.instagram.com/${username}/`],
-      resultsLimit: contentSampleLimit(stats.platforms.instagram.posts),
-      skipPinnedPosts: true
-    });
-    const recentItems = await runApifyActorItems(env("APIFY_INSTAGRAM_ACTOR_ID"), recentInput);
-    stats.platforms.instagram.performance = summarizeContent(recentItems, stats.platforms.instagram.followers, "instagram");
-    console.log(`Updated Instagram content metrics from ${recentItems.length} items.`);
-  } catch (error) {
-    console.warn(`Instagram content metrics skipped: ${error.message}`);
-  }
-
-  console.log(`Updated Instagram from Apify @${stats.platforms.instagram.username}.`);
+  console.log(`Updated Instagram profile stats from Apify @${stats.platforms.instagram.username}; performance metrics are maintained manually.`);
   return true;
 }
 
@@ -297,7 +277,7 @@ async function updateTikTokFromApify(stats) {
   if (avatar && (!stats.profile.avatar || stats.profile.avatar === "assets/avatar.svg")) stats.profile.avatar = avatar;
 
   stats.profile.tiktokUrl = `https://www.tiktok.com/@${stats.platforms.tiktok.username}`;
-  stats.platforms.tiktok.performance = summarizeContent(items, stats.platforms.tiktok.followers, "tiktok");
+  stats.platforms.tiktok.performance = summarizeTikTokContent(items, stats.platforms.tiktok.followers);
   console.log(`Updated TikTok content metrics from ${items.length} items.`);
   console.log(`Updated TikTok from Apify @${stats.platforms.tiktok.username}.`);
   return true;

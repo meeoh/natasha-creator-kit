@@ -38,6 +38,8 @@
   - Instagram avg engagement/views/likes
   - TikTok avg engagement/views/likes
 - Added combined performance stats in `data/stats.json`.
+- Changed Instagram performance stats to manual values: avg engagement `4.9%`, avg views `22.2K`, reach rate `73%`.
+- Removed automatic Instagram content-performance calculation from the stats updater; Instagram follower/profile stats can still refresh automatically.
 
 ## UI iterations
 
@@ -89,6 +91,7 @@
 - Changed `/links` Collabs icon to an outline envelope so it matches the other outline-style icons.
 - Restored plain default `mailto:` behavior on media kit and `/links`; removed the custom email-copy/toast JS.
 - Added small info tooltips beside media kit `Avg engagement` labels to explain the calculation, then refined the tooltip copy into compact `Avg engagement = ...` math formulas without unexplained acronyms.
+- Updated the Instagram stat row to show Followers, Avg engagement, Avg views, and Reach rate.
 
 ## Current known design direction
 

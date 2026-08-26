@@ -12,13 +12,13 @@ Normal pushes do **not** refresh stats.
 
 ## Refreshing stats
 
-Stats refresh automatically runs every two weeks by default, plus it can still be run manually:
+Stats refresh can be run manually:
 
 ```txt
 GitHub → Actions → Update stats and deploy GitHub Pages → Run workflow
 ```
 
-The first scheduled refresh is 2026-07-18 at 14:00 UTC. After that, the workflow refreshes every 14 days. GitHub Actions does not support a true biweekly cron expression, so the workflow is scheduled weekly on Saturdays and gates paid Apify refreshes by date. On refresh runs, it updates Apify stats, commits `data/stats.json`, and deploys.
+On refresh runs, the workflow updates automatic profile stats, commits `data/stats.json`, and deploys. Instagram follower count can refresh automatically, but Instagram performance stats are manually maintained in `data/stats.json`.
 
 ## Required GitHub secrets
 
@@ -43,15 +43,25 @@ TIKTOK_USERNAME
 CONTENT_SAMPLE_SIZE
 MAX_CONTENT_ITEMS
 APIFY_INSTAGRAM_INPUT_JSON
-APIFY_INSTAGRAM_RECENT_INPUT_JSON
 APIFY_TIKTOK_INPUT_JSON
 ```
 
-Defaults for performance scrape:
+Defaults for TikTok performance scrape:
 
 ```txt
 CONTENT_SAMPLE_SIZE=all
 MAX_CONTENT_ITEMS=250
+```
+
+Instagram performance fields are manual:
+
+```json
+"performance": {
+  "avgEngagementRate": 4.9,
+  "avgViews": 22200,
+  "reachRate": 73,
+  "source": "manual"
+}
 ```
 
 ## Local preview
@@ -144,23 +154,7 @@ sips -Z 900 --setProperty format jpeg --setProperty formatOptions 82 assets/feat
 
 ## Cost estimate
 
-Current all-time refresh at account size around 35 IG posts + 140 TikTok videos:
-
-```txt
-~$0.30–$0.31 per manual refresh
-```
-
-If daily:
-
-```txt
-~$9–10/month
-```
-
-With the current biweekly schedule:
-
-```txt
-~$0.60–$0.62/month, plus any manual refreshes
-```
+Current refreshes no longer scrape Instagram content-performance items. A manual refresh updates Instagram profile stats and TikTok stats/performance, so Apify cost should be lower than the previous all-content Instagram + TikTok estimate and depends on the configured actor pricing and TikTok sample size.
 
 ## Avoid committing secrets
 

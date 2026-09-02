@@ -8,49 +8,34 @@ Pushes to `main` deploy the site to GitHub Pages.
 git push origin main
 ```
 
-Normal pushes do **not** refresh stats.
+The deploy workflow only generates static HTML from committed data and deploys it.
 
-## Updating stats
+## Updating site content and stats
 
-Instagram and TikTok stats are manual only.
+All media-kit content and stats are manual and live in:
+
+```txt
+data/site.json
+```
 
 To update them:
 
-1. Edit `data/stats.json`.
+1. Edit `data/site.json`.
 2. Commit the change.
-3. Push to `main`, or run the GitHub Pages deploy workflow manually.
+3. Push to `main`.
 
-The GitHub Actions workflow deploys only. It does not call Apify, official APIs, or `scripts/update-stats.mjs`.
+GitHub Actions runs:
 
-## GitHub secrets
-
-No GitHub Actions secrets are required for deployment. Social stats are not refreshed automatically.
-
-Current Instagram performance fields are manual:
-
-```json
-"performance": {
-  "avgEngagementRate": 4.9,
-  "avgViews": 22200,
-  "reachRate": 73,
-  "source": "manual"
-}
+```bash
+node scripts/build-site.mjs
 ```
 
-Current TikTok performance fields are manual:
-
-```json
-"performance": {
-  "totalViews": 2200000,
-  "engagementRate": 3.5,
-  "profileViews": 39900,
-  "source": "manual"
-}
-```
+That generates `index.html` before upload. Social stats are never refreshed automatically.
 
 ## Local preview
 
 ```bash
+node scripts/build-site.mjs
 python3 -m http.server 8080
 ```
 
@@ -83,6 +68,7 @@ DNS setup should include GitHub Pages apex A records and a `www` CNAME to `meeoh
 Files:
 
 ```txt
+links/index.template.html
 links/index.html
 links/styles.css
 ```
@@ -104,33 +90,23 @@ Design rules:
 - Keep it compact and fitting in the viewport without scroll where possible.
 - Use `assets/natasha-avatar.jpg`.
 - Use subtle pink/white icon cards with black/outline glyphs, not bright gradients.
-- Bump the query string in `links/index.html` when changing `links/styles.css`.
+- Bump the query string in `links/index.template.html` when changing `links/styles.css`, then regenerate.
 
 ## Updating partner logos
 
-Partner logos live in `assets/brands/` and are referenced twice in `index.html` because the carousel repeats one logo set for seamless scrolling.
-
-Current partner list:
-
-```txt
-GolfNorth
-GrooveIt
-PUR3 Golf
-Trust Golf Ball
-Transcend Golf Simulators
-SeeMore Putter Company
-```
+Partner logos live in `assets/brands/` and are referenced twice in `index.template.html` because the carousel repeats one logo set for seamless scrolling.
 
 When replacing a partner logo:
 
 1. Add the optimized local asset under `assets/brands/`.
-2. Update both repeated carousel logo sets in `index.html`.
+2. Update both repeated carousel logo sets in `index.template.html`.
 3. Add or adjust a logo-specific CSS class in `styles.css` for alignment/sizing.
-4. Preview locally and verify the logo is visually aligned in the carousel before pushing.
+4. Run `node scripts/build-site.mjs`.
+5. Preview locally and verify the logo is visually aligned in the carousel before pushing.
 
 ## Adding featured posts
 
-1. Add item to `data/featured-posts.json`:
+Featured posts live in the `featuredPosts` array in `data/site.json`:
 
 ```json
 {
@@ -142,35 +118,20 @@ When replacing a partner logo:
 }
 ```
 
-2. Download thumbnail locally. For Instagram posts/reels, this often works with `/p/SHORTCODE/` even when the public URL is `/reels/SHORTCODE/`:
+Then add/download the thumbnail locally. For Instagram posts/reels, this often works with `/p/SHORTCODE/` even when the public URL is `/reels/SHORTCODE/`:
 
 ```bash
 curl -L "https://www.instagram.com/p/SHORTCODE/media/?size=l" -o assets/featured/SHORTCODE.jpg
 ```
 
-3. Optimize image:
+Optimize image:
 
 ```bash
 sips -Z 900 --setProperty format jpeg --setProperty formatOptions 82 assets/featured/SHORTCODE.jpg --out assets/featured/SHORTCODE.jpg
 ```
 
-4. For TikTok thumbnails, use TikTok oEmbed to find `thumbnail_url`, download it locally, then optimize with `sips`.
-
-5. Commit JSON + image.
-
-## Cost estimate
-
-The deploy workflow no longer runs Apify or official social APIs, so normal deploys have no social-scraping cost.
+For TikTok thumbnails, use the post thumbnail URL from TikTok/oEmbed or another manual source, download it locally, then optimize with `sips`.
 
 ## Avoid committing secrets
 
-Never commit:
-
-```txt
-APIFY_TOKEN
-access tokens
-refresh tokens
-client secrets
-```
-
-Secrets belong only in GitHub Actions secrets.
+Never commit access tokens, refresh tokens, or client secrets.

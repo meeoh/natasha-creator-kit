@@ -189,6 +189,7 @@ h1 {
   color: #34312e;
   font-size: 16px;
   line-height: 1.55;
+  white-space: pre-line;
 }
 .profile-cta { margin-top: 2px; }
 

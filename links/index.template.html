@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Natasha Golfing links for Instagram, TikTok, media kit, and collabs." />
-    <title>Natasha Golfing Links</title>
+    <meta name="description" content="{{profile.name}} links for Instagram, TikTok, media kit, and collabs." />
+    <title>{{profile.name}} Links</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -12,33 +12,33 @@
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>
-    <main class="links-shell" aria-label="Natasha Golfing links">
+    <main class="links-shell" aria-label="{{profile.name}} links">
       <section class="links-card">
         <div class="avatar-wrap">
-          <img src="../assets/natasha-avatar.jpg" alt="Natasha Golfing" />
+          <img src="../{{profile.avatar}}" alt="{{profile.name}}" />
         </div>
 
-        <h1>Natasha Golfing</h1>
-        <p class="intro">Golf girlie learning, styling, and sharing the journey ⛳️✨</p>
+        <h1>{{profile.name}}</h1>
+        <p class="intro">{{profile.linksIntro}}</p>
 
         <div class="link-stack">
-          <a class="link-button instagram" href="https://instagram.com/natashagolfing" target="_blank" rel="noreferrer">
+          <a class="link-button instagram" href="{{profile.instagramUrl}}" target="_blank" rel="noreferrer">
             <span class="link-icon">◎</span>
             <span>
               <strong>Instagram</strong>
-              <small>@natashagolfing</small>
+              <small>@{{stats.instagram.username}}</small>
             </span>
           </a>
 
-          <a class="link-button tiktok" href="https://www.tiktok.com/@natashagolfing" target="_blank" rel="noreferrer">
+          <a class="link-button tiktok" href="{{profile.tiktokUrl}}" target="_blank" rel="noreferrer">
             <span class="link-icon">♪</span>
             <span>
               <strong>TikTok</strong>
-              <small>@natashagolfing</small>
+              <small>@{{stats.tiktok.username}}</small>
             </span>
           </a>
 
-          <a class="link-button media-kit" href="https://natashagolfing.com/">
+          <a class="link-button media-kit" href="{{profile.siteUrl}}">
             <span class="link-icon">✦</span>
             <span>
               <strong>Media kit</strong>
@@ -46,7 +46,7 @@
             </span>
           </a>
 
-          <a class="link-button email" href="mailto:natashagolfing@gmail.com">
+          <a class="link-button email" href="mailto:{{profile.email}}">
             <span class="link-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" focusable="false">
                 <rect x="4" y="6.5" width="16" height="11" rx="1.8" />
@@ -55,7 +55,7 @@
             </span>
             <span>
               <strong>Collabs</strong>
-              <small>natashagolfing@gmail.com</small>
+              <small>{{profile.email}}</small>
             </span>
           </a>
         </div>

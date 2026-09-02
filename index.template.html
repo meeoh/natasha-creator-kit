@@ -17,18 +17,16 @@
         <div class="left-rail">
         <section class="profile-panel">
           <div class="profile-image-card">
-            <img src="assets/natasha-avatar.jpg" alt="Natasha Golfing profile" />
+            <img src="{{profile.avatar}}" alt="{{profile.name}} profile" />
             <div class="image-badge">Golf · Lifestyle · UGC</div>
           </div>
 
           <div class="profile-copy">
             <p class="eyebrow">Media kit</p>
-            <h1>Natasha Golfing</h1>
-            <p class="location">Canada · Golf content creator</p>
-            <p class="bio">I’m Natasha, a golf content creator documenting the journey from beginner to better — the good shots, the bad shots, the lessons, and everything in between.
-
-I partner with brands to create content for paid media, organic social, and everything in between. If you’re looking for content that feels natural to the golf community, let’s work together!</p>
-            <a class="primary-button profile-cta" href="mailto:natashagolfing@gmail.com">Contact for collabs</a>
+            <h1>{{profile.name}}</h1>
+            <p class="location">{{profile.location}} · {{profile.category}}</p>
+            <p class="bio">{{profile.bio}}</p>
+            <a class="primary-button profile-cta" href="mailto:{{profile.email}}">Contact for collabs</a>
           </div>
         </section>
 
@@ -45,13 +43,13 @@ I partner with brands to create content for paid media, organic social, and ever
                 <span class="platform-icon">◎</span>
                 <div>
                   <p class="mini-label">Instagram</p>
-                  <a href="https://instagram.com/natashagolfing" target="_blank" rel="noreferrer">@natashagolfing</a>
+                  <a href="{{profile.instagramUrl}}" target="_blank" rel="noreferrer">@{{stats.instagram.username}}</a>
                 </div>
               </div>
               <div class="metric-row">
                 <div class="mini-stat hero-stat">
                   <span>Followers</span>
-                  <strong>6.6K</strong>
+                  <strong>{{stats.instagram.followers}}</strong>
                 </div>
                 <div class="mini-stat">
                   <div class="metric-label">
@@ -64,15 +62,15 @@ I partner with brands to create content for paid media, organic social, and ever
                       </span>
                     </button>
                   </div>
-                  <strong>4.9%</strong>
+                  <strong>{{stats.instagram.avgEngagementRate}}</strong>
                 </div>
                 <div class="mini-stat">
                   <span>Avg views</span>
-                  <strong>22.2K</strong>
+                  <strong>{{stats.instagram.avgViews}}</strong>
                 </div>
                 <div class="mini-stat">
                   <span>Reach rate</span>
-                  <strong>73%</strong>
+                  <strong>{{stats.instagram.reachRate}}</strong>
                 </div>
               </div>
             </article>
@@ -82,25 +80,25 @@ I partner with brands to create content for paid media, organic social, and ever
                 <span class="platform-icon">♪</span>
                 <div>
                   <p class="mini-label">TikTok</p>
-                  <a href="https://www.tiktok.com/@natashagolfing" target="_blank" rel="noreferrer">@natashagolfing</a>
+                  <a href="{{profile.tiktokUrl}}" target="_blank" rel="noreferrer">@{{stats.tiktok.username}}</a>
                 </div>
               </div>
               <div class="metric-row">
                 <div class="mini-stat hero-stat">
                   <span>Followers</span>
-                  <strong>2.3K</strong>
+                  <strong>{{stats.tiktok.followers}}</strong>
                 </div>
                 <div class="mini-stat">
                   <span>Total views</span>
-                  <strong>2.2M</strong>
+                  <strong>{{stats.tiktok.totalViews}}</strong>
                 </div>
                 <div class="mini-stat">
                   <span>Engagement rate</span>
-                  <strong>3.5%</strong>
+                  <strong>{{stats.tiktok.engagementRate}}</strong>
                 </div>
                 <div class="mini-stat">
                   <span>Profile views</span>
-                  <strong>39.9K</strong>
+                  <strong>{{stats.tiktok.profileViews}}</strong>
                 </div>
               </div>
             </article>
@@ -117,7 +115,7 @@ I partner with brands to create content for paid media, organic social, and ever
                   <div class="audience-card-head">
                     <h4>Gender</h4>
                   </div>
-                  <div class="gender-arc-wrap" aria-label="Gender split: men 52 percent, women 48 percent">
+                  <div class="gender-arc-wrap" aria-label="Gender split: men {{audience.gender.men}} percent, women {{audience.gender.women}} percent">
                     <svg class="gender-arc" viewBox="0 0 260 150" role="img" aria-hidden="true">
                       <path class="gender-arc-base" d="M 30 120 A 100 100 0 0 1 230 120" pathLength="100" />
                       <path class="gender-arc-men" d="M 30 120 A 100 100 0 0 1 230 120" pathLength="100" />
@@ -126,11 +124,11 @@ I partner with brands to create content for paid media, organic social, and ever
                   <div class="audience-legend">
                     <div class="audience-legend-row">
                       <span><i class="dot men-dot"></i>Men</span>
-                      <strong>52%</strong>
+                      <strong>{{audience.gender.menPercent}}</strong>
                     </div>
                     <div class="audience-legend-row">
                       <span><i class="dot women-dot"></i>Women</span>
-                      <strong>48%</strong>
+                      <strong>{{audience.gender.womenPercent}}</strong>
                     </div>
                   </div>
                 </div>
@@ -140,11 +138,7 @@ I partner with brands to create content for paid media, organic social, and ever
                     <h4>Age</h4>
                   </div>
                   <div class="age-bars" aria-label="Age split: 18 to 24 15.6 percent, 25 to 34 40.4 percent, 35 to 44 22.5 percent, 45 to 54 12.3 percent, 55 plus 9.2 percent">
-                    <div class="age-row" style="--value: 15.6%"><div class="age-meta"><span>18–24</span><strong>15.6%</strong></div><div class="age-track"><i></i></div></div>
-                    <div class="age-row" style="--value: 40.4%"><div class="age-meta"><span>25–34</span><strong>40.4%</strong></div><div class="age-track"><i></i></div></div>
-                    <div class="age-row" style="--value: 22.5%"><div class="age-meta"><span>35–44</span><strong>22.5%</strong></div><div class="age-track"><i></i></div></div>
-                    <div class="age-row" style="--value: 12.3%"><div class="age-meta"><span>45–54</span><strong>12.3%</strong></div><div class="age-track"><i></i></div></div>
-                    <div class="age-row" style="--value: 9.2%"><div class="age-meta"><span>55+</span><strong>9.2%</strong></div><div class="age-track"><i></i></div></div>
+{{audience.ageRows}}
                   </div>
                 </div>
               </div>
@@ -218,102 +212,7 @@ I partner with brands to create content for paid media, organic social, and ever
               </div>
 
               <div class="featured-grid">
-                <a class="featured-post-card has-image" data-category="products" href="https://www.instagram.com/p/DZ_Z4OWtHVO/?hl=en" target="_blank" rel="noreferrer">
-                  <img src="assets/featured/DZ_Z4OWtHVO.jpg" alt="Product feature" loading="lazy" />
-                  <span class="post-platform">Instagram</span>
-                  <span class="post-category">Products</span>
-                  <span class="post-open">View post ↗</span>
-                </a>
-                <a class="featured-post-card has-image" data-category="products" href="https://www.instagram.com/p/DZPxSoUxpm6/?hl=en" target="_blank" rel="noreferrer">
-                  <img src="assets/featured/DZPxSoUxpm6.jpg" alt="Product feature" loading="lazy" />
-                  <span class="post-platform">Instagram</span>
-                  <span class="post-category">Products</span>
-                  <span class="post-open">View post ↗</span>
-                </a>
-                <a class="featured-post-card has-image" data-category="products" href="https://www.tiktok.com/@natashagolfing/video/7632421241474862343?_r=1&amp;_t=ZS-97juxsKcEJb" target="_blank" rel="noreferrer">
-                  <img src="assets/featured/7632421241474862343.jpg" alt="Product feature" loading="lazy" />
-                  <span class="post-platform">TikTok</span>
-                  <span class="post-category">Products</span>
-                  <span class="post-open">View post ↗</span>
-                </a>
-                <a class="featured-post-card has-image" data-category="products" href="https://www.instagram.com/reels/DaOOTzGhwm1/" target="_blank" rel="noreferrer">
-                  <img src="assets/featured/DaOOTzGhwm1.jpg" alt="Product feature" loading="lazy" />
-                  <span class="post-platform">Instagram</span>
-                  <span class="post-category">Products</span>
-                  <span class="post-open">View post ↗</span>
-                </a>
-                <a class="featured-post-card has-image" data-category="products" href="https://www.instagram.com/p/Dbihh_YxNe-/" target="_blank" rel="noreferrer">
-                  <img src="assets/featured/Dbihh_YxNe-.jpg" alt="Product feature" loading="lazy" />
-                  <span class="post-platform">Instagram</span>
-                  <span class="post-category">Products</span>
-                  <span class="post-open">View post ↗</span>
-                </a>
-                <a class="featured-post-card has-image" data-category="play" href="https://www.instagram.com/p/DYdI7NzHb13/?hl=en" target="_blank" rel="noreferrer">
-                  <img src="assets/featured/DYdI7NzHb13.jpg" alt="Golf play moment" loading="lazy" />
-                  <span class="post-platform">Instagram</span>
-                  <span class="post-category">Play</span>
-                  <span class="post-open">View post ↗</span>
-                </a>
-                <a class="featured-post-card has-image" data-category="play" href="https://www.instagram.com/p/DZBflphMDuF/?hl=en" target="_blank" rel="noreferrer">
-                  <img src="assets/featured/DZBflphMDuF.jpg" alt="Golf play moment" loading="lazy" />
-                  <span class="post-platform">Instagram</span>
-                  <span class="post-category">Play</span>
-                  <span class="post-open">View post ↗</span>
-                </a>
-                <a class="featured-post-card has-image" data-category="play" href="https://www.instagram.com/reels/DZn_d5lhGHX/" target="_blank" rel="noreferrer">
-                  <img src="assets/featured/DZn_d5lhGHX.jpg" alt="Golf play moment" loading="lazy" />
-                  <span class="post-platform">Instagram</span>
-                  <span class="post-category">Play</span>
-                  <span class="post-open">View post ↗</span>
-                </a>
-                <a class="featured-post-card has-image" data-category="play" href="https://www.tiktok.com/@natashagolfing/photo/7589137311741267207?_r=1&amp;_t=ZS-97jv1xUFB4S&amp;image_index=2" target="_blank" rel="noreferrer">
-                  <img src="assets/featured/7589137311741267207.jpg" alt="Golf play moment" loading="lazy" />
-                  <span class="post-platform">TikTok</span>
-                  <span class="post-category">Play</span>
-                  <span class="post-open">View post ↗</span>
-                </a>
-                <a class="featured-post-card has-image" data-category="play" href="https://www.tiktok.com/@natashagolfing/video/7635450570861579527?_r=1&amp;_t=ZS-97jv0ZZlEfA" target="_blank" rel="noreferrer">
-                  <img src="assets/featured/7635450570861579527.jpg" alt="Golf play moment" loading="lazy" />
-                  <span class="post-platform">TikTok</span>
-                  <span class="post-category">Play</span>
-                  <span class="post-open">View post ↗</span>
-                </a>
-                <a class="featured-post-card has-image" data-category="entertainment" href="https://www.instagram.com/p/DZXToHtx6LJ/?hl=en" target="_blank" rel="noreferrer">
-                  <img src="assets/featured/DZXToHtx6LJ.jpg" alt="Entertainment post" loading="lazy" />
-                  <span class="post-platform">Instagram</span>
-                  <span class="post-category">Personality</span>
-                  <span class="post-open">View post ↗</span>
-                </a>
-                <a class="featured-post-card has-image" data-category="entertainment" href="https://www.instagram.com/p/DZyUp7RPHfw/?hl=en" target="_blank" rel="noreferrer">
-                  <img src="assets/featured/DZyUp7RPHfw.jpg" alt="Entertainment post" loading="lazy" />
-                  <span class="post-platform">Instagram</span>
-                  <span class="post-category">Personality</span>
-                  <span class="post-open">View post ↗</span>
-                </a>
-                <a class="featured-post-card has-image" data-category="entertainment" href="https://www.instagram.com/p/DXdIXD6Dc14/?hl=en" target="_blank" rel="noreferrer">
-                  <img src="assets/featured/DXdIXD6Dc14.jpg" alt="Entertainment post" loading="lazy" />
-                  <span class="post-platform">Instagram</span>
-                  <span class="post-category">Personality</span>
-                  <span class="post-open">View post ↗</span>
-                </a>
-                <a class="featured-post-card has-image" data-category="places" href="https://www.instagram.com/p/Dbf6AlBxIib/" target="_blank" rel="noreferrer">
-                  <img src="assets/featured/Dbf6AlBxIib.jpg" alt="Places post" loading="lazy" />
-                  <span class="post-platform">Instagram</span>
-                  <span class="post-category">Places</span>
-                  <span class="post-open">View post ↗</span>
-                </a>
-                <a class="featured-post-card has-image" data-category="places" href="https://www.instagram.com/p/DaaYbVPxy8-/" target="_blank" rel="noreferrer">
-                  <img src="assets/featured/DaaYbVPxy8-.jpg" alt="Places post" loading="lazy" />
-                  <span class="post-platform">Instagram</span>
-                  <span class="post-category">Places</span>
-                  <span class="post-open">View post ↗</span>
-                </a>
-                <a class="featured-post-card has-image" data-category="places" href="https://www.instagram.com/p/DZ43mtZxYMU/" target="_blank" rel="noreferrer">
-                  <img src="assets/featured/DZ43mtZxYMU.jpg" alt="Places post" loading="lazy" />
-                  <span class="post-platform">Instagram</span>
-                  <span class="post-category">Places</span>
-                  <span class="post-open">View post ↗</span>
-                </a>
+{{featuredPosts}}
               </div>
             </article>
           </div>

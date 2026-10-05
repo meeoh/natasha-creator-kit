@@ -80,6 +80,7 @@ Instagram
 TikTok
 Media kit
 Collabs
+Rapsodo (affiliate link)
 ```
 
 The Collabs link is a plain `mailto:` link. It uses default browser/device behavior. If clicking it appears to do nothing, the visitor probably does not have a default mail app/handler configured.
@@ -90,6 +91,7 @@ Design rules:
 - Keep it compact and fitting in the viewport without scroll where possible.
 - Use `assets/natasha-avatar.jpg`.
 - Use subtle pink/white icon cards with black/outline glyphs, not bright gradients.
+- All link icons are inline outline SVGs from one style (Tabler-style: 24px grid, round caps/joins, shared stroke width in CSS). Don't mix in emoji/unicode glyphs or icons from other sets.
 - Bump the query string in `links/index.template.html` when changing `links/styles.css`, then regenerate.
 
 ## Updating partner logos

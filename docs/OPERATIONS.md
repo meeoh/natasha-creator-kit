@@ -81,6 +81,7 @@ TikTok
 Media kit
 Collabs
 Rapsodo (affiliate link)
+Hazard Hunters (affiliate link)
 ```
 
 The Collabs link is a plain `mailto:` link. It uses default browser/device behavior. If clicking it appears to do nothing, the visitor probably does not have a default mail app/handler configured.

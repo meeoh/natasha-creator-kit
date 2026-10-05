@@ -14,10 +14,10 @@
 * { box-sizing: border-box; }
 html { height: 100%; }
 body {
-  height: 100vh;
-  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
   margin: 0;
-  overflow: hidden;
+  overflow-x: hidden;
   color: var(--ink);
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   background:
@@ -43,8 +43,8 @@ body {
   position: relative;
   z-index: 1;
   width: min(100% - 28px, 540px);
-  height: 100vh;
-  height: 100dvh;
+  min-height: 100vh;
+  min-height: 100dvh;
   margin: 0 auto;
   padding: 14px 0;
   display: grid;
@@ -53,7 +53,6 @@ body {
 
 .links-card {
   width: 100%;
-  max-height: calc(100dvh - 28px);
   position: relative;
   overflow: hidden;
   border: 1px solid var(--line);
@@ -78,7 +77,7 @@ body {
 }
 
 .avatar-wrap {
-  width: clamp(106px, 17dvh, 140px);
+  width: clamp(100px, 15dvh, 140px);
   aspect-ratio: 1;
   margin: 0 auto clamp(14px, 2.2dvh, 20px);
   position: relative;
@@ -125,11 +124,11 @@ h1 {
 
 .link-stack {
   display: grid;
-  gap: clamp(8px, 1.4dvh, 12px);
+  gap: clamp(8px, 1.2dvh, 12px);
 }
 
 .link-button {
-  min-height: clamp(58px, 9dvh, 70px);
+  min-height: clamp(54px, 7.4dvh, 66px);
   position: relative;
   display: grid;
   grid-template-columns: auto 1fr;
@@ -212,7 +211,6 @@ h1 {
   }
 
   .links-card {
-    max-height: calc(100dvh - 16px);
     border-radius: 28px;
     padding: clamp(16px, 2.6dvh, 22px) 18px;
   }
@@ -233,7 +231,7 @@ h1 {
   .link-icon { border-radius: 16px; }
 }
 
-@media (max-height: 680px) {
+@media (max-height: 760px) {
   .links-card { padding-top: 16px; padding-bottom: 16px; }
   .links-card::before { inset: 9px; }
   .avatar-wrap { width: 92px; border-width: 6px; }
@@ -247,11 +245,18 @@ h1 {
   .link-button small { font-size: 12px; }
 }
 
-@media (max-height: 560px) {
+@media (max-height: 620px) {
   .links-card { padding-top: 12px; padding-bottom: 12px; }
   .avatar-wrap { width: 74px; margin-bottom: 8px; }
   h1 { font-size: 30px; }
   .intro { margin: 8px auto 10px; }
   .link-button { min-height: 50px; }
   .link-icon { width: 36px; height: 36px; }
+}
+
+@media (min-width: 521px) and (max-height: 860px) and (min-height: 761px) {
+  .links-card { padding-top: 18px; padding-bottom: 18px; }
+  .avatar-wrap { width: 108px; margin-bottom: 12px; }
+  h1 { font-size: 40px; }
+  .intro { margin: 10px auto 14px; }
 }

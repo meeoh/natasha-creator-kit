@@ -562,7 +562,28 @@ h1 {
   transform: translateY(var(--logo-y, 0));
 }
 .brand-logo-tile-golfnorth { --logo-y: 2px; }
-.brand-logo-tile-grooveit { --logo-y: 1px; }
+.brand-logo-tile-golftown {
+  width: 130px;
+  padding-inline: 0;
+}
+.brand-logo-tile-golftown img {
+  max-height: 66px;
+}
+.brand-logo-tile-awesomegolf {
+  --logo-y: -1px;
+  width: 228px;
+  padding-inline: 0;
+}
+.brand-logo-tile-awesomegolf img {
+  max-height: 42px;
+}
+.brand-logo-tile-rapsodo {
+  width: 170px;
+  padding-inline: 0;
+}
+.brand-logo-tile-rapsodo img {
+  max-height: 40px;
+}
 .brand-logo-tile-pur3 {
   --logo-y: -1px;
   width: 190px;

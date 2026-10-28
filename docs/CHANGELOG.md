@@ -1,5 +1,11 @@
 # Changelog / Work Completed
 
+## Partner carousel update
+
+- Added Golf Town, Awesome Golf, and Rapsodo logos to the partner carousel (`assets/brands/golf-town.png`, `awesome-golf.svg`, `rapsodo.svg`).
+- Removed GrooveIt from the partner carousel.
+- Awesome Golf SVG is the official logo recolored from white to `#191817` for the light background.
+
 ## Static one-source content update
 
 - Added `data/site.json` as the single editable source of truth for media-kit profile copy, stats, audience values, and featured posts.

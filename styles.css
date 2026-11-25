@@ -320,6 +320,7 @@ h2 {
   color: #fff;
   font-size: 14px;
   font-weight: 700;
+  white-space: nowrap;
   opacity: 0;
   pointer-events: none;
   transform: translate(-50%, 8px);

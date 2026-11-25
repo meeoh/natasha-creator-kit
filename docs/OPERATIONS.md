@@ -30,7 +30,7 @@ GitHub Actions runs:
 node scripts/build-site.mjs
 ```
 
-That generates `index.html` before upload. Social stats are never refreshed automatically.
+That generates `index.html` (links page) and `mediakit/index.html` before upload. Social stats are never refreshed automatically.
 
 ## Local preview
 
@@ -43,7 +43,7 @@ Open:
 
 ```txt
 http://localhost:8080
-http://localhost:8080/links/
+http://localhost:8080/mediakit/
 ```
 
 ## Custom domain
@@ -57,53 +57,54 @@ natashagolfing.com
 GitHub Pages should serve:
 
 ```txt
-https://natashagolfing.com/
-https://natashagolfing.com/links
+https://natashagolfing.com/           links page
+https://natashagolfing.com/mediakit/  media kit
+https://natashagolfing.com/links      redirects to /
 ```
 
 DNS setup should include GitHub Pages apex A records and a `www` CNAME to `meeoh.github.io`. Enable `Enforce HTTPS` in GitHub Pages after DNS verification.
 
-## `/links` page
+## Links page (`/`)
 
 Files:
 
 ```txt
-links/index.template.html
-links/index.html
-links/styles.css
+index.template.html
+index.html
+styles.css
+links/index.html   redirect from /links to /, not generated
 ```
 
-Current links, in order:
+Layout, top to bottom:
 
 ```txt
-Instagram
-TikTok
-Media kit
-Collabs
-Rapsodo (affiliate link)
-Hazard Hunters (affiliate link)
+Avatar, name, intro
+Icon row: Instagram, TikTok, YouTube, Email (no text, aria-labels only)
+Media kit card → /mediakit/
+"Codes and affiliate links" section
 ```
 
-The Collabs link is a plain `mailto:` link. It uses default browser/device behavior. If clicking it appears to do nothing, the visitor probably does not have a default mail app/handler configured.
+The codes and affiliate links come from `affiliateLinks` in `data/site.json`: `name`, optional `region`, `url`, optional `code`, `logo` (a square brand mark in `assets/brands/*-icon.png`) and optional `logoFill` for logos that are already a full app icon. A card with a code shows it and gets a copy button; tapping the card itself also copies the code before opening the store.
+
+The Email icon is a plain `mailto:` link. If clicking it appears to do nothing, the visitor probably does not have a default mail app/handler configured.
 
 Design rules:
 
-- Match the media kit design.
-- Keep it compact and fitting in the viewport without scroll where possible.
+- Green theme (`--green: #2f7a4a`), Helvetica font stack, no web fonts.
 - Use `assets/natasha-avatar.jpg`.
-- Use subtle pink/white icon cards with black/outline glyphs, not bright gradients.
-- All link icons are inline outline SVGs from one style (Tabler-style: 24px grid, round caps/joins, shared stroke width in CSS). Don't mix in emoji/unicode glyphs or icons from other sets.
-- Bump the query string in `links/index.template.html` when changing `links/styles.css`, then regenerate.
+- Use subtle green/white icon tiles with black/outline glyphs, not bright gradients.
+- All glyph icons are inline outline SVGs from one style (Tabler-style: 24px grid, round caps/joins, shared stroke width in CSS). Don't mix in emoji/unicode glyphs or icons from other sets. Brand cards use the company's real logo.
+- Bump the query string in `index.template.html` when changing `styles.css`, then regenerate.
 
 ## Updating partner logos
 
-Partner logos live in `assets/brands/` and are referenced twice in `index.template.html` because the carousel repeats one logo set for seamless scrolling.
+Partner logos live in `assets/brands/` and are referenced twice in `mediakit/index.template.html` because the carousel repeats one logo set for seamless scrolling.
 
 When replacing a partner logo:
 
 1. Add the optimized local asset under `assets/brands/`.
-2. Update both repeated carousel logo sets in `index.template.html`.
-3. Add or adjust a logo-specific CSS class in `styles.css` for alignment/sizing.
+2. Update both repeated carousel logo sets in `mediakit/index.template.html`.
+3. Add or adjust a logo-specific CSS class in `mediakit/styles.css` for alignment/sizing.
 4. Run `node scripts/build-site.mjs`.
 5. Preview locally and verify the logo is visually aligned in the carousel before pushing.
 

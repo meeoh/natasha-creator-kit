@@ -2,11 +2,12 @@
 
 ## Purpose
 
-A static GitHub Pages media kit for Natasha Golfing:
+A static GitHub Pages links page and media kit for Natasha Golfing:
 
 ```txt
-https://natashagolfing.com/
-https://natashagolfing.com/links
+https://natashagolfing.com/           links page
+https://natashagolfing.com/mediakit/  media kit
+https://natashagolfing.com/links      redirects to /
 ```
 
 The site is intentionally simple: committed data generates static HTML, and deployed pages do not fetch profile/stats data in the browser.
@@ -25,6 +26,7 @@ This includes:
 - Instagram and TikTok display stats
 - audience gender/age values
 - featured post metadata
+- codes and affiliate links on the links page
 
 When changing bio, stats, audience, or featured posts, edit `data/site.json` only, then run:
 
@@ -38,24 +40,25 @@ The GitHub Pages workflow also runs that build command before deploy, so pushing
 
 Instagram and TikTok stats are manual only. Do not add automatic social refresh jobs or client-side JSON fetches for visible stats/profile content.
 
-There should be no flash of stale placeholder content. The visible media-kit content should be present in the generated static `index.html`.
+There should be no flash of stale placeholder content. The visible content should be present in the generated static `index.html` and `mediakit/index.html`.
 
 ## Main files
 
 ```txt
 data/site.json             One editable source of truth for media-kit content/stats
-index.template.html         HTML template used by the generator
-scripts/build-site.mjs      Generates index.html from data/site.json
-index.html                  Generated static media-kit page
-styles.css                  Media-kit styling
-script.js                   Small interaction-only JS for filters/carousel sizing
-links/index.template.html   Links-page HTML template
-links/index.html            Generated Linktree-style links page
-links/styles.css            Links page styling
+scripts/build-site.mjs      Generates both pages from data/site.json
+index.template.html         Links-page HTML template
+index.html                  Generated Linktree-style links page (site root)
+styles.css                  Links page styling
+mediakit/index.template.html Media-kit HTML template
+mediakit/index.html         Generated static media-kit page
+mediakit/styles.css         Media-kit styling
+mediakit/script.js          Small interaction-only JS for filters/carousel sizing
+links/index.html            Hand-written redirect from /links to /
 CNAME                       Custom domain for GitHub Pages
 .github/workflows/pages.yml GitHub Pages deploy + static generation
-assets/natasha-avatar.jpg   Cropped square avatar used by media kit and /links
-assets/brands/*             Local partner carousel logos
+assets/natasha-avatar.jpg   Cropped square avatar used by both pages
+assets/brands/*             Local partner carousel logos and *-icon.png brand marks for link cards
 assets/featured/*.jpg       Optimized featured post thumbnails
 ```
 
@@ -94,23 +97,23 @@ Open:
 
 ```txt
 http://localhost:8080
-http://localhost:8080/links/
+http://localhost:8080/mediakit/
 ```
 
 ## Design notes
 
-- Warm cream/white/blush media-kit design.
+- Green/white design on both pages (`--green: #2f7a4a`), Helvetica font stack, no web fonts.
 - No top nav/header.
 - Left profile card is sticky on desktop.
 - CTA label: `Contact for collabs`.
-- The `/links` page is generated from `links/index.template.html`, intentionally has no JS, and uses plain `mailto:` for collabs.
-- Partner carousel logos are duplicated in `index.template.html` for seamless scrolling.
+- The links page at `/` is generated from `index.template.html`; its only JS is a small inline copy-code handler, and email is a plain `mailto:`.
+- Partner carousel logos are duplicated in `mediakit/index.template.html` for seamless scrolling.
 - Featured post filtering is static HTML plus interaction-only JS.
 
 ## Future maintenance rules
 
 - Edit `data/site.json` for content/stats changes.
-- Edit `index.template.html` for layout/markup changes, then regenerate `index.html`.
-- Edit `styles.css` for media-kit styles.
+- Edit `index.template.html` / `mediakit/index.template.html` for layout/markup changes, then regenerate.
+- Edit `styles.css` for links-page styles, `mediakit/styles.css` for media-kit styles.
 - Keep social stats manual unless explicitly asked to build a different workflow.
 - Do not commit secrets.

@@ -1,11 +1,13 @@
 # Natasha Creator Kit
 
-A static creator/media kit for Natasha Golfing, served at:
+A static links page and media kit for Natasha Golfing, served at:
 
 ```txt
-https://natashagolfing.com/
-https://natashagolfing.com/links
+https://natashagolfing.com/           links page
+https://natashagolfing.com/mediakit/  media kit
 ```
+
+`https://natashagolfing.com/links` redirects to `/` so older shared links keep working.
 
 ## Editing site content
 
@@ -21,7 +23,7 @@ To update the site:
 2. Commit the change.
 3. Push to `main`.
 
-GitHub Pages runs `node scripts/build-site.mjs`, which generates static `index.html` from `data/site.json` before deploying. There is no client-side stats/profile fetch, so the page does not flash old placeholder content.
+GitHub Pages runs `node scripts/build-site.mjs`, which generates static `index.html` and `mediakit/index.html` from `data/site.json` before deploying. There is no client-side stats/profile fetch, so the page does not flash old placeholder content.
 
 ## No automatic social stats updates
 
@@ -29,12 +31,13 @@ Instagram and TikTok stats are manual only. This repo only generates static HTML
 
 ## Files
 
-- `data/site.json` — one editable source of truth for media-kit content and stats
-- `index.template.html` — media-kit HTML template
-- `links/index.template.html` — links-page HTML template
+- `data/site.json` — one editable source of truth for content, stats, and the codes/affiliate links
+- `index.template.html` — links-page HTML template
+- `mediakit/index.template.html` — media-kit HTML template
 - `scripts/build-site.mjs` — local/GitHub Pages generator from `data/site.json` to static HTML
-- `index.html`, `styles.css`, `script.js` — generated/static media kit page and interaction styling/JS
-- `links/index.html`, `links/styles.css` — generated/static Linktree-style links page and styling
+- `index.html`, `styles.css` — generated Linktree-style links page and its styling
+- `mediakit/index.html`, `mediakit/styles.css`, `mediakit/script.js` — generated media kit page and its styling/JS
+- `links/index.html` — hand-written redirect from `/links` to `/`
 - `assets/` — images, partner logos, and featured thumbnails
 - `CNAME` — custom domain for `natashagolfing.com`
 - `.github/workflows/pages.yml` — GitHub Pages deploy
@@ -52,7 +55,7 @@ Open:
 
 ```txt
 http://localhost:8080
-http://localhost:8080/links/
+http://localhost:8080/mediakit/
 ```
 
 ## GitHub Pages deploy

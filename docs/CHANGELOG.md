@@ -1,5 +1,12 @@
 # Changelog / Work Completed
 
+## Links page becomes the homepage
+
+- The links page now lives at `/`, the media kit at `/mediakit/`; `/links` redirects to `/`.
+- Instagram, TikTok, YouTube (@natashagolfing) and Email are a row of text-free icons under the intro.
+- First card is the media kit, followed by a "Codes and affiliate links" section (Awesome Golf, Vistaget Canada, Vistaget US, Rapsodo, Hazard Hunters) driven by `affiliateLinks` in `data/site.json`, with brand logos and copy-to-clipboard codes.
+- Theme colour changed to green and font to Helvetica; the Google Fonts load was dropped.
+
 ## Partner carousel update
 
 - Added Golf Town, Awesome Golf, and Rapsodo logos to the partner carousel (`assets/brands/golf-town.png`, `awesome-golf.svg`, `rapsodo.svg`).

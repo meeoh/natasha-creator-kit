@@ -4,7 +4,8 @@
 
 - The links page now lives at `/`, the media kit at `/mediakit/`; `/links` redirects to `/`.
 - Instagram, TikTok, YouTube (@natashagolfing) and Email are a row of text-free icons under the intro.
-- First card is the media kit, followed by a "Codes and affiliate links" section (ShopMy, Awesome Golf, Vistaget Canada, Vistaget US, Rapsodo, Hazard Hunters) driven by `affiliateLinks` in `data/site.json`, with brand logos and copy-to-clipboard codes. ShopMy and Rapsodo are plain links with no code to copy; ShopMy's logo is its official app icon (`assets/brands/shopmy-icon.png`).
+- First card is the media kit, followed by a "Codes and affiliate links" section (ShopMy, Awesome Golf, Vistaget Canada, Vistaget US, Rapsodo, PUR3 Gloves, Hazard Hunters) driven by `affiliateLinks` in `data/site.json`, with brand logos and copy-to-clipboard codes. ShopMy and Rapsodo are plain links with no code to copy; ShopMy's logo is its official app icon (`assets/brands/shopmy-icon.png`). PUR3 Gloves (code NATASHA) uses the PUR3 Golf wordmark fitted to a square (`assets/brands/pur3-icon.png`).
+- The page background now covers the full scrolled height (it used to repeat with a hard band below the first screen), and the card has room below it at the bottom.
 - Theme colour changed to green and font to Helvetica; the Google Fonts load was dropped.
 
 ## Partner carousel update

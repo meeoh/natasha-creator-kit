@@ -45,6 +45,13 @@
       "logo": "assets/brands/rapsodo-icon.png"
     },
     {
+      "name": "PUR3 Gloves",
+      "url": "https://pur3golf.com",
+      "code": "NATASHA",
+      "logo": "assets/brands/pur3-icon.png",
+      "logoFill": true
+    },
+    {
       "name": "Hazard Hunters",
       "url": "https://hazardhunters.net/natashagan",
       "code": "NATASHAGOLFING10",

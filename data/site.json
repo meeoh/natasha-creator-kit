@@ -14,6 +14,11 @@
   },
   "affiliateLinks": [
     {
+      "name": "ShopMy",
+      "url": "https://shopmy.us/shop/natashagolfing?tab=latest",
+      "logo": "assets/brands/shopmy-icon.png"
+    },
+    {
       "name": "Awesome Golf",
       "url": "https://insights.awesome-golf.com/black-friday?ref=NATASHAGOLFING",
       "code": "NATASHAGOLFING",

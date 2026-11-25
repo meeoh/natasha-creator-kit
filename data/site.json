@@ -15,7 +15,7 @@
   "affiliateLinks": [
     {
       "name": "Awesome Golf",
-      "url": "https://www.awesome-golf.com/",
+      "url": "https://insights.awesome-golf.com/black-friday?ref=NATASHAGOLFING",
       "code": "NATASHAGOLFING",
       "logo": "assets/brands/awesome-golf-icon.png",
       "logoFill": true
@@ -23,20 +23,20 @@
     {
       "name": "Vistaget",
       "region": "Canada",
-      "url": "https://vistaget.com/",
+      "url": "https://www.amazon.ca/dp/B0GL2G222G?maas=maas_adg_847B340ED290F16F8484A1780FF7B14D_afap_abs&ref_=aa_maas&tag=maas",
       "code": "12GOLVIA30",
       "logo": "assets/brands/vistaget-icon.png"
     },
     {
       "name": "Vistaget",
       "region": "US",
-      "url": "https://vistaget.com/",
+      "url": "https://www.amazon.com/dp/B0H3THRPYS?maas=maas_adg_FFD58AE361F161AF69E93532931952EE_afap_abs&ref_=aa_maas&tag=maas",
       "code": "12GOLVIA30",
       "logo": "assets/brands/vistaget-icon.png"
     },
     {
       "name": "Rapsodo",
-      "url": "http://glnk.io/91vnw/natashagan",
+      "url": "https://rapsodo.ca/pages/golf?platform=grin&link_id=2137718&token=x0L6KCFlRg6lgk3Raz7lELe4hbAlO54n&contact_id=59cbe843-dfab-4062-a674-bfd053162b9f&attribution_window=30&shpxid=ac0730dd-f5f2-4883-9f31-a1bf00cd6c1f",
       "logo": "assets/brands/rapsodo-icon.png"
     },
     {

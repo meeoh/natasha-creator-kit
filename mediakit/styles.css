@@ -372,21 +372,7 @@ h1 {
   padding: 22px;
   box-shadow: 0 16px 42px rgba(54,43,35,.07);
 }
-.social-detail-card::after {
-  content: "";
-  position: absolute;
-  right: -58px;
-  bottom: -82px;
-  width: 170px;
-  height: 170px;
-  border-radius: 999px;
-  opacity: .22;
-}
-.instagram-detail::after { background: linear-gradient(135deg, #ffcf6b, #ff4fb8, #8b5cff); }
-.tiktok-detail::after { background: linear-gradient(135deg, #25f4ee, #fe2c55); }
 .social-detail-head {
-  position: relative;
-  z-index: 1;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -395,8 +381,6 @@ h1 {
 .social-detail-head .mini-label { margin-bottom: 4px; }
 .social-detail-head a { color: var(--muted); text-decoration: none; font-weight: 850; }
 .metric-row {
-  position: relative;
-  z-index: 1;
   display: grid;
   grid-template-columns: 1.15fr repeat(3, 1fr);
   gap: 12px;

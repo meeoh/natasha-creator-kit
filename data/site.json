@@ -8,9 +8,44 @@
     "email": "natashagolfing@gmail.com",
     "instagramUrl": "https://instagram.com/natashagolfing",
     "tiktokUrl": "https://www.tiktok.com/@natashagolfing",
-    "siteUrl": "https://natashagolfing.com/",
+    "youtubeUrl": "https://www.youtube.com/@natashagolfing",
+    "mediaKitUrl": "/mediakit/",
     "linksIntro": "Golf girlie learning, styling, and sharing the journey ⛳️✨"
   },
+  "affiliateLinks": [
+    {
+      "name": "Awesome Golf",
+      "url": "https://www.awesome-golf.com/",
+      "code": "NATASHAGOLFING",
+      "logo": "assets/brands/awesome-golf-icon.png",
+      "logoFill": true
+    },
+    {
+      "name": "Vistaget",
+      "region": "Canada",
+      "url": "https://vistaget.com/",
+      "code": "12GOLVIA30",
+      "logo": "assets/brands/vistaget-icon.png"
+    },
+    {
+      "name": "Vistaget",
+      "region": "US",
+      "url": "https://vistaget.com/",
+      "code": "12GOLVIA30",
+      "logo": "assets/brands/vistaget-icon.png"
+    },
+    {
+      "name": "Rapsodo",
+      "url": "http://glnk.io/91vnw/natashagan",
+      "logo": "assets/brands/rapsodo-icon.png"
+    },
+    {
+      "name": "Hazard Hunters",
+      "url": "https://hazardhunters.net/natashagan",
+      "code": "NATASHAGOLFING10",
+      "logo": "assets/brands/hazard-hunters-icon.png"
+    }
+  ],
   "stats": {
     "instagram": {
       "username": "natashagolfing",

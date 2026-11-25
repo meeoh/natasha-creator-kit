@@ -3,237 +3,75 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Natasha Golfing creator media kit with manually updated Instagram and TikTok stats." />
-    <title>Natasha Golfing Media Kit</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260704-ui37" />
+    <meta name="description" content="{{profile.name}} links: Instagram, TikTok, YouTube, media kit, and golf discount codes." />
+    <title>{{profile.name}}</title>
+    <link rel="canonical" href="https://natashagolfing.com/" />
+    <link rel="stylesheet" href="styles.css?v=20260705-links18" />
   </head>
   <body>
     <div class="noise" aria-hidden="true"></div>
-    <div class="page-shell">
-      <main id="top" class="kit-card">
-        <div class="left-rail">
-        <section class="profile-panel">
-          <div class="profile-image-card">
-            <img src="{{profile.avatar}}" alt="{{profile.name}} profile" />
-            <div class="image-badge">Golf · Lifestyle · UGC</div>
-          </div>
-
-          <div class="profile-copy">
-            <p class="eyebrow">Media kit</p>
-            <h1>{{profile.name}}</h1>
-            <p class="location">{{profile.location}} · {{profile.category}}</p>
-            <p class="bio">{{profile.bio}}</p>
-            <a class="primary-button profile-cta" href="mailto:{{profile.email}}">Contact for collabs</a>
-          </div>
-        </section>
-
+    <main class="links-shell" aria-label="{{profile.name}} links">
+      <section class="links-card">
+        <div class="avatar-wrap">
+          <img src="{{profile.avatar}}" alt="{{profile.name}}" />
         </div>
 
-        <section class="stats-panel" id="stats" aria-label="Creator stats">
-          <div class="insights-head">
-            <p class="eyebrow">Insights & data</p>
-          </div>
+        <h1>{{profile.name}}</h1>
+        <p class="intro">{{profile.linksIntro}}</p>
 
-          <div class="social-sections">
-            <article class="social-detail-card instagram-detail">
-              <div class="social-detail-head">
-                <span class="platform-icon">◎</span>
-                <div>
-                  <p class="mini-label">Instagram</p>
-                  <a href="{{profile.instagramUrl}}" target="_blank" rel="noreferrer">@{{stats.instagram.username}}</a>
-                </div>
-              </div>
-              <div class="metric-row">
-                <div class="mini-stat hero-stat">
-                  <span>Followers</span>
-                  <strong>{{stats.instagram.followers}}</strong>
-                </div>
-                <div class="mini-stat">
-                  <div class="metric-label">
-                    Avg engagement
-                    <button class="info-dot" type="button" aria-label="Instagram average engagement is defined as likes plus comments plus shares plus saves divided by views, averaged across posts.">
-                      i
-                      <span class="info-tooltip">
-                        <span class="formula-platform">Instagram definition</span>
-                        <span class="formula-line">(Likes + Comments + Shares + Saves) ÷ Views, averaged across posts</span>
-                      </span>
-                    </button>
-                  </div>
-                  <strong>{{stats.instagram.avgEngagementRate}}</strong>
-                </div>
-                <div class="mini-stat">
-                  <span>Avg views</span>
-                  <strong>{{stats.instagram.avgViews}}</strong>
-                </div>
-                <div class="mini-stat">
-                  <span>Reach rate</span>
-                  <strong>{{stats.instagram.reachRate}}</strong>
-                </div>
-              </div>
-            </article>
+        <nav class="social-icons" aria-label="Socials">
+          <a href="{{profile.instagramUrl}}" target="_blank" rel="noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M4 8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4z" /><circle cx="12" cy="12" r="3" /><path d="M16.5 7.5v.01" /></svg>
+          </a>
+          <a href="{{profile.tiktokUrl}}" target="_blank" rel="noreferrer" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M21 7.917v4.034a9.948 9.948 0 0 1-5-1.951v4.5a6.5 6.5 0 1 1-8-6.326v4.326a2.5 2.5 0 1 0 4 2V3h4.083A6.005 6.005 0 0 0 21 7.917z" /></svg>
+          </a>
+          <a href="{{profile.youtubeUrl}}" target="_blank" rel="noreferrer" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M2 8a4 4 0 0 1 4-4h12a4 4 0 0 1 4 4v8a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4z" /><path d="M10 9l5 3l-5 3z" /></svg>
+          </a>
+          <a href="mailto:{{profile.email}}" aria-label="Email {{profile.email}}">
+            <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" /><path d="M3 7l9 6l9-6" /></svg>
+          </a>
+        </nav>
 
-            <article class="social-detail-card tiktok-detail">
-              <div class="social-detail-head">
-                <span class="platform-icon">♪</span>
-                <div>
-                  <p class="mini-label">TikTok</p>
-                  <a href="{{profile.tiktokUrl}}" target="_blank" rel="noreferrer">@{{stats.tiktok.username}}</a>
-                </div>
-              </div>
-              <div class="metric-row">
-                <div class="mini-stat hero-stat">
-                  <span>Followers</span>
-                  <strong>{{stats.tiktok.followers}}</strong>
-                </div>
-                <div class="mini-stat">
-                  <span>Total views</span>
-                  <strong>{{stats.tiktok.totalViews}}</strong>
-                </div>
-                <div class="mini-stat">
-                  <span>Engagement rate</span>
-                  <strong>{{stats.tiktok.engagementRate}}</strong>
-                </div>
-                <div class="mini-stat">
-                  <span>Profile views</span>
-                  <strong>{{stats.tiktok.profileViews}}</strong>
-                </div>
-              </div>
-            </article>
+        <div class="link-stack">
+          <a class="link-button" href="{{profile.mediaKitUrl}}">
+            <span class="link-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" focusable="false"><path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2-2a2 2 0 0 1-2-2a2 2 0 0 1-2 2zm0-12a2 2 0 0 1 2 2a2 2 0 0 1 2-2a2 2 0 0 1-2-2a2 2 0 0 1-2 2zM9 18a6 6 0 0 1 6-6a6 6 0 0 1-6-6a6 6 0 0 1-6 6a6 6 0 0 1 6 6z" /></svg>
+            </span>
+            <span>
+              <strong>Media kit</strong>
+              <small>Stats, audience, and featured work</small>
+            </span>
+          </a>
+        </div>
 
-            <article class="audience-panel">
-              <div class="featured-head">
-                <div>
-                  <p class="mini-label">Audience</p>
-                </div>
-              </div>
+        <h2>Codes and affiliate links</h2>
 
-              <div class="audience-grid">
-                <div class="audience-card gender-card">
-                  <div class="audience-card-head">
-                    <h4>Gender</h4>
-                  </div>
-                  <div class="gender-arc-wrap" aria-label="Gender split: men {{audience.gender.men}} percent, women {{audience.gender.women}} percent">
-                    <svg class="gender-arc" viewBox="0 0 260 150" role="img" aria-hidden="true">
-                      <path class="gender-arc-base" d="M 30 120 A 100 100 0 0 1 230 120" pathLength="100" />
-                      <path class="gender-arc-men" d="M 30 120 A 100 100 0 0 1 230 120" pathLength="100" />
-                    </svg>
-                  </div>
-                  <div class="audience-legend">
-                    <div class="audience-legend-row">
-                      <span><i class="dot men-dot"></i>Men</span>
-                      <strong>{{audience.gender.menPercent}}</strong>
-                    </div>
-                    <div class="audience-legend-row">
-                      <span><i class="dot women-dot"></i>Women</span>
-                      <strong>{{audience.gender.womenPercent}}</strong>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="audience-card age-card">
-                  <div class="audience-card-head">
-                    <h4>Age</h4>
-                  </div>
-                  <div class="age-bars" aria-label="Age split: 18 to 24 15.6 percent, 25 to 34 40.4 percent, 35 to 44 22.5 percent, 45 to 54 12.3 percent, 55 plus 9.2 percent">
-{{audience.ageRows}}
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="brand-panel" aria-label="Brand collaborations">
-              <div class="brand-panel-head">
-                <div>
-                  <p class="mini-label">Partners</p>
-                </div>
-              </div>
-              <div class="brand-carousel" data-brand-carousel>
-                <div class="brand-logo-track">
-                  <div class="brand-logo-set">
-                    <a class="brand-logo-tile brand-logo-tile-golfnorth" href="https://golfnorth.ca/" target="_blank" rel="noreferrer" aria-label="GolfNorth">
-                      <img src="assets/brands/golfnorth.png" alt="GolfNorth logo" />
-                    </a>
-                    <a class="brand-logo-tile brand-logo-tile-golftown" href="https://www.golftown.com/" target="_blank" rel="noreferrer" aria-label="Golf Town">
-                      <img src="assets/brands/golf-town.png" alt="Golf Town logo" />
-                    </a>
-                    <a class="brand-logo-tile brand-logo-tile-pur3" href="https://pur3golf.com/" target="_blank" rel="noreferrer" aria-label="PUR3 Golf">
-                      <img src="assets/brands/pur3-golf.png" alt="PUR3 Golf logo" />
-                    </a>
-                    <a class="brand-logo-tile brand-logo-tile-awesomegolf" href="https://www.awesome-golf.com/" target="_blank" rel="noreferrer" aria-label="Awesome Golf">
-                      <img src="assets/brands/awesome-golf.svg" alt="Awesome Golf logo" />
-                    </a>
-                    <a class="brand-logo-tile brand-logo-tile-trust" href="https://trustgolfball.ca/" target="_blank" rel="noreferrer" aria-label="Trust Golf Ball">
-                      <img src="assets/brands/trust-golf.svg" alt="Trust Golf logo" />
-                    </a>
-                    <a class="brand-logo-tile brand-logo-tile-rapsodo" href="https://rapsodo.com/" target="_blank" rel="noreferrer" aria-label="Rapsodo">
-                      <img src="assets/brands/rapsodo.svg" alt="Rapsodo logo" />
-                    </a>
-                    <a class="brand-logo-tile brand-logo-tile-dark brand-logo-tile-mark" href="https://www.transcendgolf.ca/" target="_blank" rel="noreferrer" aria-label="Transcend Golf Simulators">
-                      <img src="assets/brands/transcend-golf.png" alt="Transcend Golf logo" />
-                    </a>
-                    <a class="brand-logo-tile brand-logo-tile-seemore" href="https://seemore.com/" target="_blank" rel="noreferrer" aria-label="SeeMore Putter Company">
-                      <img src="assets/brands/seemore.png" alt="SeeMore logo" />
-                    </a>
-                  </div>
-                  <div class="brand-logo-set" aria-hidden="true">
-                    <a class="brand-logo-tile brand-logo-tile-golfnorth" href="https://golfnorth.ca/" target="_blank" rel="noreferrer" tabindex="-1" aria-label="GolfNorth">
-                      <img src="assets/brands/golfnorth.png" alt="" />
-                    </a>
-                    <a class="brand-logo-tile brand-logo-tile-golftown" href="https://www.golftown.com/" target="_blank" rel="noreferrer" tabindex="-1" aria-label="Golf Town">
-                      <img src="assets/brands/golf-town.png" alt="" />
-                    </a>
-                    <a class="brand-logo-tile brand-logo-tile-pur3" href="https://pur3golf.com/" target="_blank" rel="noreferrer" tabindex="-1" aria-label="PUR3 Golf">
-                      <img src="assets/brands/pur3-golf.png" alt="" />
-                    </a>
-                    <a class="brand-logo-tile brand-logo-tile-awesomegolf" href="https://www.awesome-golf.com/" target="_blank" rel="noreferrer" tabindex="-1" aria-label="Awesome Golf">
-                      <img src="assets/brands/awesome-golf.svg" alt="" />
-                    </a>
-                    <a class="brand-logo-tile brand-logo-tile-trust" href="https://trustgolfball.ca/" target="_blank" rel="noreferrer" tabindex="-1" aria-label="Trust Golf Ball">
-                      <img src="assets/brands/trust-golf.svg" alt="" />
-                    </a>
-                    <a class="brand-logo-tile brand-logo-tile-rapsodo" href="https://rapsodo.com/" target="_blank" rel="noreferrer" tabindex="-1" aria-label="Rapsodo">
-                      <img src="assets/brands/rapsodo.svg" alt="" />
-                    </a>
-                    <a class="brand-logo-tile brand-logo-tile-dark brand-logo-tile-mark" href="https://www.transcendgolf.ca/" target="_blank" rel="noreferrer" tabindex="-1" aria-label="Transcend Golf Simulators">
-                      <img src="assets/brands/transcend-golf.png" alt="" />
-                    </a>
-                    <a class="brand-logo-tile brand-logo-tile-seemore" href="https://seemore.com/" target="_blank" rel="noreferrer" tabindex="-1" aria-label="SeeMore Putter Company">
-                      <img src="assets/brands/seemore.png" alt="" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="featured-panel">
-              <div class="featured-head">
-                <div>
-                  <p class="mini-label">Featured posts</p>
-                </div>
-              </div>
-
-              <div class="filter-pills" role="tablist" aria-label="Filter featured posts">
-                <button class="filter-pill active" type="button" data-filter="all">All</button>
-                <button class="filter-pill" type="button" data-filter="products">Products</button>
-                <button class="filter-pill" type="button" data-filter="play">Play</button>
-                <button class="filter-pill" type="button" data-filter="entertainment">Personality</button>
-                <button class="filter-pill" type="button" data-filter="places">Places</button>
-              </div>
-
-              <div class="featured-grid">
-{{featuredPosts}}
-              </div>
-            </article>
-          </div>
-
-        </section>
-      </main>
-
-    </div>
-
-    <script src="script.js?v=20260704-ui36"></script>
+        <div class="link-stack">
+{{affiliateLinks}}
+        </div>
+      </section>
+    </main>
+    <p class="copy-toast" role="status" aria-live="polite"></p>
+    <script>
+      document.addEventListener("click", (event) => {
+        const target = event.target.closest("[data-code]");
+        if (!target || !navigator.clipboard) return;
+        navigator.clipboard.writeText(target.dataset.code).then(() => {
+          if (target.tagName !== "BUTTON") return;
+          const toast = document.querySelector(".copy-toast");
+          toast.textContent = `Code ${target.dataset.code} copied`;
+          document.querySelectorAll(".copied").forEach((button) => button.classList.remove("copied"));
+          target.classList.add("copied");
+          toast.classList.add("show");
+          clearTimeout(window.copyTimer);
+          window.copyTimer = setTimeout(() => {
+            target.classList.remove("copied");
+            toast.classList.remove("show");
+          }, 1800);
+        }, () => {});
+      });
+    </script>
   </body>
 </html>

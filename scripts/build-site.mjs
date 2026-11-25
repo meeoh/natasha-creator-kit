@@ -1,10 +1,10 @@
 import { readFile, writeFile } from "node:fs/promises";
 
 const siteDataPath = new URL("../data/site.json", import.meta.url);
-const mediaKitTemplatePath = new URL("../index.template.html", import.meta.url);
-const mediaKitOutputPath = new URL("../index.html", import.meta.url);
-const linksTemplatePath = new URL("../links/index.template.html", import.meta.url);
-const linksOutputPath = new URL("../links/index.html", import.meta.url);
+const mediaKitTemplatePath = new URL("../mediakit/index.template.html", import.meta.url);
+const mediaKitOutputPath = new URL("../mediakit/index.html", import.meta.url);
+const linksTemplatePath = new URL("../index.template.html", import.meta.url);
+const linksOutputPath = new URL("../index.html", import.meta.url);
 
 const compactFormatter = new Intl.NumberFormat("en", {
   notation: "compact",
@@ -63,13 +63,37 @@ function featuredPostsHtml(posts = []) {
   return posts.map((post) => {
     const title = escapeHtml(post.title || post.url || "Featured post");
     const category = escapeHtml((post.category || "").toLowerCase());
-    const image = post.image ? `\n                  <img src="${escapeHtml(post.image)}" alt="${title}" loading="lazy" />` : "";
+    const image = post.image ? `\n                  <img src="../${escapeHtml(post.image)}" alt="${title}" loading="lazy" />` : "";
 
     return `                <a class="featured-post-card ${image ? "has-image" : ""}" data-category="${category}" href="${escapeHtml(post.url)}" target="_blank" rel="noreferrer">${image}
                   <span class="post-platform">${platformLabel(post.platform)}</span>
                   <span class="post-category">${categoryLabel(post.category)}</span>
                   <span class="post-open">View post ↗</span>
                 </a>`;
+  }).join("\n");
+}
+
+function affiliateLinksHtml(links = []) {
+  return links.map((link) => {
+    const name = escapeHtml(link.name);
+    const label = link.region ? `${name} <em>${escapeHtml(link.region)}</em>` : name;
+    const code = link.code ? escapeHtml(link.code) : "";
+    const detail = code ? `Code <b>${code}</b>` : "Affiliate link";
+    const copyButton = code ? `
+            <button class="copy-code" type="button" data-code="${code}" aria-label="Copy ${name} code ${code}">
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M7 9.667a2.667 2.667 0 0 1 2.667-2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1-2.667 2.667h-8.666a2.667 2.667 0 0 1-2.667-2.667z" /><path d="M4.012 16.737a2 2 0 0 1-1.012-1.737v-10c0-1.1.9-2 2-2h10c.75 0 1.158.385 1.5 1" /></svg>
+              <svg class="check" viewBox="0 0 24 24" focusable="false" aria-hidden="true"><path d="M5 12l5 5l10-10" /></svg>
+            </button>` : "";
+
+    return `          <div class="code-card">
+            <a class="link-button" href="${escapeHtml(link.url)}" target="_blank" rel="noreferrer"${code ? ` data-code="${code}"` : ""}>
+              <span class="link-icon brand-icon${link.logoFill ? " fill" : ""}" aria-hidden="true"><img src="${escapeHtml(link.logo)}" alt="" /></span>
+              <span>
+                <strong>${label}</strong>
+                <small>${detail}</small>
+              </span>
+            </a>${copyButton}
+          </div>`;
   }).join("\n");
 }
 
@@ -87,7 +111,8 @@ function replacements(data) {
       "profile.email": data.profile.email,
       "profile.instagramUrl": data.profile.instagramUrl,
       "profile.tiktokUrl": data.profile.tiktokUrl,
-      "profile.siteUrl": data.profile.siteUrl,
+      "profile.youtubeUrl": data.profile.youtubeUrl,
+      "profile.mediaKitUrl": data.profile.mediaKitUrl,
       "profile.linksIntro": data.profile.linksIntro,
       "stats.instagram.username": instagram.username,
       "stats.instagram.followers": formatCompact(instagram.followers),
@@ -106,7 +131,8 @@ function replacements(data) {
     },
     html: {
       "audience.ageRows": ageRowsHtml(data.audience.age),
-      featuredPosts: featuredPostsHtml(data.featuredPosts)
+      featuredPosts: featuredPostsHtml(data.featuredPosts),
+      affiliateLinks: affiliateLinksHtml(data.affiliateLinks)
     }
   };
 }

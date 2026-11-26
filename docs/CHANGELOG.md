@@ -1,5 +1,10 @@
 # Changelog / Work Completed
 
+## Favicon and media kit CSS cleanup
+
+- Added `favicon.ico` (16/32/48, circle crop of Natasha's face from `assets/natasha-avatar.jpg`) and a 180×180 `apple-touch-icon.png` at the root, linked from the links page, the media kit and the `/links/` redirect. `/favicon.ico` no longer 404s.
+- Removed unused old-theme media kit CSS: `.platform-card` (with its pink/blue `::after`), `.total-card`, `.spark`, `.platform-grid`, `.feature-card`, `.cta-card`, and the `--clay`/`--sky` variables.
+
 ## Links page becomes the homepage
 
 - The links page now lives at `/`, the media kit at `/mediakit/`; `/links` redirects to `/`.
